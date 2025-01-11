@@ -81,7 +81,7 @@
 1.リポジトリをクローンする
    リポジトリを GitHub からローカルにコピーします。  
 
-     git clone https://github.com/shimodum/ability-test2.git
+     git clone https://github.com/shimodum/mock-project-flea-market-app.git
 
    **クローン後、プロジェクトディレクトリに移動します**:  
 
