@@ -21,6 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'postal_code',
+        'address',
+        'address_building',
+        'profile_image',
     ];
 
     /**
@@ -41,4 +45,48 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * ユーザーが所有するアイテム
+     */
+    public function items()
+    {
+        return $this->hasMany(Item::class);
+    }
+
+    /**
+     * ユーザーが行った購入
+     */
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class);
+    }
+
+    /**
+     * ユーザーが投稿したコメント
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * ユーザーが「いいね」したアイテム
+     */
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    /**
+     * プロフィール画像のURLを取得
+     *
+     * @return string
+     */
+    public function getProfileImageUrlAttribute()
+    {
+        return $this->profile_image
+            ? asset('storage/profile_images/' . $this->profile_image)
+            : asset('images/default_profile.png');
+    }
 }
