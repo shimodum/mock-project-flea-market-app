@@ -34,7 +34,7 @@ class RegisterController extends Controller
         // 登録後にログイン
         Auth::login($user);
 
-        // ダッシュボードなど、ログイン後に遷移したい場所にリダイレクト
-        return redirect()->route('home'); // 適切なルート名に変更
+        // プロフィール設定画面へリダイレクト
+        return redirect()->route('profile.edit');
     }
 }
