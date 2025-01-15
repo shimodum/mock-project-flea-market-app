@@ -13,7 +13,8 @@
 - purchases … 購入履歴を管理（決済・住所など）  
 - comments … 商品に対するコメントを管理  
 - likes … 商品への「いいね」を管理（多対多を中間テーブルで実装）  
-
+- categories … 商品のカテゴリ情報を管理する  
+- items_categories … itemsとcategoriesの多対多関係を管理する中間テーブル  
 ---
 
 ## プロジェクト概要
