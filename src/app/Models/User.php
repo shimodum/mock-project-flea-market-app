@@ -46,33 +46,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * ユーザーが所有するアイテム
-     */
+    
+    // ユーザーが出品する商品
     public function items()
     {
         return $this->hasMany(Item::class);
     }
 
-    /**
-     * ユーザーが行った購入
-     */
+    
+    // ユーザーが行った購入
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
     }
 
-    /**
-     * ユーザーが投稿したコメント
-     */
+    
+    // ユーザーが投稿したコメント
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * ユーザーが「いいね」したアイテム
-     */
+    
+    // ユーザーが「いいね」した商品
     public function likes()
     {
         return $this->hasMany(Like::class);

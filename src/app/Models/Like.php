@@ -19,17 +19,13 @@ class Like extends Model
         'item_id',
     ];
 
-    /**
-     * いいねをしたユーザー
-     */
+    // いいねをしたユーザー
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * いいねをされたアイテム
-     */
+    // いいねをされた商品
     public function item()
     {
         return $this->belongsTo(Item::class);
