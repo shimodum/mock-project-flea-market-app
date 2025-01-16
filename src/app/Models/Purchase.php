@@ -21,17 +21,13 @@ class Purchase extends Model
         'shipping_address',
     ];
 
-    /**
-     * 購入を行ったユーザー
-     */
+    // 購入を行ったユーザー
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * 購入されたアイテム
-     */
+    // 購入された商品
     public function item()
     {
         return $this->belongsTo(Item::class);

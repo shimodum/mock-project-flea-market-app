@@ -21,7 +21,6 @@ class CreateItemsTable extends Migration
             $table->unsignedInteger('price');
             $table->tinyInteger('condition');
             $table->string('brand', 255)->nullable();
-            $table->string('category', 100)->nullable();
             $table->string('image_path', 255)->nullable();
             $table->boolean('is_sold')->default(false);
             $table->timestamps();

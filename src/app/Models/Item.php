@@ -21,41 +21,42 @@ class Item extends Model
         'price',
         'condition',
         'brand',
-        'category',
         'image_path',
         'is_sold',
     ];
 
-    /**
-     * アイテムを所有するユーザー
-     */
+    // 商品を出品するユーザー
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * アイテムに関連する購入
-     */
+    // 商品に関連する購入
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
     }
 
-    /**
-     * アイテムに投稿されたコメント
-     */
+    // 商品に投稿されたコメント
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    /**
-     * アイテムに対する「いいね」
-     */
+    // 商品に対する「いいね」
     public function likes()
     {
         return $this->hasMany(Like::class);
+    }
+
+    // 多：多（中間テーブル：item_category を使用）
+    // ItemとCategoryは多対多の関係にある
+    public function categories()
+    {
+        // 第2引数: 中間テーブル名
+        // 第3引数: Item側の外部キー (item_id)
+        // 第4引数: Category側の外部キー (category_id)
+        return $this->belongsToMany(Category::class, 'item_category', 'item_id', 'category_id');
     }
 
     /**
@@ -75,30 +76,6 @@ class Item extends Model
         return $conditions[$this->condition];
     }
 
-    /**
-     * 商品カテゴリーの選択肢
-     *
-     * @return array
-     */
-    public static function categories()
-    {
-        return [
-            'ファッション',
-            '家電',
-            'インテリア',
-            'レディース',
-            'メンズ',
-            'コスメ',
-            '本',
-            'ゲーム',
-            'スポーツ',
-            'キッチン',
-            'ハンドメイド',
-            'アクセサリー',
-            'おもちゃ',
-            'ベビー・キッズ',
-        ];
-    }
 
     /**
      * 商品画像のURLを取得
