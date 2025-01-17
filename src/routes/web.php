@@ -10,6 +10,8 @@ Route::get('/register', [RegisterController::class, 'showForm'])->name('register
 // 会員登録処理
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
+//ログイン
+
 // プロフィール設定（編集）画面表示
 Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 // プロフィール更新処理
