@@ -57,57 +57,5 @@
     text-decoration: none;
 }
 
-/* ヘッダーのスタイル */
-.header {
-    background-color: black;
-    padding: 10px 0;
-    text-align: left;
-}
+/* レスポンシブ対応 */
 
-.header img {
-    max-width: 200px;
-}
-
-/* レスポンシブ対応: PC（1400px以上） */
-@media screen and (min-width: 1400px) {
-    .register-form {
-        max-width: 500px;
-        /* PCの場合、少し広くする */
-        padding: 40px;
-    }
-
-    .register-form h2 {
-        font-size: 24px;
-    }
-
-    .register-form label,
-    .register-form input {
-        font-size: 16px;
-    }
-
-    .register-form button {
-        font-size: 18px;
-    }
-}
-
-/* レスポンシブ対応: タブレット（768px - 850px） */
-@media screen and (min-width: 768px) and (max-width: 850px) {
-    .register-form {
-        max-width: 90%;
-        /* タブレットの場合は広めに */
-        padding: 15px;
-    }
-
-    .register-form h2 {
-        font-size: 20px;
-    }
-
-    .register-form label,
-    .register-form input {
-        font-size: 14px;
-    }
-
-    .register-form button {
-        font-size: 16px;
-    }
-}
