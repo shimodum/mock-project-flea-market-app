@@ -44,7 +44,7 @@
         <button type="submit">登録する</button>
 
         <div class="login-link">
-            <a href="{{ route('login') }}">ログインはこちら</a>
+            <a href="{{ route('login.form') }}">ログインはこちら</a>
         </div>
     </form>
 </div>
