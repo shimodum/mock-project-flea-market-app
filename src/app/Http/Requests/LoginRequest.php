@@ -24,8 +24,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed', // 'confirmed' で登録したパスワードと一致することをチェック
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
         ];
     }
 
@@ -41,7 +41,6 @@ class LoginRequest extends FormRequest
             'email.email' => 'メールアドレスは「ユーザー名@ドメイン」形式で入力してください。',
             'password.required' => 'パスワードを入力してください。',
             'password.min' => 'パスワードは8文字以上で入力してください。',
-            'password.confirmed' => 'ログイン情報が登録されていません。',
         ];
     }
 }
