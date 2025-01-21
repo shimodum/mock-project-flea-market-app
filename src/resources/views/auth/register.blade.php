@@ -19,23 +19,25 @@
 
         <div>
             <label for="email">メールアドレス</label>
-            <input type="text" name="email" id="email" value="{{ old('email') }}">
+            <input type="email" name="email" id="email" value="{{ old('email') }}">
             @error('email')
                 <div class="error-message">{{ $message }}</div>
             @enderror
         </div>
 
-        <div>
+        <div class="password-container">
             <label for="password">パスワード</label>
             <input type="password" name="password" id="password">
+            <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
             @error('password')
                 <div class="error-message">{{ $message }}</div>
             @enderror
         </div>
 
-        <div>
+        <div class="password-container">
             <label for="password_confirmation">確認用パスワード</label>
             <input type="password" name="password_confirmation" id="password_confirmation">
+            <span class="toggle-password" onclick="togglePassword('password_confirmation')">👁️</span>
             @error('password_confirmation')
                 <div class="error-message">{{ $message }}</div>
             @enderror

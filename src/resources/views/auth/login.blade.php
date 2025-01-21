@@ -17,9 +17,10 @@
             @enderror
         </div>
 
-        <div>
+        <div class="password-container">
             <label for="password">パスワード</label>
             <input type="password" name="password" id="password">
+            <span class="toggle-password" onclick="togglePassword('password')">👁️</span>
             @error('password')
                 <div class="error-message">{{ $message }}</div>
             @enderror

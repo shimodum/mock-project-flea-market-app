@@ -57,3 +57,23 @@
     text-decoration: none;
 }
 
+
+/* 目のマーク関連 */
+.password-container {
+    position: relative; /* アイコンを絶対位置で配置するための親要素を相対位置に設定 */
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* アイコンが表示されるスペースを確保 */
+}
+
+.toggle-password {
+    position: absolute; /* アイコンをフォーム内の右端に配置 */
+    top: 70%; /* フォーム内で縦方向に中央揃え */
+    right: 10px; /* フォーム右端からの余白 */
+    transform: translateY(-50%); /* 中央揃えを調整 */
+    cursor: pointer;
+    font-size: 20px;
+    color: #555;
+}
