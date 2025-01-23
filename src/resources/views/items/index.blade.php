@@ -8,7 +8,7 @@
 @section('content')
 <div class="tabs">
     <span>おすすめ</span>
-    <span class="active">マイリスト</span>
+    <span>マイリスト</span>
 </div>
 
 <div class="item-list">
