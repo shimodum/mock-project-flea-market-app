@@ -11,6 +11,7 @@ body {
     padding: 20px;
 }
 
+
 /* 共通ヘッダー部分 */
 .header {
     display: flex;
@@ -34,6 +35,7 @@ body {
     font-size: 16px;
 }
 
+
 /* ナビゲーション部分 */
 .navigation {
     display: flex;
@@ -44,6 +46,10 @@ body {
 .navigation a {
     color: white;
     text-decoration: none;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
 }
 
 .navigation .sell-button {
@@ -59,10 +65,26 @@ body {
     background-color: rgba(255, 255, 255, 0.644);
 }
 
+/* ボタンリンクのスタイルを他のナビゲーションリンクと統一 */
+.navigation button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px; /* 他のリンクと同じ文字サイズに設定 */
+    cursor: pointer;
+    text-decoration: none;
+    padding: 0;
+}
+
+.navigation button:hover {
+    text-decoration: underline;
+}
+
+
 /* 共通タブ部分 */
 .tabs {
     display: flex;
-    justify-content: flex-start; /* 左詰めにする */
+    justify-content: left; /* 左詰めにする */
     margin-top: 20px;
     border-bottom: 1px solid #ccc;
     width: 100%; /* 横幅を画面いっぱいにする */

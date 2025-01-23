@@ -18,7 +18,10 @@
         @if (!request()->is('register') && !request()->is('login'))
             <input type="text" placeholder="なにをお探しですか？">
             <div class="navigation">
-                <a href="/logout">ログアウト</a>
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit">ログアウト</button>
+                </form>
                 <a href="/mypage">マイページ</a>
                 <a href="/sell" class="sell-button">出品</a>
             </div>

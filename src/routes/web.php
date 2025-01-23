@@ -16,6 +16,12 @@ Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+//ログアウト処理
+Route::post('logout', function() {
+    Auth::logout();
+    return redirect('login');
+})->name('logout');
+
 // 認証不要なルート
 Route::get('/', [ItemController::class, 'index'])->name('items.index'); // 商品一覧
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show'); // 商品詳細
