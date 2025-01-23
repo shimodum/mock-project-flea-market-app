@@ -11,7 +11,7 @@ body {
     padding: 20px;
 }
 
-/* ヘッダーのスタイル */
+/* 共通ヘッダー部分 */
 .header {
     background-color: black;
     padding: 10px 0;
@@ -24,3 +24,40 @@ body {
     margin-left: 7px;
 }
 
+.header input {
+    flex-grow: 1;
+    margin: 0 20px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.navigation a {
+    color: white;
+    margin-left: 15px;
+    text-decoration: none;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+/* 共通タブ部分 */
+.tabs {
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.tabs span {
+    margin-right: 20px;
+    padding: 10px 0;
+    cursor: pointer;
+}
+
+.tabs .active {
+    color: red;
+    font-weight: bold;
+    border-bottom: 2px solid red;
+}
