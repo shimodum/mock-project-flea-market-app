@@ -6,18 +6,6 @@
 @endsection
 
 @section('content')
-<div class="header">
-    <form method="GET" action="{{ route('items.index') }}">
-        <input
-            type="text"
-            name="search"
-            placeholder="商品名で検索"
-            value="{{ old('search', $search ?? '') }}" {{-- 検索キーワードを保持 --}}
-        >
-        <button type="submit">検索</button>
-    </form>
-</div>
-
 <div class="tabs">
     <span>おすすめ</span>
     <span>マイリスト</span>

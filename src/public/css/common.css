@@ -26,16 +26,16 @@ body {
     height: 40px;
 }
 
+
+/* 検索ボックス部分 */
 .search-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    /* 検索ボックスとボタンの間隔 */
+    gap: 20px; /* 検索ボックスとボタンの間隔 */
 }
 
 .search-container input {
-    width: 600px;
-    /* 必要に応じて調整 */
+    width: 750px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
