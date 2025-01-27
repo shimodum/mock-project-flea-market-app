@@ -43,12 +43,19 @@ body {
     gap: 15px;
 }
 
-.navigation a {
+.navigation a,
+.navigation button {
     color: white;
     text-decoration: none;
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0;
 }
 
-.navigation a:hover {
+.navigation a:hover,
+.navigation button:hover {
     text-decoration: underline;
 }
 
@@ -65,30 +72,15 @@ body {
     background-color: rgba(255, 255, 255, 0.644);
 }
 
-/* ボタンリンクのスタイルを他のナビゲーションリンクと統一 */
-.navigation button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 16px; /* 他のリンクと同じ文字サイズに設定 */
-    cursor: pointer;
-    text-decoration: none;
-    padding: 0;
-}
-
-.navigation button:hover {
-    text-decoration: underline;
-}
-
 
 /* 共通タブ部分 */
 .tabs {
     display: flex;
-    justify-content: left; /* 左詰めにする */
+    justify-content: left;
     margin-top: 20px;
     border-bottom: 1px solid #ccc;
-    width: 100%; /* 横幅を画面いっぱいにする */
-    box-sizing: border-box; /* paddingを含めた幅を調整 */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .tabs span {
@@ -96,4 +88,3 @@ body {
     cursor: pointer;
     font-weight: bold;
 }
-

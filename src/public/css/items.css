@@ -1,18 +1,26 @@
-/* 商品一覧専用のスタイル */
+/* 商品一覧専用スタイル */
 .item-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
-    flex-wrap: wrap;
     margin-top: 20px;
 }
 
 .item {
-    width: 200px;
     text-align: center;
     border: 1px solid #ccc;
     padding: 10px;
     border-radius: 5px;
     background-color: #f9f9f9;
+}
+
+.item img {
+    width: 100%; /* 親要素の幅に合わせる */
+    height: auto; /* アスペクト比を維持 */
+    max-height: 150px;
+    object-fit: contain; /* アスペクト比を維持しつつ、コンテナに収める */
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
 }
 
 .item:hover {
