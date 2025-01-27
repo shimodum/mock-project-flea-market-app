@@ -16,7 +16,17 @@
 
         {{-- 現在のURLが "register" または "login" でない場合に適用 --}}
         @if (!request()->is('register') && !request()->is('login'))
-            <input type="text" placeholder="なにをお探しですか？">
+            <div class="search-container">
+                <form method="GET" action="{{ route('items.index') }}">
+                    <input
+                        type="text"
+                        name="query"
+                        value="{{ request('query') }}"
+                        placeholder="何をお探しですか？"
+                    >
+                    <button type="submit">検索</button>
+                </form>
+            </div>
             <div class="navigation">
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf

@@ -12,7 +12,6 @@ body {
     padding: 20px;
 }
 
-
 /* 共通ヘッダー部分 */
 .header {
     display: flex;
@@ -27,15 +26,35 @@ body {
     height: 40px;
 }
 
-.header input {
-    width: 800px;
-    margin: 0 20px;
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* 検索ボックスとボタンの間隔 */
+}
+
+.search-container input {
+    width: 600px;
+    /* 必要に応じて調整 */
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 16px;
 }
 
+.search-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #0056b3;
+}
 
 /* ナビゲーション部分 */
 .navigation {
@@ -72,7 +91,6 @@ body {
 .navigation .sell-button:hover {
     background-color: rgba(255, 255, 255, 0.644);
 }
-
 
 /* 共通タブ部分 */
 .tabs {
