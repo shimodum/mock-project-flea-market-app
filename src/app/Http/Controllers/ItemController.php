@@ -16,15 +16,15 @@ class ItemController extends Controller
             });
 
         // 商品名での部分一致検索
-        if ($request->has('search') && !empty($request->input('search'))) {
-            $query->where('name', 'LIKE', '%' . $request->input('search') . '%');
+        if ($request->has('query') && !empty($request->input('query'))) {
+            $query->where('name', 'LIKE', '%' . $request->input('query') . '%');
         }
 
         $items = $query->get();
 
         return view('items.index', [
             'items' => $items,
-            'search' => $request->input('search') // 検索キーワードをビューに渡す
+            'query' => $request->input('query') // 検索キーワードをビューに渡す
         ]);
     }
 }

@@ -21,7 +21,7 @@
                     <input
                         type="text"
                         name="query"
-                        value="{{ request('query') }}"
+                        value="{{ request('query') }}" {{-- 検索キーワードを保持 --}}
                         placeholder="何をお探しですか？"
                     >
                     <button type="submit">検索</button>
