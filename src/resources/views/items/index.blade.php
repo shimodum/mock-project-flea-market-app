@@ -12,6 +12,13 @@
 </div>
 
 <div class="item-list">
-    {{-- 商品情報をここにリスト表示させる--}}
+    @foreach($items as $item)
+        <div class="item">
+            <img src="{{ $item->img_url }}" alt="{{ $item->name }}">
+            <h3>{{ $item->name }}</h3>
+            <p>¥{{ number_format($item->price) }}</p>
+            <p>{{ $item->condition }}</p>
+        </div>
+    @endforeach
 </div>
 @endsection
