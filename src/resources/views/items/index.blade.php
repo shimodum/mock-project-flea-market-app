@@ -14,7 +14,7 @@
 <div class="item-list">
     @foreach($items as $item)
         <div class="item">
-            <img src="{{ $item->img_url }}" alt="{{ $item->name }}">
+            <img src="{{ $item->image_path }}" alt="{{ $item->name }}">
             <h3>{{ $item->name }}</h3>
             <p>¥{{ number_format($item->price) }}</p>
             <p>{{ $item->condition }}</p>
