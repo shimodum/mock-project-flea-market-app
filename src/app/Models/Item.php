@@ -64,7 +64,7 @@ class Item extends Model
      *
      * @return string
      */
-    public function getConditionTextAttribute()
+    public function getConditionLabelAttribute()
     {
         $conditions = [
             1 => '良好',
@@ -73,7 +73,7 @@ class Item extends Model
             4 => '状態が悪い',
         ];
 
-        return $conditions[$this->condition];
+        return $conditions[$this->condition] ?? '不明';
     }
 
 

@@ -17,7 +17,7 @@
             <img src="{{ $item->image_path }}" alt="{{ $item->name }}">
             <h3>{{ $item->name }}</h3>
             <p>¥{{ number_format($item->price) }}</p>
-            <p>{{ $item->condition }}</p>
+            <p>{{ $item->condition_label }}</p>
         </div>
     @endforeach
 </div>
