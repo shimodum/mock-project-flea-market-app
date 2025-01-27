@@ -29,6 +29,13 @@
 }
 
 
+.sold {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+
 @media (max-width: 850px) {
     .item {
         font-size: 14px;
