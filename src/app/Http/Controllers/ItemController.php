@@ -30,10 +30,7 @@ class ItemController extends Controller
 
     public function show($id)
     {
-        $item = Item::find($id);
-        if (!$item) {
-            abort(404, 'Item not found');
-        }
+        $item = Item::findOrFail($id);
         return view('items.show', compact('item'));
     }   
 }
