@@ -41,6 +41,7 @@
     padding: 20px;
 }
 
+/* 商品情報エリアのレイアウト */
 .item-detail-header {
     display: flex;
     align-items: flex-start;
@@ -120,7 +121,7 @@
     margin-bottom: 10px;
 }
 
-/* コメントセクション */
+/* コメントエリア */
 .item-comments {
     margin-top: 30px;
 }
@@ -130,7 +131,7 @@
     padding-top: 15px;
 }
 
-/* コメント1つ分のデザイン */
+/* コメントデザイン */
 .comment {
     display: flex;
     align-items: flex-start;
@@ -167,6 +168,12 @@
     border-radius: 5px;
     background-color: #fafafa;
 }
+
+.comment-form label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
 
 .comment-form textarea {
     width: 100%;
