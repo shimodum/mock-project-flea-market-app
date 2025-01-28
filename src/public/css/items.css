@@ -41,7 +41,10 @@
     padding: 20px;
 }
 
+<<<<<<< HEAD
 /* 商品情報エリアのレイアウト */
+=======
+>>>>>>> b0ada94 (商品詳細画面（仮）、コメントコントローラを追加？)
 .item-detail-header {
     display: flex;
     align-items: flex-start;
@@ -121,7 +124,11 @@
     margin-bottom: 10px;
 }
 
+<<<<<<< HEAD
 /* コメントエリア */
+=======
+/* コメントセクション */
+>>>>>>> b0ada94 (商品詳細画面（仮）、コメントコントローラを追加？)
 .item-comments {
     margin-top: 30px;
 }
@@ -131,7 +138,11 @@
     padding-top: 15px;
 }
 
+<<<<<<< HEAD
 /* コメントデザイン */
+=======
+/* コメント1つ分のデザイン */
+>>>>>>> b0ada94 (商品詳細画面（仮）、コメントコントローラを追加？)
 .comment {
     display: flex;
     align-items: flex-start;
@@ -169,12 +180,15 @@
     background-color: #fafafa;
 }
 
+<<<<<<< HEAD
 .comment-form label {
     font-size: 16px;
     font-weight: bold;
     display: block;
     margin-bottom: 8px;
 
+=======
+>>>>>>> b0ada94 (商品詳細画面（仮）、コメントコントローラを追加？)
 .comment-form textarea {
     width: 100%;
     height: 80px;

@@ -57,12 +57,11 @@
     {{-- 商品へのコメント投稿フォーム --}}
     <h3>商品へのコメント</h3>
     @auth
-        <form method="POST" action="{{ route('comments.store', ['item' => $item->id]) }}" class="comment-form">
-            @csrf
-            <label for="content">コメントを入力してください:</label>
-            <textarea name="content" id="content" placeholder="商品へのコメントを入力"></textarea>
-            <button type="submit">コメントを送信する</button>
-        </form>
+    <form method="POST" action="{{ route('items.store', ['item' => $item->id]) }}" class="comment-form">
+        @csrf
+        <textarea name="content" placeholder="商品へのコメントを入力"></textarea>
+        <button type="submit">コメントを送信する</button>
+    </form>
     @endauth
     </div>
 @endsection
