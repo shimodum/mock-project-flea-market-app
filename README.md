@@ -139,5 +139,5 @@
 **Mailtrap を使用する場合**
 - [Mailtrap](https://mailtrap.io/) に登録し、SMTP設定を `.env` に反映してください。  
 
-9. 必要なJavaScriptファイルの読み込み  
+9.必要なJavaScriptファイルの読み込み  
    会員登録画面・ログイン画面における「パスワード表示切替機能」を有効にするため、`common.js` などのJavaScriptファイルが正しくロードされていることを確認してください。
