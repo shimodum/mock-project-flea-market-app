@@ -25,6 +25,15 @@ class ItemController extends Controller
         return view('items.index', [
             'items' => $items,
             'query' => $request->input('query') // 検索キーワードをビューに渡す
-        ]);
+        ]);    
     }
+
+    public function show($id)
+    {
+        $item = Item::find($id);
+        if (!$item) {
+            abort(404, 'Item not found');
+        }
+        return view('items.show', compact('item'));
+    }   
 }

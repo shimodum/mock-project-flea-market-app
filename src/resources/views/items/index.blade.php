@@ -14,8 +14,10 @@
 <div class="item-list">
     @foreach($items as $item)
         <div class="item">
-            <img src="{{ $item->image_path }}" alt="{{ $item->name }}">
-            <h3>{{ $item->name }}</h3>
+            <a href="{{ route('items.show', $item->id) }}">
+                <img src="{{ $item->image_path }}" alt="{{ $item->name }}">
+                <h3>{{ $item->name }}</h3>
+            </a>
             <p>¥{{ number_format($item->price) }}</p>
             <p>{{ $item->condition_label }}</p>
             @if ($item->is_sold)
