@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Laravel\Fortify\Rules\Password;
+use App\Http\Controllers\CommentController;
 
 class CommentRequest extends FormRequest
 {

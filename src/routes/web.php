@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\CommentController;
 
 // 会員登録関連
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
@@ -16,7 +17,7 @@ Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-//ログアウト処理
+// ログアウト処理
 Route::post('logout', function() {
     Auth::logout();
     return redirect('login');
@@ -25,6 +26,12 @@ Route::post('logout', function() {
 // 認証不要なルート
 Route::get('/', [ItemController::class, 'index'])->name('items.index'); // 商品一覧
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show'); // 商品詳細
+
+// コメント機能(auth ミドルウェアでログインユーザーのみがコメント投稿できるよう制御)
+Route::middleware(['auth'])->group(function () {
+    // 商品へのコメント投稿
+    Route::post('/comments/{item_id}', [CommentController::class, 'store'])->name('comments.store');
+});
 
 // 認証が必要なルートをグループ化
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -41,5 +48,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品出品関連
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
     Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
-
 });
