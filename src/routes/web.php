@@ -27,7 +27,7 @@ Route::get('/', [ItemController::class, 'index'])->name('items.index'); // 商�
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show'); // 商品詳細
 
 // 認証が必要なルートをグループ化
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     // プロフィール設定関連
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');

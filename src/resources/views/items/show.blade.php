@@ -37,13 +37,13 @@
 
     {{-- コメントセクション --}}
     <div class="item-comments">
-        <h3>コメント ({{ $item->comments->count() }})</h3>
+        <h3>コメント ({{ $item->comments->count() }})</h3> <!-- コメント数をリアルタイムで更新 -->
         <div class="comments-container">
             @foreach($item->comments as $comment)
                 <div class="comment">
                     {{-- ユーザーのプロフィール画像 --}}
-                    <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}" 
-                        alt="{{ $comment->user->name }}" 
+                    <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}"
+                        alt="{{ $comment->user->name }}"
                         class="profile-image">
                     <div class="comment-content">
                         <p><strong>{{ $comment->user->name }}</strong></p>
@@ -57,7 +57,7 @@
     {{-- 商品へのコメント投稿フォーム --}}
     <h3>商品へのコメント</h3>
     @auth
-    <form method="POST" action="{{ route('items.store', ['item' => $item->id]) }}" class="comment-form">
+    <form method="POST" action="{{ route('comments.store', ['item' => $item->id]) }}" class="comment-form">
         @csrf
         <textarea name="content" placeholder="商品へのコメントを入力"></textarea>
         <button type="submit">コメントを送信する</button>
