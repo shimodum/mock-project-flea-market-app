@@ -35,25 +35,33 @@
         <p>商品の状態: {{ $item->condition_label }}</p>
     </div>
 
-    {{-- コメント --}}
+    {{-- コメントセクション --}}
     <div class="item-comments">
         <h3>コメント ({{ $item->comments->count() }})</h3>
-        @foreach($item->comments as $comment)
-            <div class="comment">
-                <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}" alt="{{ $comment->user->name }}" class="profile-image">
-                <p><strong>{{ $comment->user->name }}</strong></p>
-                <p>{{ $comment->content }}</p>
-            </div>
-        @endforeach
+        <div class="comments-container">
+            @foreach($item->comments as $comment)
+                <div class="comment">
+                    {{-- ユーザーのプロフィール画像 --}}
+                    <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}" 
+                        alt="{{ $comment->user->name }}" 
+                        class="profile-image">
+                    <div class="comment-content">
+                        <p><strong>{{ $comment->user->name }}</strong></p>
+                        <p>{{ $comment->content }}</p>
+                    </div>
+                </div>
+            @endforeach
+        </div>
     </div>
 
-    {{-- コメント送信 --}}
+    {{-- 商品へのコメント投稿フォーム --}}
+    <h3>商品へのコメント</h3>
     @auth
-    <form method="POST" action="{{ route('comments.store', ['item' => $item->id]) }}">
+    <form method="POST" action="{{ route('comments.store', ['item' => $item->id]) }}" class="comment-form">
         @csrf
-        <textarea name="content" rows="3" placeholder="商品へのコメントを入力"></textarea>
-        <button type="submit" class="submit-comment">コメントを送信する</button>
+        <textarea name="content" placeholder="商品へのコメントを入力"></textarea>
+        <button type="submit">コメントを送信する</button>
     </form>
     @endauth
-</div>
+    </div>
 @endsection

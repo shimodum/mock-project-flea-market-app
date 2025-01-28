@@ -4,7 +4,7 @@
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 20px;
     margin-top: 20px;
-    align-items: stretch; /* カードを均等に揃える */
+    align-items: stretch;
 }
 
 .item {
@@ -16,10 +16,10 @@
 }
 
 .item img {
-    width: 100%; /* 親要素の幅に合わせる */
-    height: auto; /* アスペクト比を維持 */
+    width: 100%;
+    height: auto;
     max-height: 150px;
-    object-fit: cover; /* 必要ならカバー設定に変更 */
+    object-fit: cover;
     border-bottom: 1px solid #ccc;
     margin-bottom: 10px;
 }
@@ -28,16 +28,191 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-
 .sold {
     color: red;
     font-weight: bold;
     margin-top: 10px;
 }
 
+/* 商品詳細画面のスタイル */
+.item-detail {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+}
 
+.item-detail-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.item-image {
+    width: 50%;
+    max-width: 400px;
+    border-radius: 5px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-info h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.item-info p {
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.item-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.like-button,
+.comment-button {
+    background: none;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.like-button:hover,
+.comment-button:hover {
+    background-color: #f5f5f5;
+}
+
+.purchase-button {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.purchase-button:hover {
+    background-color: darkred;
+}
+
+/* 商品説明と情報 */
+.item-description,
+.item-meta {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.item-description h2,
+.item-meta h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* コメントセクション */
+.item-comments {
+    margin-top: 30px;
+}
+
+.comments-container {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+/* コメント1つ分のデザイン */
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ddd;
+}
+
+/* 名前とコメントの間のスペース調整 */
+.comment-content {
+    flex: 1;
+}
+
+.comment-content strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+
+/* コメント投稿フォーム */
+.comment-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+/* コメント送信ボタン */
+.comment-form button {
+    display: block;
+    background-color: red;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.comment-form button:hover {
+    background-color: darkred;
+}
+
+
+/* レスポンシブ対応 */
 @media (max-width: 850px) {
-    .item {
-        font-size: 14px;
+    .item-detail-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .item-image {
+        width: 100%;
+        max-width: none;
+    }
+
+    .item-info {
+        text-align: center;
+    }
+
+    .item-actions {
+        justify-content: center;
     }
 }
