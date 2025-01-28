@@ -15,7 +15,7 @@
             <p>ブランド名: {{ $item->brand ?? '不明' }}</p>
             <p>¥{{ number_format($item->price) }} (税込)</p>
             <div class="item-actions">
-                <button class="like-button">♡ {{ $item->likes_count ?? 0 }}</button>
+                <button class="like-button">☆ {{ $item->likes_count ?? 0 }}</button>
                 <button class="comment-button">💬 {{ $item->comments_count ?? 0 }}</button>
             </div>
             <a href="/purchase/{{ $item->id }}" class="purchase-button">購入手続きへ</a>
