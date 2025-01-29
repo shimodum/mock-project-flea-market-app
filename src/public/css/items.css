@@ -178,6 +178,12 @@
     resize: none;
 }
 
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
 /* コメント送信ボタン */
 .comment-form button {
     display: block;
@@ -215,4 +221,5 @@
     .item-actions {
         justify-content: center;
     }
+
 }

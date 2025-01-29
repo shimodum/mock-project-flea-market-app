@@ -59,7 +59,12 @@
     @auth
     <form method="POST" action="{{ route('comments.store', ['item_id' => $item->id]) }}" class="comment-form">
         @csrf
-        <textarea name="content" placeholder="商品へのコメントを入力"></textarea>
+        <textarea name="content" placeholder="商品へのコメントを入力">{{ old('content') }}</textarea>
+
+        @if ($errors->has('content'))
+            <p class="error-message">⚠️  {{ $errors->first('content') }}</p>
+        @endif
+
         <button type="submit">コメントを送信する</button>
     </form>
     @endauth
