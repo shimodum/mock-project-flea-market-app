@@ -18,7 +18,15 @@
                 <button class="like-button">☆ {{ $item->likes_count ?? 0 }}</button>
                 <button class="comment-button">💬 {{ $item->comments_count ?? 0 }}</button>
             </div>
-            <a href="/purchase/{{ $item->id }}" class="purchase-button">購入手続きへ</a>
+
+            {{-- 購入ボタン（認証済みのユーザーのみ表示） --}}
+            @auth
+                <a href="{{ route('purchase.create', ['item_id' => $item->id]) }}" class="purchase-button">
+                    購入手続きへ
+                </a>
+            @else
+                <p class="login-warning">購入するには <a href="{{ route('login.form') }}">ログイン</a> してください。</p>
+            @endauth
         </div>
     </div>
 
@@ -37,7 +45,7 @@
 
     {{-- コメントセクション --}}
     <div class="item-comments">
-        <h3>コメント ({{ $item->comments->count() }})</h3> <!-- コメント数をリアルタイムで更新 -->
+        <h3>コメント ({{ $item->comments->count() }})</h3>
         <div class="comments-container">
             @foreach($item->comments as $comment)
                 <div class="comment">
@@ -54,7 +62,7 @@
         </div>
     </div>
 
-    {{-- 商品へのコメント投稿フォーム --}}
+    {{-- 商品へのコメント投稿フォーム（認証済みユーザーのみ表示） --}}
     <h3>商品へのコメント</h3>
     @auth
     <form method="POST" action="{{ route('comments.store', ['item_id' => $item->id]) }}" class="comment-form">
@@ -67,6 +75,8 @@
 
         <button type="submit">コメントを送信する</button>
     </form>
+    @else
+        <p class="login-warning">コメントを投稿するには <a href="{{ route('login.form') }}">ログイン</a> してください。</p>
     @endauth
-    </div>
+</div>
 @endsection
