@@ -25,37 +25,43 @@ class Item extends Model
         'is_sold',
     ];
 
-    // 商品を出品するユーザー
+    /**
+     * 商品を出品するユーザー
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-    // 商品に関連する購入
+    /**
+     * 商品に関連する購入
+     */
     public function purchases()
     {
         return $this->hasMany(Purchase::class);
     }
 
-    // 商品に投稿されたコメント
+    /**
+     * 商品に投稿されたコメント
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
-    // 商品に対する「いいね」
+    /**
+     * 商品に対する「いいね」
+     */
     public function likes()
     {
         return $this->hasMany(Like::class);
     }
 
-    // 多：多（中間テーブル：item_category を使用）
-    // ItemとCategoryは多対多の関係にある
+    /**
+     * 商品が所属するカテゴリ（多対多）
+     */
     public function categories()
     {
-        // 第2引数: 中間テーブル名
-        // 第3引数: Item側の外部キー (item_id)
-        // 第4引数: Category側の外部キー (category_id)
         return $this->belongsToMany(Category::class, 'item_category', 'item_id', 'category_id');
     }
 
@@ -76,7 +82,6 @@ class Item extends Model
         return $conditions[$this->condition] ?? '不明';
     }
 
-
     /**
      * 商品画像のURLを取得
      *
@@ -87,5 +92,19 @@ class Item extends Model
         return $this->image_path
             ? asset('storage/item_images/' . $this->image_path)
             : asset('images/default_item.png');
+    }
+
+    /**
+     * 指定したユーザーがこの商品を「いいね」しているか判定
+     *
+     * @param \App\Models\User|null $user
+     * @return bool
+     */
+    public function isLikedBy($user)
+    {
+        if (!$user) {
+            return false;
+        }
+        return $this->likes()->where('user_id', $user->id)->exists();
     }
 }

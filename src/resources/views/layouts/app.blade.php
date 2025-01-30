@@ -8,7 +8,12 @@
         <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
         <link rel="stylesheet" href="{{ asset('css/common.css') }}">
         @yield('css')
+
+        {{-- CSRF トークンを埋め込む（JavaScriptでfetchを使う際に必要） --}}
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
         <script src="{{ asset('js/common.js') }}" defer></script>
+        @yield('js') {{-- 各ページで必要なJSを追加できる --}}
     </head>
     <body>
         <header class="header">
@@ -41,5 +46,8 @@
         <div class="container">
             @yield('content')
         </div>
+
+        {{-- JavaScriptファイルをページごとに追加できる --}}
+        @yield('js')
     </body>
 </html>

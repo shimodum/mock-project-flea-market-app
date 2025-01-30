@@ -15,7 +15,12 @@
             <p>ブランド名: {{ $item->brand ?? '不明' }}</p>
             <p>¥{{ number_format($item->price) }} (税込)</p>
             <div class="item-actions">
-                <button class="like-button">☆ {{ $item->likes_count ?? 0 }}</button>
+                <button id="like-button"
+                        data-item-id="{{ $item->id }}"
+                        class="like-button {{ $item->isLikedBy(Auth::user()) ? 'liked' : '' }}">
+                    {{ $item->isLikedBy(Auth::user()) ? '⭐' : '☆' }} 
+                    <span id="like-count">{{ $item->likes->count() }}</span>
+                </button>
                 <button class="comment-button">💬 {{ $item->comments_count ?? 0 }}</button>
             </div>
 
@@ -79,4 +84,8 @@
         <p class="login-warning">コメントを投稿するには <a href="{{ route('login.form') }}">ログイン</a> してください。</p>
     @endauth
 </div>
+
+{{-- JavaScriptの読み込み --}}
+@section('js')
+    <script src="{{ asset('js/like.js') }}" defer></script>
 @endsection
