@@ -9,7 +9,7 @@
 <div class="purchase-container">
     <div class="purchase-item">
         <div class="purchase-image">
-            <img src="{{ $item->image_path }}" alt="{{ $item->name }}">
+            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
         </div>
         <div class="purchase-info">
             <h2>{{ $item->name }}</h2>

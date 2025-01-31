@@ -15,7 +15,7 @@
     @foreach($items as $item)
         <div class="item">
             <a href="{{ route('items.show', $item->id) }}">
-                <img src="{{ $item->image_path }}" alt="{{ $item->name }}">
+                <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
                 <h3>{{ $item->name }}</h3>
             </a>
             <p>¥{{ number_format($item->price) }}</p>

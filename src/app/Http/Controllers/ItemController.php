@@ -33,5 +33,38 @@ class ItemController extends Controller
     {
         $item = Item::findOrFail($id);
         return view('items.show', compact('item'));
-    }   
+    }
+
+    //出品処理
+    public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'price' => 'required|integer|min:1',
+        'condition' => 'required|integer|between:1,4',
+        'brand' => 'nullable|string|max:255',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    // 画像を storage/app/public/item_images に保存
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('item_images', 'public');
+    } else {
+        $imagePath = null;
+    }
+
+    Item::create([
+        'user_id' => auth()->id(),
+        'name' => $request->name,
+        'description' => $request->description,
+        'price' => $request->price,
+        'condition' => $request->condition,
+        'brand' => $request->brand,
+        'image_path' => $imagePath, // ここに保存したパスを設定
+        'is_sold' => false,
+    ]);
+
+    return redirect()->route('items.index');
+}
 }
