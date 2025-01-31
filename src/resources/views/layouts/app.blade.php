@@ -9,45 +9,39 @@
         <link rel="stylesheet" href="{{ asset('css/common.css') }}">
         @yield('css')
 
-        {{-- CSRF トークンを埋め込む（JavaScriptでfetchを使う際に必要） --}}
+        {{-- CSRF トークンを埋め込む --}}
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <script src="{{ asset('js/common.js') }}" defer></script>
-        @yield('js') {{-- 各ページで必要なJSを追加できる --}}
+        @yield('js')
     </head>
     <body>
         <header class="header">
             <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH ロゴ">
 
-        {{-- 現在のURLが "register" または "login" でない場合に適用 --}}
-        @if (!request()->is('register') && !request()->is('login'))
-            <div class="search-container">
-                <form method="GET" action="{{ route('items.index') }}">
-                    <input
-                        type="text"
-                        name="query"
-                        value="{{ request('query') }}" {{-- 検索キーワードを保持 --}}
-                        placeholder="何をお探しですか？"
-                    >
-                    <button type="submit">検索</button>
-                </form>
-            </div>
-            <div class="navigation">
-                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                    @csrf
-                    <button type="submit">ログアウト</button>
-                </form>
-                <a href="/mypage">マイページ</a>
-                <a href="/sell" class="sell-button">出品</a>
-            </div>
-        @endif
+            {{-- 会員登録画面とログイン画面以外で表示 --}}
+            @if (!request()->is('register') && !request()->is('login'))
+                <div class="search-container">
+                    <form method="GET" action="{{ route('items.index') }}">
+                        <input type="text" name="query" value="{{ request('query') }}" placeholder="何をお探しですか？">
+                        <button type="submit">検索</button>
+                    </form>
+                </div>
+                <div class="navigation">
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit">ログアウト</button>
+                    </form>
+                    <a href="/mypage">マイページ</a>
+                    <a href="/sell" class="sell-button">出品</a>
+                </div>
+            @endif
         </header>
 
         <div class="container">
             @yield('content')
         </div>
 
-        {{-- JavaScriptファイルをページごとに追加できる --}}
         @yield('js')
     </body>
 </html>

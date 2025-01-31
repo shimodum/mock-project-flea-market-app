@@ -4,38 +4,71 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    padding-top: 60px;
+    /* ヘッダー分のスペースを確保 */
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* 共通ヘッダー部分 */
+/* ヘッダー */
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: black;
+    color: white;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: black;
-    color: white;
+    z-index: 1000;
 }
 
 .header img {
     height: 40px;
 }
 
+/* メインコンテンツ */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
-/* 検索ボックス部分 */
+/* 商品一覧のグリッドレイアウト修正 */
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+    align-items: stretch;
+}
+
+/* フォームの調整（会員登録、ログイン画面） */
+.form-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.form-container input {
+    width: 100%;
+    /* フォーム幅を適切に修正 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 .search-container {
     display: flex;
     align-items: center;
-    gap: 20px; /* 検索ボックスとボタンの間隔 */
+    gap: 20px;
+    flex-grow: 1;
 }
 
 .search-container input {
-    width: 750px;
+    width: 600px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -56,54 +89,10 @@ body {
     background-color: #0056b3;
 }
 
-/* ナビゲーション部分 */
-.navigation {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.navigation a,
-.navigation button {
-    color: white;
-    text-decoration: none;
-    background: none;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0;
-}
-
-.navigation a:hover,
-.navigation button:hover {
-    text-decoration: underline;
-}
-
-.navigation .sell-button {
-    color: black;
-    padding: 5px 20px;
-    background-color: white;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.navigation .sell-button:hover {
-    background-color: rgba(255, 255, 255, 0.644);
-}
-
-/* 共通タブ部分 */
-.tabs {
-    display: flex;
-    justify-content: left;
-    margin-top: 20px;
-    border-bottom: 1px solid #ccc;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.tabs span {
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
+/* 商品詳細ページの調整 */
+.item-detail {
+    max-width: 1000px;
+    margin: 60px auto;
+    /* ヘッダーが隠れないように調整 */
+    padding: 20px;
 }
