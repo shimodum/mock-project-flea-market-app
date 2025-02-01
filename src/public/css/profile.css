@@ -1,3 +1,4 @@
+/* プロフィール設定画面（初回ログイン時）、プロフィール編集画面 共通設定 */
 .container {
     max-width: 500px;
     margin: 50px auto;
@@ -31,13 +32,19 @@
 
 /* 画像選択ボタン */
 .upload-button {
-    background-color: #ff6b6b;
+    background-color: #e2a16b;
     color: white;
     border: none;
     padding: 8px 12px;
     font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 画像選択ボタンのホバー時の色を暗くする */
+.upload-button:hover {
+    background-color: #c28558;
 }
 
 /* フォームスタイル */
@@ -70,7 +77,7 @@
 
 /* 更新ボタン */
 .update-button {
-    background-color: #ff6b6b;
+    background-color: #e74c3c;
     color: white;
     font-size: 16px;
     padding: 12px 20px;
@@ -80,4 +87,10 @@
     width: 100%;
     max-width: 300px;
     margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+/* 更新ボタンのホバー時の色を暗くする */
+.update-button:hover {
+    background-color: #c0392b;
 }
