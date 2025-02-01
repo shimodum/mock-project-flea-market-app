@@ -1,3 +1,4 @@
+{{-- 商品購入画面 --}}
 @extends('layouts.app')
 
 @section('css')
