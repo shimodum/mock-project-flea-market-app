@@ -41,7 +41,6 @@ body {
     align-items: center;
 }
 
-
 .search-container input {
     max-width: 1250px;
     width: 100%;
@@ -61,7 +60,9 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px;
-    white-space: nowrap; /* 縦並び防止 */
+    white-space: nowrap;
+    /* 縦並び防止 */
+    transition: background-color 0.3s ease;
 }
 
 .search-container button:hover {
@@ -88,6 +89,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     padding: 5px 10px;
+    transition: background-color 0.3s ease, text-decoration 0.3s ease;
 }
 
 .navigation a:hover,
@@ -95,6 +97,7 @@ body {
     text-decoration: underline;
 }
 
+/* 出品ボタン */
 .navigation .sell-button {
     color: black;
     padding: 8px 15px;
@@ -103,6 +106,7 @@ body {
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .navigation .sell-button:hover {

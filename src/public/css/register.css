@@ -1,4 +1,4 @@
-/* 基本スタイル */
+/* 会員登録画面のレイアウトとデザイン*/
 .register-form {
     width: 100%;
     max-width: 400px;
@@ -45,6 +45,12 @@
     border-radius: 5px;
     font-size: 16px;
     margin-top: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+    background-color: #c0392b;
 }
 
 .register-form .login-link {
@@ -58,7 +64,7 @@
 }
 
 
-/* 目のマーク関連 */
+/* 目のアイコン（クリックでパスワード表示・非表示を切り替え） */
 .password-container {
     position: relative; /* アイコンを絶対位置で配置するための親要素を相対位置に設定 */
 }
