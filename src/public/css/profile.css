@@ -1,7 +1,21 @@
-/* プロフィール画面専用のスタイル */
-.profile-image-container {
+.container {
+    max-width: 500px;
+    margin: 50px auto;
     text-align: center;
-    margin-bottom: 30px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* プロフィール画像の枠 */
+.profile-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
 .profile-image-placeholder {
@@ -9,26 +23,61 @@
     height: 100px;
     background-color: #ccc;
     border-radius: 50%;
-    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
+/* 画像選択ボタン */
 .upload-button {
-    margin-top: 10px;
-    padding: 5px 15px;
-    background-color: red;
+    background-color: #ff6b6b;
     color: white;
     border: none;
+    padding: 8px 12px;
+    font-size: 14px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.update-button {
+/* フォームスタイル */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input {
     width: 100%;
     padding: 10px;
-    background-color: #ff5c5c;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* 更新ボタン */
+.update-button {
+    background-color: #ff6b6b;
     color: white;
+    font-size: 16px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 10px;
 }

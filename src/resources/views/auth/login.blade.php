@@ -1,3 +1,4 @@
+{{-- ログイン画面 --}}
 @extends('layouts.app')
 
 @section('css')

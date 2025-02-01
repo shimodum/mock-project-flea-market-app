@@ -1,9 +1,14 @@
+{{-- プロフィール編集画面（設定画面） --}}
 @extends('layouts.app')
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+@endsection
 
 @section('content')
 <div class="container">
     <h1 class="page-title">プロフィール設定</h1>
-    
+
     <!-- プロフィール画像 -->
     <div class="profile-image-container">
         <div class="profile-image-placeholder">

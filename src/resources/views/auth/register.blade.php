@@ -1,3 +1,4 @@
+{{-- 会員登録画面 --}}
 @extends('layouts.app')
 
 @section('css')

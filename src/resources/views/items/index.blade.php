@@ -1,3 +1,4 @@
+{{-- 商品一覧画面（トップ画面） --}}
 @extends('layouts.app')
 
 @section('css')
