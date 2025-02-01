@@ -122,7 +122,6 @@
     margin: 50px auto;
     padding: 20px;
     text-align: center;
-    box-shadow: none;
 }
 
 .page-title {
@@ -133,8 +132,8 @@
 
 .address-form {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* 子要素を縦に並べる */
+    align-items: center; /* 中央揃え（横方向） */
 }
 
 .form-group {
@@ -157,6 +156,7 @@
     border-radius: 5px;
 }
 
+/* 更新ボタン */
 .update-button {
     display: block;
     width: 100%;
