@@ -37,6 +37,7 @@ body {
 }
 
 .search-container form {
+    width: 500px;
     display: flex;
     align-items: center;
 }
@@ -52,6 +53,7 @@ body {
 
 /* 検索ボタン */
 .search-container button {
+    width: 70px;
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -60,8 +62,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px;
-    white-space: nowrap;
-    /* 縦並び防止 */
+    white-space: nowrap; /* 縦並び防止 */
     transition: background-color 0.3s ease;
 }
 
@@ -72,13 +73,10 @@ body {
 /* ナビゲーション */
 .navigation {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 15px;
 }
 
-.navigation form {
-    margin: 0;
-}
 
 .navigation a,
 .navigation button {
@@ -88,7 +86,8 @@ body {
     border: none;
     font-size: 16px;
     cursor: pointer;
-    padding: 5px 10px;
+    padding: 5px 5px;
+    white-space: nowrap; /* 縦並び防止 */
     transition: background-color 0.3s ease, text-decoration 0.3s ease;
 }
 
@@ -99,8 +98,9 @@ body {
 
 /* 出品ボタン */
 .navigation .sell-button {
+    padding: 10px 20px;
     color: black;
-    padding: 8px 15px;
+    padding: 5px 15px;
     background-color: white;
     border: none;
     border-radius: 5px;
