@@ -42,7 +42,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     // プロフィール設定関連
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     // 商品購入関連
     Route::get('/purchase/{item_id}', [PurchaseController::class, 'create'])->name('purchase.create');
