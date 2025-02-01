@@ -13,7 +13,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script src="{{ asset('js/common.js') }}" defer></script>
-    @yield('js')
 </head>
 <body>
     <header class="header">
@@ -33,7 +32,7 @@
                     <button type="submit">ログアウト</button>
                 </form>
                 <a href="/mypage">マイページ</a>
-                <a href="/sell" class="sell-button">出品</a>
+                <a href="{{ route('items.create') }}" class="sell-button">出品</a>
             </div>
         @endif
     </header>
@@ -41,7 +40,5 @@
     <div class="container">
         @yield('content')
     </div>
-
-    @yield('js')
 </body>
 </html>

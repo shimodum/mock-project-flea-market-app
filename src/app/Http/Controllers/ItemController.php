@@ -35,6 +35,12 @@ class ItemController extends Controller
         return view('items.show', compact('item'));
     }
 
+    //出品画面表示
+    public function create()
+    {
+        return view('items.create');
+    }
+
     //出品処理
     public function store(Request $request)
 {
@@ -67,4 +73,5 @@ class ItemController extends Controller
 
     return redirect()->route('items.index');
 }
+
 }

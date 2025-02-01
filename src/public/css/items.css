@@ -1,4 +1,4 @@
-/* 商品一覧専用スタイル */
+/* 商品一覧画面（トップページ）専用 */
 .item-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -34,7 +34,7 @@
     margin-top: 10px;
 }
 
-/* 商品詳細画面のスタイル */
+/* 商品詳細画面 */
 .item-detail {
     max-width: 1000px;
     margin: 40px auto;
@@ -236,6 +236,76 @@
 .comment-form button:hover {
     background-color: darkred;
 }
+
+
+/* 商品出品画面 */
+.container {
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.category {
+    border: 1px solid red;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: red;
+    font-size: 14px;
+}
+
+.sell-button {
+    background-color: #e74c3c;
+    color: white;
+    font-size: 16px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 300px;
+    margin-top: 10px;
+}
+
+.sell-button:hover {
+    background-color: darkred;
+}
+
+
 
 /* レスポンシブ対応 */
 @media (max-width: 850px) {
