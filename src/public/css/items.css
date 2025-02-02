@@ -1,4 +1,6 @@
+/* ========================= */
 /* 商品一覧画面（トップページ） */
+/* ========================= */
 .item-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -13,156 +15,7 @@
     border: 1px solid #ddd;
     padding: 10px;
     border-radius: 10px;
-    background-color: #f9f9f9;a/* 商品一覧画面（トップページ） */
-        .item-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            width: 100%;
-            padding: 20px;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
-    
-        /* 商品カードのデザイン */
-        .item {
-            text-align: center;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-    
-        /* 商品画像 */
-        .item img {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 4 / 3;
-            object-fit: cover;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 10px;
-        }
-    
-        /* 商品出品画面 */
-        .sell-container {
-            max-width: 600px;
-            margin: 50px auto;
-        }
-    
-        /* タイトル */
-        .page-title {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-    
-        /* フォーム全体 */
-        .form-group {
-            margin-bottom: 20px;
-        }
-    
-        /* フォームのラベル */
-        .form-group label {
-            font-size: 16px;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 5px;
-        }
-    
-        /* 入力フォーム・選択メニュー */
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            font-size: 14px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-    
-        /* 画像アップロードエリア */
-        .image-upload {
-            border: 2px dashed #e74c3c;
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            background-color: #fff;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-    
-        .image-upload:hover {
-            background-color: #f8d7da;
-        }
-    
-        .image-upload input[type="file"] {
-            display: none;
-        }
-    
-        .image-upload label {
-            color: #e74c3c;
-            font-weight: bold;
-            cursor: pointer;
-        }
-    
-        /* カテゴリーリスト */
-        .category-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 15px;
-        }
-    
-        .category {
-            border: 1px solid red;
-            padding: 5px 10px;
-            border-radius: 5px;
-            color: red;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-    
-        .category:hover {
-            background-color: red;
-            color: white;
-        }
-    
-        /* 出品ボタン */
-        .sell-button {
-            background-color: #e74c3c;
-            color: white;
-            font-size: 16px;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            max-width: 300px;
-            margin: 20px auto;
-            display: block;
-            text-align: center;
-        }
-    
-        .sell-button:hover {
-            background-color: darkred;
-        }
-    
-        /* レスポンシブ対応 */
-        @media (max-width: 768px) {
-            .item-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-    
-        @media (max-width: 480px) {
-            .item-list {
-                grid-template-columns: repeat(1, 1fr);
-            }
-        }
+    background-color: #f9f9f9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -185,7 +38,8 @@
 
 .tabs {
     display: flex;
-    justify-content: flex-start; /* 左端に揃える */
+    justify-content: flex-start;
+    /* 左端に揃える */
     padding-left: 20px;
     font-size: 18px;
     font-weight: bold;
@@ -214,115 +68,47 @@
     }
 }
 
-
+/* ========================= */
 /* 商品詳細画面 */
+/* ========================= */
 .item-detail {
     max-width: 1000px;
+    /* 商品詳細ページの横幅を元に戻す */
     margin: 40px auto;
     padding: 20px;
 }
 
+/* 商品詳細のヘッダー */
 .item-detail-header {
     display: flex;
+    /* 商品画像と情報を横並びにする */
     align-items: flex-start;
     gap: 20px;
     margin-bottom: 20px;
 }
 
+/* 商品画像 */
 .item-image {
     width: 50%;
+    /* 幅を50%に戻す */
     max-width: 400px;
     border-radius: 5px;
 }
 
+/* 商品情報 */
 .item-info {
     flex: 1;
+    /* 画像の横に配置する */
 }
 
-.item-info h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.item-info p {
-    font-size: 16px;
-    margin: 5px 0;
-}
-
+/* いいねボタンや購入ボタンのレイアウトを調整 */
 .item-actions {
     display: flex;
     gap: 15px;
     margin-top: 10px;
 }
 
-/* いいねボタンのデザイン */
-.like-button {
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    color: gray;
-}
-
-.like-button.liked {
-    color: gold;
-    /* いいね済みのときに⭐をゴールドにする */
-}
-
-.like-button:hover {
-    color: orange;
-    /* ホバー時に強調 */
-}
-
-/* コメントボタン */
-.comment-button {
-    background: none;
-    border: 1px solid #ccc;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.comment-button:hover {
-    background-color: #f5f5f5;
-}
-
-/* 購入ボタン */
-.purchase-button {
-    display: inline-block;
-    background-color: red;
-    color: white;
-    padding: 12px 24px;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 5px;
-    text-align: center;
-    margin-top: 15px;
-    transition: background 0.3s ease;
-}
-
-.purchase-button:hover {
-    background-color: darkred;
-}
-
-.login-warning {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-}
-
-.login-warning a {
-    color: blue;
-    text-decoration: underline;
-}
-
-/* 商品説明と情報 */
+/* 商品の説明・情報を調整 */
 .item-description,
 .item-meta {
     margin-top: 20px;
@@ -332,177 +118,60 @@
     background-color: #fafafa;
 }
 
-.item-description h2,
-.item-meta h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-/* コメントセクション */
-.item-comments {
-    margin-top: 30px;
-}
-
-.comments-container {
-    border-top: 1px solid #ddd;
-    padding-top: 15px;
-}
-
-/* コメント1つ分のデザイン */
-.comment {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
-
-.profile-image {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    background-color: #ddd;
-}
-
-/* 名前とコメントの間のスペース調整 */
-.comment-content {
-    flex: 1;
-}
-
-.comment-content strong {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-/* コメント投稿フォーム */
-.comment-form {
-    margin-top: 20px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #fafafa;
-}
-
-.comment-form textarea {
-    width: 100%;
-    height: 80px;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: none;
-}
-
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* コメント送信ボタン */
-.comment-form button {
-    display: block;
-    background-color: red;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.comment-form button:hover {
-    background-color: darkred;
-}
-
+/* ========================= */
 /* 商品出品画面 */
-.container {
-    width: 100%; /* デフォルトの .container は最大幅を設定しない */
-    margin: 50px auto;
-    text-align: left;
+/* ========================= */
+#sell-form-container {
+    max-width: 600px;
+    /* 商品出品画面のコンテンツ幅を制限 */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #ddd;
 }
 
-/* タイトル */
-.page-title {
-    font-size: 24px;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* フォーム全体 */
-.form-group {
-    margin-bottom: 20px;
-}
-
-/* フォームのラベル */
-.form-group label {
-    font-size: 16px;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* 入力フォーム・選択メニュー */
-.form-group input,
-.form-group select,
-.form-group textarea {
+/* 商品出品フォームのテキストエリア、セレクト、インプット */
+#sell-form-container input,
+#sell-form-container select,
+#sell-form-container textarea {
     width: 100%;
+    /* 商品出品フォームの幅調整 */
     padding: 10px;
-    font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 16px;
 }
 
-/* 画像アップロードエリア */
-.image-upload {
-    border: 2px dashed #e74c3c;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    background-color: #fff;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
-
-.image-upload:hover {
-    background-color: #f8d7da;
-}
-
-.image-upload input[type="file"] {
-    display: none;
-}
-
-.image-upload label {
-    color: #e74c3c;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* カテゴリーリスト */
+/* カテゴリーリスト（選択時のスタイル） */
 .category-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 15px;
 }
 
 .category {
     border: 1px solid red;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 20px;
     color: red;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.category:hover {
+.category:hover,
+.category.selected {
     background-color: red;
     color: white;
+}
+
+/* 商品出品ページの見出し下のグレー線 */
+.section-title {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
 }
 
 /* 出品ボタン */
@@ -516,9 +185,8 @@
     cursor: pointer;
     width: 100%;
     max-width: 300px;
-    margin: 20px auto;
-    display: block;
-    text-align: center;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
 }
 
 .sell-button:hover {

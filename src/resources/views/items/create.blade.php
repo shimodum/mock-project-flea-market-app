@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container sell-container">
+<div id="sell-form-container">
     <h1 class="page-title">商品を出品</h1>
 
     <form action="{{ route('items.store') }}" method="POST" enctype="multipart/form-data">
