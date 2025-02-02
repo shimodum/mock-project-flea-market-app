@@ -20,30 +20,35 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* 左右にロゴ・検索・ナビゲーションを分ける */
     padding: 10px 20px;
     z-index: 1000;
 }
 
+/* ロゴ */
 .header img {
     height: 40px;
 }
 
 /* 検索フォーム */
 .search-container {
+    flex: 1;
+    /* ナビゲーションとのバランスをとる */
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-grow: 1;
+    max-width: 500px;
+    /* 検索フォームの幅を制限 */
+    margin: 0 auto;
 }
 
 .search-container form {
-    width: 500px;
+    width: 100%;
     display: flex;
     align-items: center;
 }
 
 .search-container input {
-    max-width: 1250px;
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
@@ -62,7 +67,7 @@ body {
     font-size: 16px;
     cursor: pointer;
     margin-left: 10px;
-    white-space: nowrap; /* 縦並び防止 */
+    white-space: nowrap;
     transition: background-color 0.3s ease;
 }
 
@@ -73,11 +78,12 @@ body {
 /* ナビゲーション */
 .navigation {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 15px;
+    white-space: nowrap;
 }
 
-
+/* ナビゲーションリンク */
 .navigation a,
 .navigation button {
     color: white;
@@ -87,7 +93,6 @@ body {
     font-size: 16px;
     cursor: pointer;
     padding: 5px 5px;
-    white-space: nowrap; /* 縦並び防止 */
     transition: background-color 0.3s ease, text-decoration 0.3s ease;
 }
 
@@ -97,11 +102,10 @@ body {
 }
 
 /* 出品ボタン */
-.navigation .sell-button {
-    padding: 10px 20px;
-    color: black;
-    padding: 5px 15px;
+.sell-button {
+    padding: 10px 15px;
     background-color: white;
+    color: black;
     border: none;
     border-radius: 5px;
     text-decoration: none;
@@ -109,6 +113,6 @@ body {
     transition: background-color 0.3s ease;
 }
 
-.navigation .sell-button:hover {
+.sell-button:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
