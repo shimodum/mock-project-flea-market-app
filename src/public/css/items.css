@@ -28,6 +28,30 @@
     margin-bottom: 10px;
 }
 
+/* タブ（おすすめ・マイリスト）のスタイル */
+.tabs-container {
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.tabs {
+    display: flex;
+    justify-content: flex-start; /* 左端に揃える */
+    padding-left: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.tabs span {
+    margin-right: 20px;
+}
+
+.tabs span.active {
+    color: red;
+    /* アクティブなタブの色 */
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .item-list {
