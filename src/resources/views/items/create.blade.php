@@ -1,4 +1,3 @@
-{{-- 商品出品画面 --}}
 @extends('layouts.app')
 
 @section('css')
@@ -15,10 +14,13 @@
         {{-- 商品画像 --}}
         <div class="form-group">
             <label for="image">商品画像</label>
-            <input type="file" id="image" name="image" required>
+            <div class="image-upload">
+                <label for="image">画像を選択する</label>
+                <input type="file" id="image" name="image" required>
+            </div>
         </div>
 
-        {{-- 商品のの詳細 --}}
+        {{-- 商品の詳細 --}}
         <div class="form-group">
             <h2 class="section-title">商品の詳細</h2>
 
