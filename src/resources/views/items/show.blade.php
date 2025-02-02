@@ -16,11 +16,11 @@
             <p>ブランド名: {{ $item->brand ?? '不明' }}</p>
             <p>¥{{ number_format($item->price) }} (税込)</p>
             <div class="item-actions">
-                <button id="like-button"
+                <button id="like-button-{{ $item->id }}"
                         data-item-id="{{ $item->id }}"
                         class="like-button {{ $item->isLikedBy(Auth::user()) ? 'liked' : '' }}">
-                    {{ $item->isLikedBy(Auth::user()) ? '⭐' : '☆' }} 
-                    <span id="like-count">{{ $item->likes->count() }}</span>
+                    {{ $item->isLikedBy(Auth::user()) ? '⭐' : '☆' }}
+                    <span id="like-count-{{ $item->id }}">{{ $item->likes->count() }}</span>
                 </button>
                 <button class="comment-button">💬 {{ $item->comments_count ?? 0 }}</button>
             </div>

@@ -1,49 +1,43 @@
-// ページが完全に読み込まれたら処理を実行
 document.addEventListener("DOMContentLoaded", function () {
-    
-    // すべての「いいね」ボタンを取得
     const likeButtons = document.querySelectorAll(".like-button");
-    
-    // CSRFトークンを取得 (LaravelではCSRF対策のため、リクエストにこのトークンが必要)
-    const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
 
-    // CSRFトークンが見つからない場合は処理を中断
-    if (!csrfTokenElement) return;
-
-    // メタタグからCSRFトークンの値を取得
-    const csrfToken = csrfTokenElement.content;
-
-    // すべての「いいね」ボタンに対してクリックイベントを設定
     likeButtons.forEach(button => {
         button.addEventListener("click", function () {
-
-            // ボタンの data-item-id 属性から、対象の商品IDを取得
             const itemId = this.dataset.itemId;
+            const likeCountElement = document.getElementById(`like-count-${itemId}`);
 
-            // fetch API を使って「いいね」リクエストを送信
             fetch(`/like/${itemId}`, {
-                method: "POST", // HTTPリクエストの種類 (新しくデータを作るのでPOST)
+                method: "POST",
                 headers: {
-                    "X-CSRF-TOKEN": csrfToken, // CSRFトークンをヘッダーにセット
-                    "Content-Type": "application/json", // JSON形式のデータを送信
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
                 },
             })
-            .then(response => response.json()) // JSONデータとしてレスポンスを取得
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        alert("いいねするにはログインが必要です。");
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                // いいねの数を更新するための要素を取得
-                const likeCount = document.getElementById("like-count");
+                if (!likeCountElement) {
+                    console.error(`Like count element not found for item ${itemId}`);
+                    return;
+                }
 
-                // いいねされたかどうかの状態をサーバーから取得してボタンを更新
                 if (data.liked) {
-                    this.classList.add("liked"); // いいね済みスタイルを適用
-                    this.innerHTML = "⭐ <span id='like-count'>" + (parseInt(likeCount.innerText) + 1) + "</span>";
+                    this.classList.add("liked");
+                    this.innerHTML = `⭐ <span id='like-count-${itemId}'>${data.likeCount}</span>`;
                 } else {
-                    this.classList.remove("liked"); // いいね解除のスタイル
-                    this.innerHTML = "☆ <span id='like-count'>" + (parseInt(likeCount.innerText) - 1) + "</span>";
+                    this.classList.remove("liked");
+                    this.innerHTML = `☆ <span id='like-count-${itemId}'>${data.likeCount}</span>`;
                 }
             })
-            .catch(() => {
-                // エラー発生時の処理を何もしないようにする
+            .catch(error => {
+                console.error("いいねの送信中にエラーが発生しました:", error);
             });
         });
     });

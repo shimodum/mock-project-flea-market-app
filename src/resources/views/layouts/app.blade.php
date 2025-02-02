@@ -14,6 +14,7 @@
 
     <script src="{{ asset('js/common.js') }}" defer></script>
 </head>
+
 <body>
     <header class="header">
         <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH ロゴ">
@@ -40,5 +41,9 @@
     <div class="container">
         @yield('content')
     </div>
+
+    {{-- JavaScript の読み込み --}}
+    @yield('js')
 </body>
+
 </html>
