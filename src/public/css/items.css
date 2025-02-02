@@ -101,14 +101,7 @@
     /* 画像の横に配置する */
 }
 
-/* いいねボタンや購入ボタンのレイアウトを調整 */
-.item-actions {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-/* 商品の説明・情報を調整 */
+/* 商品説明と情報 */
 .item-description,
 .item-meta {
     margin-top: 20px;
@@ -116,6 +109,109 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     background-color: #fafafa;
+}
+
+/* ========================= */
+/* コメントセクション */
+/* ========================= */
+.item-comments {
+    margin-top: 30px;
+}
+
+.comments-container {
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+/* コメント1つ分のデザイン */
+.comment {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ddd;
+}
+
+/* 名前とコメントの間のスペース調整 */
+.comment-content {
+    flex: 1;
+}
+
+.comment-content strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/* コメント投稿フォーム */
+.comment-form {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.comment-form textarea {
+    width: 100%;
+    height: 120px;
+    /* 高さを拡大 */
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+}
+
+/* コメント送信ボタン */
+.comment-form button {
+    display: block;
+    width: 100%;
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: darkred;
+}
+
+/* ========================= */
+/* 購入ボタン */
+/* ========================= */
+.purchase-button {
+    display: block;
+    background-color: #e74c3c;
+    color: white;
+    padding: 12px 24px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+    width: 100%;
+}
+
+.purchase-button:hover {
+    background-color: darkred;
 }
 
 /* ========================= */
