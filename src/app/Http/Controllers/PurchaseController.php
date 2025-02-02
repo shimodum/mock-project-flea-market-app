@@ -33,14 +33,45 @@ class PurchaseController extends Controller
         ]);
 
         // 購入情報をデータベースに保存
-        Purchase::create([
+        $purchase = Purchase::create([
             'user_id' => Auth::id(),
             'item_id' => $item_id,
             'payment_method' => $request->payment_method,
         ]);
 
-        return redirect()->route('items.index')->with('success', '購入が完了しました！');
+        // Stripe の決済ページにリダイレクト
+        return response()->json([
+            'url' => route('stripe.checkout', ['item_id' => $item_id])
+        ]);
     }
+
+    // Stripe 決済処理
+    public function checkout(Request $request)
+    {
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $item = Item::findOrFail($request->item_id);
+
+        $session = \Stripe\Checkout\Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => 'jpy',
+                    'product_data' => [
+                        'name' => $item->name,
+                    ],
+                    'unit_amount' => $item->price * 100,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => url('/purchase/success'),
+            'cancel_url' => url('/purchase/cancel'),
+        ]);
+
+        return response()->json(['url' => $session->url]);
+    }
+
 
     // 送付先住所変更画面を表示
     public function editAddress($item_id)

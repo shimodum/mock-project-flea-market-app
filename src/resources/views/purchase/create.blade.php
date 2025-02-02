@@ -18,8 +18,22 @@
         </div>
     </div>
 
+    <div class="purchase-summary">
+        <h3>注文内容</h3>
+        <table class="summary-table">
+            <tr>
+                <th>商品代金</th>
+                <td>¥{{ number_format($item->price) }}</td>
+            </tr>
+            <tr>
+                <th>支払い方法</th>
+                <td id="payment-summary">未選択</td>
+            </tr>
+        </table>
+    </div>
+
     <div class="purchase-form">
-        <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST">
+        <form id="purchase-form" action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST">
             @csrf
             <div class="payment-method">
                 <label for="payment_method" class="bold-label">支払い方法</label>
@@ -36,8 +50,12 @@
                 <a href="{{ route('purchase.editAddress', ['item_id' => $item->id]) }}" class="change-address">変更する</a>
             </div>
 
-            <button type="submit" class="purchase-button">購入する</button>
+            <button type="submit" id="purchase-button" class="purchase-button" data-item-id="{{ $item->id }}">購入する</button>
         </form>
     </div>
 </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/purchase.js') }}" defer></script>
 @endsection

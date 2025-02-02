@@ -21,6 +21,15 @@ class Purchase extends Model
         'shipping_address',
     ];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'payment_method' => 'string', // payment_method を string 型として扱う
+    ];
+
     // 購入を行ったユーザー
     public function user()
     {
@@ -31,21 +40,6 @@ class Purchase extends Model
     public function item()
     {
         return $this->belongsTo(Item::class);
-    }
-
-    /**
-     * 支払い方法を人間が読める形式で取得
-     *
-     * @return string
-     */
-    public function getPaymentMethodTextAttribute()
-    {
-        $paymentMethods = [
-            1 => 'コンビニ払い',
-            2 => 'カード支払い',
-        ];
-
-        return $paymentMethods[$this->payment_method];
     }
 
     /**
