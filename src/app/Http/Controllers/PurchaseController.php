@@ -14,7 +14,14 @@ class PurchaseController extends Controller
     {
         // 指定されたIDの商品を取得（存在しない場合は404エラー）
         $item = Item::findOrFail($item_id);
-        return view('purchase.create', compact('item'));
+
+        // ログインユーザーの住所情報を取得
+        $user = Auth::user();
+        $address = $user->postal_code ? 
+            "〒 {$user->postal_code} {$user->address} " . ($user->building ? "({$user->building})" : "") 
+            : "住所が登録されていません。";
+
+        return view('purchase.create', compact('item', 'address'));
     }
 
     // 商品購入処理

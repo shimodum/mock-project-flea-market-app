@@ -32,8 +32,7 @@
 
             <div class="shipping-info">
                 <h3>配送先</h3>
-                <p>〒 XXX-YYYY</p>
-                <p>ここには住所と建物が入ります</p>
+                <p>{{ $address }}</p>
                 <a href="{{ route('purchase.editAddress', ['item_id' => $item->id]) }}" class="change-address">変更する</a>
             </div>
 
