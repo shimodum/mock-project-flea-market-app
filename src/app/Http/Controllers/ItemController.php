@@ -29,6 +29,20 @@ class ItemController extends Controller
         ]);    
     }
 
+    //マイリスト
+    public function mylist()
+    {
+        if (!auth()->check()) {
+            return view('items.mylist', ['items' => []]); // 未認証ユーザーには何も表示しない
+        }
+
+        $items = Item::whereIn('id', function ($query) {
+            $query->select('item_id')->from('likes')->where('user_id', auth()->id());
+        })->get();
+
+        return view('items.mylist', ['items' => $items]);
+    }
+
     public function show($id)
     {
         $item = Item::findOrFail($id);
@@ -43,35 +57,34 @@ class ItemController extends Controller
 
     //出品処理
     public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'nullable|string',
-        'price' => 'required|integer|min:1',
-        'condition' => 'required|integer|between:1,4',
-        'brand' => 'nullable|string|max:255',
-        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|integer|min:1',
+            'condition' => 'required|integer|between:1,4',
+            'brand' => 'nullable|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-    // 画像を storage/app/public/item_images に保存
-    if ($request->hasFile('image')) {
-        $imagePath = $request->file('image')->store('item_images', 'public');
-    } else {
-        $imagePath = null;
+        // 画像を storage/app/public/item_images に保存
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('item_images', 'public');
+        } else {
+            $imagePath = null;
+        }
+
+        Item::create([
+            'user_id' => auth()->id(),
+            'name' => $request->name,
+            'description' => $request->description,
+            'price' => $request->price,
+            'condition' => $request->condition,
+            'brand' => $request->brand,
+            'image_path' => $imagePath, // ここに保存したパスを設定
+            'is_sold' => false,
+        ]);
+
+        return redirect()->route('items.index');
     }
-
-    Item::create([
-        'user_id' => auth()->id(),
-        'name' => $request->name,
-        'description' => $request->description,
-        'price' => $request->price,
-        'condition' => $request->condition,
-        'brand' => $request->brand,
-        'image_path' => $imagePath, // ここに保存したパスを設定
-        'is_sold' => false,
-    ]);
-
-    return redirect()->route('items.index');
-}
-
 }

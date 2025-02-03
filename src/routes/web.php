@@ -28,6 +28,11 @@ Route::post('logout', function() {
 Route::get('/', [ItemController::class, 'index'])->name('items.index'); // 商品一覧
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show'); // 商品詳細
 
+// マイリスト ＝ いいねした商品のみを表示する（認証が必要）
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mylist', [ItemController::class, 'mylist'])->name('items.mylist');
+});
+
 // いいね機能(auth ミドルウェアでログインユーザーのみが使用可能)
 Route::middleware(['auth'])->group(function () {
     Route::post('/like/{item_id}', [LikeController::class, 'toggleLike'])->name('like.toggle');
