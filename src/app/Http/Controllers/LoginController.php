@@ -18,7 +18,7 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        //認証情報を使ってログインを試みる
+        // 認証情報を使ってログインを試みる
         if (Auth::attempt($credentials)) {
             // 認証成功
             $request->session()->regenerate();
@@ -26,4 +26,13 @@ class LoginController extends Controller
         }
     }
 
+    // ログアウト処理
+    public function logout()
+    {
+        Auth::logout(); // ユーザーをログアウト
+        request()->session()->invalidate(); // セッションを無効化
+        request()->session()->regenerateToken(); // CSRFトークンを再生成
+
+        return redirect()->route('login.form'); // ログイン画面へリダイレクト
+    }
 }
