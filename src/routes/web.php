@@ -13,7 +13,7 @@ use App\Http\Controllers\LikeController;
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'store'])->name('register');
 
-// ログイン関連
+// ログイン/ログアウト関連
 Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
