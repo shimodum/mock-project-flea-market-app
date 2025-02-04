@@ -8,6 +8,7 @@ use App\Models\Category;
 
 class ItemController extends Controller
 {
+    //商品一覧画面（トップページ）
     public function index(Request $request)
     {
         $query = Item::query()
@@ -15,6 +16,12 @@ class ItemController extends Controller
             ->when(auth()->check(), function ($query) {
                 $query->where('user_id', '!=', auth()->id()); // 自分が出品した商品を除外
             });
+
+        // マイリスト（いいねした商品のみ）を表示する場合
+        if ($request->query('tab') === 'mylist' && auth()->check()) {
+            $likedItemIds = auth()->user()->likes()->pluck('item_id');
+            $query->whereIn('id', $likedItemIds);
+        }
 
         // 商品名での部分一致検索
         if ($request->has('query') && !empty($request->input('query'))) {
@@ -25,24 +32,12 @@ class ItemController extends Controller
 
         return view('items.index', [
             'items' => $items,
-            'query' => $request->input('query') // 検索キーワードをビューに渡す
-        ]);    
+            'query' => $request->input('query'),
+            'tab' => $request->query('tab') // 現在のタブ状態をビューに渡す
+        ]);
     }
 
-    //マイリスト
-    public function mylist()
-    {
-        if (!auth()->check()) {
-            return view('items.mylist', ['items' => []]); // 未認証ユーザーには何も表示しない
-        }
-
-        $items = Item::whereIn('id', function ($query) {
-            $query->select('item_id')->from('likes')->where('user_id', auth()->id());
-        })->get();
-
-        return view('items.mylist', ['items' => $items]);
-    }
-
+    //商品詳細画面表示
     public function show($id)
     {
         $item = Item::findOrFail($id);

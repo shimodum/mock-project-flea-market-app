@@ -9,10 +9,11 @@
 <div class="container items-container">
     <div class="tabs-container">
         <div class="tabs">
-            <span class="active">おすすめ</span>
-            <span>マイリスト</span>
+            <a href="{{ route('items.index') }}" class="{{ request('tab') !== 'mylist' ? 'active' : '' }}">おすすめ</a>
+            <a href="{{ route('items.index', ['tab' => 'mylist']) }}" class="{{ request('tab') === 'mylist' ? 'active' : '' }}">マイリスト</a>
         </div>
     </div>
+
 
     <div class="item-list">
         @foreach($items as $item)
