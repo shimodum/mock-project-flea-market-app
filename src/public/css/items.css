@@ -38,12 +38,12 @@
 
 .tabs {
     display: flex;
-    justify-content: flex-start;
-    /* 左端に揃える */
+    justify-content: flex-start; /* 左端に揃える */
     padding-left: 20px;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
+    gap: 20px;
 }
 
 .tabs span {
@@ -51,8 +51,7 @@
 }
 
 .tabs span.active {
-    color: red;
-    /* アクティブなタブの色 */
+    color: red; /* アクティブなタブの色 */
 }
 
 /* レスポンシブ対応 */
