@@ -22,7 +22,7 @@
                     {{ $item->isLikedBy(Auth::user()) ? '⭐' : '☆' }}
                     <span id="like-count-{{ $item->id }}">{{ $item->likes->count() }}</span>
                 </button>
-                <button class="comment-button">💬 {{ $item->comments_count ?? 0 }}</button>
+                <a href="#comment-form" class="comment-icon">💬 <span id="comment-count">{{ $item->comments->count() }}</span></a>
             </div>
 
             {{-- 購入ボタン（認証済みのユーザーのみ表示） --}}
@@ -51,16 +51,16 @@
 
     {{-- コメントセクション --}}
     <div class="item-comments">
-        <h3>コメント ({{ $item->comments->count() }})</h3>
-        <div class="comments-container">
-            @foreach($item->comments as $comment)
+        <h3>コメント (<span id="comment-count">{{ $item->comments->count() }}</span>)</h3>
+        <div id="comments" class="comments-container">
+            @foreach($item->comments->sortByDesc('created_at') as $comment)
                 <div class="comment">
                     {{-- ユーザーのプロフィール画像 --}}
                     <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}"
                         alt="{{ $comment->user->name }}"
                         class="profile-image">
                     <div class="comment-content">
-                        <p><strong>{{ $comment->user->name }}</strong></p>
+                        <p><strong>{{ $comment->user->name }}</strong> <span class="comment-date">{{ $comment->formatted_created_at }}</span></p>
                         <p>{{ $comment->content }}</p>
                     </div>
                 </div>
@@ -71,7 +71,7 @@
     {{-- 商品へのコメント投稿フォーム（認証済みユーザーのみ表示） --}}
     <h3>商品へのコメント</h3>
     @auth
-    <form method="POST" action="{{ route('comments.store', ['item_id' => $item->id]) }}" class="comment-form">
+    <form id="comment-form" method="POST" action="{{ route('comments.store', ['item_id' => $item->id]) }}" class="comment-form">
         @csrf
         <textarea name="content" placeholder="商品へのコメントを入力">{{ old('content') }}</textarea>
 
@@ -88,5 +88,13 @@
 
 {{-- JavaScriptの読み込み --}}
 @section('js')
-    <script src="{{ asset('js/like.js') }}" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // コメントアイコンをクリックすると、コメントフォームまでスクロール
+            document.querySelector(".comment-icon").addEventListener("click", function (event) {
+                event.preventDefault();
+                document.querySelector("#comment-form").scrollIntoView({ behavior: "smooth" });
+            });
+        });
+    </script>
 @endsection

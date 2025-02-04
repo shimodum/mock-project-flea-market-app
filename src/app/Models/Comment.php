@@ -31,4 +31,10 @@ class Comment extends Model
     {
         return $this->belongsTo(Item::class);
     }
+
+    // フォーマットされた作成日時
+    public function getFormattedCreatedAtAttribute()
+    {
+        return $this->created_at->format('Y-m-d H:i');
+    }
 }
