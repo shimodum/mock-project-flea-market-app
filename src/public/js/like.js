@@ -5,13 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
         button.addEventListener("click", function () {
             const itemId = this.dataset.itemId;
             const likeCountElement = document.getElementById(`like-count-${itemId}`);
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content'); // CSRFトークン取得
 
             fetch(`/like/${itemId}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json"
+                    "Accept": "application/json",
+                    "X-CSRF-TOKEN": csrfToken // CSRFトークンを追加
                 },
+                credentials: "same-origin"
             })
             .then(response => {
                 if (!response.ok) {

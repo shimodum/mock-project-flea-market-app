@@ -16,13 +16,18 @@
             <p>ブランド名: {{ $item->brand ?? '不明' }}</p>
             <p>¥{{ number_format($item->price) }} (税込)</p>
             <div class="item-actions">
+                {{-- いいねボタン --}}
                 <button id="like-button-{{ $item->id }}"
                         data-item-id="{{ $item->id }}"
                         class="like-button {{ $item->isLikedBy(Auth::user()) ? 'liked' : '' }}">
                     {{ $item->isLikedBy(Auth::user()) ? '⭐' : '☆' }}
                     <span id="like-count-{{ $item->id }}">{{ $item->likes->count() }}</span>
                 </button>
-                <a href="#comment-form" class="comment-icon">💬 <span id="comment-count">{{ $item->comments->count() }}</span></a>
+
+                {{-- コメントアイコン --}}
+                <a href="#comment-form" class="comment-button">
+                    💬 <span id="comment-count">{{ $item->comments->count() }}</span>
+                </a>
             </div>
 
             {{-- 購入ボタン（認証済みのユーザーのみ表示） --}}
@@ -89,12 +94,9 @@
 {{-- JavaScriptの読み込み --}}
 @section('js')
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // コメントアイコンをクリックすると、コメントフォームまでスクロール
-            document.querySelector(".comment-icon").addEventListener("click", function (event) {
-                event.preventDefault();
-                document.querySelector("#comment-form").scrollIntoView({ behavior: "smooth" });
-            });
+        document.querySelector(".comment-button").addEventListener("click", function(event) {
+            event.preventDefault();
+            document.querySelector("#comment-form").scrollIntoView({ behavior: "smooth" });
         });
     </script>
 @endsection
