@@ -23,11 +23,9 @@
                     {{ $item->isLikedBy(Auth::user()) ? '⭐' : '☆' }}
                     <span id="like-count-{{ $item->id }}">{{ $item->likes->count() }}</span>
                 </button>
-
-                {{-- コメントアイコン --}}
-                <a href="#comment-form" class="comment-button">
+                <button class="comment-button" id="comment-button">
                     💬 <span id="comment-count">{{ $item->comments->count() }}</span>
-                </a>
+                </button>
             </div>
 
             {{-- 購入ボタン（認証済みのユーザーのみ表示） --}}
@@ -57,7 +55,7 @@
     {{-- コメントセクション --}}
     <div class="item-comments">
         <h3>コメント (<span id="comment-count">{{ $item->comments->count() }}</span>)</h3>
-        <div id="comments" class="comments-container">
+        <div class="comments-container">
             @foreach($item->comments->sortByDesc('created_at') as $comment)
                 <div class="comment">
                     {{-- ユーザーのプロフィール画像 --}}
@@ -65,7 +63,7 @@
                         alt="{{ $comment->user->name }}"
                         class="profile-image">
                     <div class="comment-content">
-                        <p><strong>{{ $comment->user->name }}</strong> <span class="comment-date">{{ $comment->formatted_created_at }}</span></p>
+                        <p><strong>{{ $comment->user->name }}</strong> <span class="comment-date">{{ $comment->created_at->format('Y-m-d H:i') }}</span></p>
                         <p>{{ $comment->content }}</p>
                     </div>
                 </div>
@@ -93,10 +91,13 @@
 
 {{-- JavaScriptの読み込み --}}
 @section('js')
+    <script src="{{ asset('js/like.js') }}" defer></script>
     <script>
-        document.querySelector(".comment-button").addEventListener("click", function(event) {
-            event.preventDefault();
-            document.querySelector("#comment-form").scrollIntoView({ behavior: "smooth" });
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#comment-button").addEventListener("click", function(event) {
+                event.preventDefault();
+                document.querySelector("#comment-form").scrollIntoView({ behavior: "smooth" });
+            });
         });
     </script>
 @endsection
