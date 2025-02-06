@@ -1,4 +1,85 @@
-/* プロフィール設定画面（初回ログイン時）、プロフィール編集画面 共通設定 */
+/* ========================= */
+/* プロフィール画面（マイページ）*/
+/* ========================= */
+
+/* プロフィールヘッダー */
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* プロフィール画像 */
+.profile-image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.profile-placeholder {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    border-radius: 50%;
+}
+
+/* プロフィール編集ボタン */
+.profile-edit-btn {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.profile-edit-btn:hover {
+    background-color: #c0392b;
+}
+
+/* タブメニュー */
+.tab-menu {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.tab-menu a {
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.tab-menu a.active {
+    color: red;
+    border-bottom: 2px solid red;
+}
+
+/* 商品リスト */
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.product-item {
+    width: 150px;
+    text-align: center;
+}
+
+.product-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+
+/* ========================= */
+/* プロフィール設定画面（初回ログイン時）*/
+/* プロフィール編集画面 共通設定 */
+/* ========================= */
 .container {
     max-width: 500px;
     margin: 50px auto;

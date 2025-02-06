@@ -4,9 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Item;
+use App\Models\Purchase;
 
 class ProfileController extends Controller
 {
+    // プロフィール画面（マイページ）の表示
+    public function index(Request $request)
+    {
+        // 現在のユーザーを取得
+        $user = Auth::user();
+
+        // クエリパラメータ 'tab' を取得 (デフォルトは 'sell' 出品リスト)
+        $tab = $request->query('tab', 'sell');
+
+        // 出品した商品
+        $sellItems = Item::where('user_id', $user->id)->get();
+
+        // 購入した商品
+        $buyItems = Purchase::where('user_id', $user->id)->with('item')->get();
+
+        return view('profile.index', [
+            'user' => $user,
+            'sellItems' => $sellItems,
+            'buyItems' => $buyItems,
+            'tab' => $tab
+        ]);
+    }
+
+
+
     // プロフィール設定画面の表示
     public function edit()
     {

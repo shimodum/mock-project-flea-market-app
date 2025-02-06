@@ -35,7 +35,8 @@ Route::middleware(['auth'])->group(function () {
 
 // 認証が必要なルートをグループ化
 Route::middleware(['auth', 'verified'])->group(function () {
-    // プロフィール設定関連
+    // プロフィール関連
+    Route::get('/mypage', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/mypage/profile', [ProfileController::class, 'update'])->name('profile.update');
 
