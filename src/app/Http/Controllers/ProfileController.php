@@ -21,8 +21,11 @@ class ProfileController extends Controller
         // 出品した商品
         $sellItems = Item::where('user_id', $user->id)->get();
 
-        // 購入した商品
-        $buyItems = Purchase::where('user_id', $user->id)->with('item')->get();
+        // 購入した商品（削除された商品を除外）
+        $buyItems = Purchase::where('user_id', $user->id)
+            ->whereHas('item') // item が存在するデータのみ取得
+            ->with('item')
+            ->get();
 
         return view('profile.index', [
             'user' => $user,
@@ -31,8 +34,6 @@ class ProfileController extends Controller
             'tab' => $tab
         ]);
     }
-
-
 
     // プロフィール設定画面の表示
     public function edit()

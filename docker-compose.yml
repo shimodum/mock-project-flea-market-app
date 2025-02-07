@@ -41,3 +41,13 @@ services:
             - mysql
         ports:
             - 8080:80
+
+
+    # MailHog を追加
+    mailhog:
+        image: mailhog/mailhog
+        container_name: mailhog
+        restart: always
+        ports:
+            - "1025:1025"  # SMTP ポート
+            - "8025:8025"  # Web UI ポート

@@ -32,12 +32,23 @@ class PurchaseController extends Controller
             'payment_method' => 'required',
         ]);
 
+        // 対象の商品を取得
+        $item = Item::findOrFail($item_id);
+
+        // 商品が既に購入されている場合は購入処理を行わない
+        if ($item->is_sold) {
+            return redirect()->route('items.show', $item_id)->with('error', 'この商品はすでに売り切れています');
+        }
+
         // 購入情報をデータベースに保存
         $purchase = Purchase::create([
             'user_id' => Auth::id(),
             'item_id' => $item_id,
             'payment_method' => $request->payment_method,
         ]);
+
+        // 商品の `is_sold` を `true` に更新
+        $item->update(['is_sold' => true]);
 
         // Stripe の決済ページにリダイレクト
         return response()->json([
@@ -71,7 +82,6 @@ class PurchaseController extends Controller
 
         return response()->json(['url' => $session->url]);
     }
-
 
     // 送付先住所変更画面を表示
     public function editAddress($item_id)

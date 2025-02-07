@@ -8,6 +8,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 
 // 会員登録関連
 Route::get('/register', [RegisterController::class, 'showForm'])->name('register.form');
@@ -18,10 +20,26 @@ Route::get('/login', [LoginController::class, 'showForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-
 // 認証不要なルート
 Route::get('/', [ItemController::class, 'index'])->name('items.index'); // 商品一覧
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show'); // 商品詳細
+
+// メール認証のルート
+Route::middleware(['auth'])->group(function () {
+    Route::get('/email/verify', function () {
+        return view('auth.verify'); // 認証待ち画面
+    })->name('verification.notice');
+
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect('/');
+    })->middleware(['signed'])->name('verification.verify');
+
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('status', 'verification-link-sent');
+    })->middleware(['throttle:6,1'])->name('verification.resend');
+});
 
 // いいね機能(auth ミドルウェアでログインユーザーのみが使用可能)
 Route::middleware(['auth'])->group(function () {

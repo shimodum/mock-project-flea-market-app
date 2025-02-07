@@ -27,10 +27,10 @@ class RegisterController extends Controller
         // 新しいユーザーを作成
         $user = User::create($validated);
 
-        // 登録後に自動ログイン
-        Auth::login($user);
+        // メール認証の通知を送る
+        $user->sendEmailVerificationNotification();
 
-        // プロフィール設定画面へリダイレクト
-        return redirect()->route('profile.edit');
+        // 認証ページにリダイレクト
+        return redirect()->route('verification.notice');
     }
 }

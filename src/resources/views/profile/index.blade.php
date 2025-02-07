@@ -48,7 +48,7 @@
             @else
                 @foreach ($buyItems as $purchase)
                     <div class="product-item">
-                        <img src="{{ asset('storage/item_images/' . $purchase->item->image) }}" alt="商品画像">
+                        <img src="{{ asset('storage/item_images/' . $purchase->item->image_path) }}" alt="商品画像">
                         <p>{{ $purchase->item->name }}</p>
                     </div>
                 @endforeach

@@ -14,17 +14,26 @@ class LoginController extends Controller
     }
 
     // ログイン処理
-    public function login(LoginRequest $request)
-    {
-        $credentials = $request->only('email', 'password');
+public function login(LoginRequest $request)
+{
+    $credentials = $request->only('email', 'password');
 
-        // 認証情報を使ってログインを試みる
-        if (Auth::attempt($credentials)) {
-            // 認証成功
-            $request->session()->regenerate();
-            return redirect()->intended('/');
+    if (Auth::attempt($credentials)) {
+        // ユーザーが認証済みか確認
+        if (!Auth::user()->hasVerifiedEmail()) {
+            Auth::logout();
+            return redirect()->route('login.form')->with('error', 'メール認証を完了してください。');
         }
+
+        // 認証成功
+        $request->session()->regenerate();
+        return redirect()->intended('/');
     }
+
+    return back()->withErrors([
+        'email' => 'メールアドレスまたはパスワードが違います。',
+    ]);
+}
 
     // ログアウト処理
     public function logout()
