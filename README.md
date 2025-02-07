@@ -30,7 +30,7 @@
   - 初回ログイン時のプロフィール設定・編集  
   - メール認証機能（Fortifyを使用）  
     - 登録時に認証メールが送信され、リンクをクリックして認証を完了するまでログインできない仕様  
-    - MailHog または Mailtrap を使用して開発環境でメール送信を確認可能  
+    - MailHogを使用して開発環境でメール送信を確認可能  
     - **パスワード表示切替機能**
     - 会員登録画面およびログイン画面のパスワード入力欄に目のアイコン「パスワードトグル（Password Toggle）アイコン」を設置  
     - アイコンをクリックすることで、入力したパスワードを表示または非表示に切り替え可能  
@@ -133,11 +133,7 @@
    MAIL_MAILER=smtp MAIL_HOST=mailhog MAIL_PORT=1025  
    MAIL_USERNAME=null MAIL_PASSWORD=null MAIL_ENCRYPTION=null  
 
-**MailHog を使用する場合**
-- MailHog コンテナは `docker-compose.yml` に含まれており、`http://localhost:8025` にアクセスすることで確認できます。  
-
-**Mailtrap を使用する場合**
-- [Mailtrap](https://mailtrap.io/) に登録し、SMTP設定を `.env` に反映してください。  
+- MailHog コンテナは `docker-compose.yml` に含まれており、`http://localhost:8025` にアクセスすることで確認できます。    
 
 9.必要なJavaScriptファイルの読み込み  
    会員登録画面・ログイン画面における「パスワード表示切替機能」を有効にするため、`common.js` などのJavaScriptファイルが正しくロードされていることを確認してください。
