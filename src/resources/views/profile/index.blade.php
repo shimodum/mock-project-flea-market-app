@@ -47,11 +47,14 @@
                 <p>購入した商品はありません。</p>
             @else
                 @foreach ($buyItems as $purchase)
-                    <div class="product-item">
-                        <img src="{{ asset('storage/item_images/' . $purchase->item->image_path) }}" alt="商品画像">
-                        <p>{{ $purchase->item->name }}</p>
-                    </div>
+                    @if ($purchase->item) {{-- item が存在する場合のみ表示 --}}
+                        <div class="product-item">
+                            <img src="{{ asset('storage/item_images/' . $purchase->item->image_path) }}" alt="商品画像">
+                            <p>{{ $purchase->item->name }}</p>
+                        </div>
+                    @endif
                 @endforeach
+
             @endif
         @endif
     </div>

@@ -1,3 +1,4 @@
+{{-- 商品出品画面 --}}
 @extends('layouts.app')
 
 @section('css')
@@ -28,7 +29,10 @@
             <label>カテゴリー</label>
             <div class="category-list">
                 @foreach (['ファッション', '家電', 'インテリア', 'レディース', 'メンズ', 'コスメ', '本', 'ゲーム', 'スポーツ', 'キッチン', 'ハンドメイド', 'アクセサリー', 'おもちゃ', 'ベビー・キッズ'] as $category)
-                    <span class="category">{{ $category }}</span>
+                    <div>
+                        <input type="checkbox" name="categories[]" value="{{ $category }}" id="category-{{ $loop->index }}">
+                        <label for="category-{{ $loop->index }}">{{ $category }}</label>
+                    </div>
                 @endforeach
             </div>
 

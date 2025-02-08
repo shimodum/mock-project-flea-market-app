@@ -40,7 +40,7 @@ class ItemController extends Controller
     //商品詳細画面表示
     public function show($id)
     {
-        $item = Item::findOrFail($id);
+        $item = Item::with('categories')->findOrFail($id); // カテゴリ情報を一緒に取得
         return view('items.show', compact('item'));
     }
 
@@ -50,7 +50,7 @@ class ItemController extends Controller
         return view('items.create');
     }
 
-    //出品処理
+    // 出品処理
     public function store(Request $request)
     {
         $request->validate([
@@ -60,26 +60,29 @@ class ItemController extends Controller
             'condition' => 'required|integer|between:1,4',
             'brand' => 'nullable|string|max:255',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'categories' => 'required|array',  // カテゴリの選択が必須
         ]);
 
-        // 画像を storage/app/public/item_images に保存
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('item_images', 'public');
-        } else {
-            $imagePath = null;
-        }
+        // 商品画像を保存
+        $imagePath = $request->file('image')->store('item_images', 'public');
 
-        Item::create([
+        // 商品を作成
+        $item = Item::create([
             'user_id' => auth()->id(),
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
             'condition' => $request->condition,
             'brand' => $request->brand,
-            'image_path' => $imagePath, // ここに保存したパスを設定
+            'image_path' => $imagePath,
             'is_sold' => false,
         ]);
 
+        // カテゴリを関連付ける
+        $categories = Category::whereIn('name', $request->categories)->pluck('id');  // カテゴリ名からIDを取得
+        $item->categories()->attach($categories);
+
         return redirect()->route('items.index');
     }
+
 }

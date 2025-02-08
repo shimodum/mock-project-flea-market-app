@@ -48,7 +48,12 @@
     {{-- 商品の情報 --}}
     <div class="item-meta">
         <h3>商品の情報</h3>
-        <p>カテゴリー: {{ $item->category->name ?? '未設定' }}</p>
+        <p>カテゴリー:
+            @foreach ($item->categories as $category)
+                {{ $category->name }}
+                @if (!$loop->last), @endif
+            @endforeach
+        </p>
         <p>商品の状態: {{ $item->condition_label }}</p>
     </div>
 
