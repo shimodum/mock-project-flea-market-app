@@ -229,9 +229,7 @@
     background-color: darkred;
 }
 
-/* ========================= */
 /* 購入ボタン */
-/* ========================= */
 .purchase-button {
     display: block;
     background-color: #e74c3c;
@@ -251,12 +249,12 @@
     background-color: darkred;
 }
 
+
 /* ========================= */
 /* 商品出品画面 */
 /* ========================= */
 #sell-form-container {
-    max-width: 600px;
-    /* 商品出品画面のコンテンツ幅を制限 */
+    max-width: 700px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
@@ -264,29 +262,53 @@
     border: 1px solid #ddd;
 }
 
-/* 商品出品フォームのテキストエリア、セレクト、インプット */
-#sell-form-container input,
-#sell-form-container select,
-#sell-form-container textarea {
-    width: 100%;
-    /* 商品出品フォームの幅調整 */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+.page-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-/* カテゴリーリスト（選択時のスタイル） */
+.form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.image-upload {
+    display: flex;
+    justify-content: center;
+}
+
+.upload-button {
+    background-color: #e2a16b;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.upload-button:hover {
+    background-color: #c28558;
+}
+
 .category-list {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .category {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
     border: 1px solid red;
-    padding: 5px 10px;
     border-radius: 20px;
     color: red;
     font-size: 14px;
@@ -294,31 +316,55 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.category input {
+    display: none;
+}
+
 .category:hover,
-.category.selected {
+.category input:checked+span {
     background-color: red;
     color: white;
 }
 
-/* 商品出品ページの見出し下のグレー線 */
-.section-title {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
+.form-control {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-/* 出品するボタン */
+.price-container {
+    position: relative;
+}
+
+.with-yen::before {
+    content: '￥';
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: #666;
+}
+
+.with-yen {
+    padding-left: 25px;
+}
+
+.button-spacing {
+    margin-top: 30px;
+}
+
 .sell-button {
     background-color: #e74c3c;
     color: white;
-    font-size: 16px;
-    padding: 12px 20px;
+    font-size: 18px;
+    padding: 14px 40px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     width: 100%;
-    max-width: 300px;
-    margin-top: 10px;
     transition: background-color 0.3s ease;
 }
 
