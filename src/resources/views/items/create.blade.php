@@ -16,15 +16,15 @@
         <div class="form-group">
             <label for="image" class="form-label">商品画像</label>
             <div class="image-upload">
+                <img src="#" alt="プレビュー画像" class="uploaded-image" style="display:none; width: 100%; max-height: 200px; object-fit: cover;">
                 <label for="image" class="upload-button">画像を選択する</label>
-                <input type="file" id="image" name="image" required style="display:none;">
+                <input type="file" id="image" name="image" style="display:none;">
             </div>
         </div>
 
         {{-- 商品の詳細 --}}
         <div class="form-group">
             <h2 class="section-title">商品の詳細</h2>
-
             {{-- カテゴリー選択 --}}
             <label class="form-label">カテゴリー</label>
             <div class="category-list">
@@ -73,4 +73,10 @@
         </div>
     </form>
 </div>
+@endsection
+
+
+{{-- JavaScriptの読み込み --}}
+@section('js')
+    <script src="{{ asset('js/item.js') }}"></script>
 @endsection

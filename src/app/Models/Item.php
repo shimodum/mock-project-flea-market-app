@@ -90,7 +90,7 @@ class Item extends Model
     public function getImageUrlAttribute()
     {
         return $this->image_path
-            ? asset('storage/item_images/' . $this->image_path)
+            ? asset('storage/' . $this->image_path)
             : asset('images/default_item.png');
     }
 

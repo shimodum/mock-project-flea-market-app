@@ -284,6 +284,13 @@
     justify-content: center;
 }
 
+.uploaded-image {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
 .upload-button {
     background-color: #e2a16b;
     color: white;
