@@ -11,16 +11,19 @@
 
     <!-- プロフィール画像 -->
     <div class="profile-image-container">
+        <h2 class="image-title"></h2>
         <div class="profile-image-placeholder">
-            <!-- 後で画像を表示するためのスペース -->
+            <img src="{{ $user->profile_image_url }}" alt="プロフィール画像" class="profile-image" id="preview-image">
         </div>
-        <button class="upload-button">画像を選択する</button>
+        <button type="button" class="upload-button" onclick="document.getElementById('profile_image').click()">画像を選択する</button>
     </div>
 
     <!-- フォーム -->
-    <form action="{{ route('profile.update') }}" method="POST" class="profile-form">
+    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile-form">
         @csrf
         @method('PUT')
+
+        <input type="file" id="profile_image" name="profile_image" style="display:none;">
 
         <div class="form-group">
             <label for="name">ユーザー名</label>
@@ -45,4 +48,8 @@
         <button type="submit" class="update-button">更新する</button>
     </form>
 </div>
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/profile.js') }}" defer></script>
 @endsection

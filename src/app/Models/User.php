@@ -74,6 +74,9 @@ class User extends Authenticatable
         return $this->hasMany(Like::class);
     }
 
+
+    protected $appends = ['profile_image_url']; 
+
     /**
      * プロフィール画像のURLを取得
      *
@@ -81,8 +84,11 @@ class User extends Authenticatable
      */
     public function getProfileImageUrlAttribute()
     {
-        return $this->profile_image
-            ? asset('storage/profile_images/' . $this->profile_image)
-            : asset('images/default_profile.png');
+        if (!empty($this->attributes['profile_image'])) {
+            return asset('storage/' . $this->attributes['profile_image']);
+        }
+
+        return asset('images/default_profile.png');
     }
+
 }

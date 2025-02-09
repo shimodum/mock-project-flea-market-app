@@ -30,7 +30,8 @@ class ProfileController extends Controller
     // プロフィール設定画面の表示
     public function edit()
     {
-        return view('profile.edit');
+        $user = Auth::user(); // ログイン中のユーザー情報を取得
+        return view('profile.edit', compact('user')); // 'user' 変数をビューに渡す
     }
 
     // プロフィール更新処理
@@ -43,15 +44,24 @@ class ProfileController extends Controller
             'postal_code' => 'nullable|string|max:8',
             'address' => 'nullable|string|max:255',
             'building' => 'nullable|string|max:255',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // 画像をアップロードして保存
+        if ($request->hasFile('profile_image')) {
+            $imagePath = $request->file('profile_image')->store('profile_images', 'public');
+            $user->profile_image = $imagePath;
+        }
 
         $user->update([
             'name' => $request->name,
             'postal_code' => $request->postal_code,
             'address' => $request->address,
             'building' => $request->building,
+            'profile_image' => $user->profile_image,
         ]);
 
-        return redirect()->route('items.index')->with('success', 'プロフィールが更新されました');
+        return redirect()->route('profile.edit')->with('success', 'プロフィールが更新されました');
     }
+
 }

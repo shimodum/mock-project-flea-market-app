@@ -75,7 +75,6 @@
     border-radius: 10px;
 }
 
-
 /* ========================= */
 /* プロフィール設定画面（初回ログイン時）*/
 /* プロフィール編集画面 共通設定 */
@@ -100,15 +99,28 @@
     margin-bottom: 20px;
 }
 
+.image-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .profile-image-placeholder {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     background-color: #ccc;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     margin-bottom: 10px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* 画像選択ボタン */
@@ -123,7 +135,6 @@
     transition: background-color 0.3s ease;
 }
 
-/* 画像選択ボタンのホバー時の色を暗くする */
 .upload-button:hover {
     background-color: #c28558;
 }
@@ -171,7 +182,6 @@
     transition: background-color 0.3s ease;
 }
 
-/* 更新ボタンのホバー時の色を暗くする */
 .update-button:hover {
     background-color: #c0392b;
 }
