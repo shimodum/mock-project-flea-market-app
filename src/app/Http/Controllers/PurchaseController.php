@@ -49,6 +49,33 @@ class PurchaseController extends Controller
         return redirect()->route('profile.index', ['tab' => 'buy'])->with('success', '商品を購入しました');
     }
 
+    // 送付先住所変更画面を表示
+    public function editAddress($item_id)
+    {
+        $item = Item::findOrFail($item_id);
+        $user = Auth::user();
+
+        return view('purchase.address', compact('item', 'user'));
+    }
+
+    // 送付先住所を更新する処理
+    public function updateAddress(Request $request, $item_id)
+    {
+        $request->validate([
+            'postal_code' => 'required|string|max:8',
+            'address' => 'required|string|max:255',
+            'building' => 'nullable|string|max:255',
+        ]);
+
+        $user = Auth::user();
+        $user->update([
+            'postal_code' => $request->postal_code,
+            'address' => $request->address,
+            'building' => $request->building,
+        ]);
+
+        return redirect()->route('purchase.editAddress', ['item_id' => $item_id])->with('success', '住所が更新されました');
+    }
 
     // Stripe 決済処理（応用機能用に残す）
     public function checkout(Request $request)
