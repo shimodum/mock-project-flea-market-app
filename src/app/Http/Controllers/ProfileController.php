@@ -18,7 +18,7 @@ class ProfileController extends Controller
         // 出品した商品一覧
         $sellItems = Item::where('user_id', $user->id)->get();
 
-        // 購入した商品一覧（削除された商品を除外）
+        // 購入した商品一覧
         $buyItems = Purchase::where('user_id', $user->id)
             ->whereHas('item')
             ->with('item')

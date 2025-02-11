@@ -16,10 +16,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (purchaseButton) {
         purchaseButton.addEventListener("click", function (event) {
+            event.preventDefault();
+
             if (!selectedPaymentMethod) {
-                event.preventDefault();
                 alert("支払い方法を選択してください。");
+                return;
             }
+
+            // Stripe の決済ページへリダイレクト
+            fetch("/stripe/checkout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
+                },
+                body: JSON.stringify({
+                    item_id: this.dataset.itemId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.url) {
+                    window.location.href = data.url;
+                } else {
+                    alert("決済ページへのリダイレクトに失敗しました。");
+                }
+            })
+            .catch(error => {
+                console.error("決済処理でエラーが発生しました:", error);
+            });
         });
     }
 });

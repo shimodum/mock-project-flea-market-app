@@ -82,8 +82,7 @@ class PurchaseController extends Controller
         return redirect()->route('purchase.editAddress', ['item_id' => $item_id])->with('success', '住所が更新されました');
     }
 
-    // Stripe 決済処理（応用機能用のため、一旦コメントアウト）
-    /*
+    // Stripe 決済処理
     public function checkout(Request $request)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -96,7 +95,7 @@ class PurchaseController extends Controller
                 'price_data' => [
                     'currency' => 'jpy',
                     'product_data' => ['name' => $item->name],
-                    'unit_amount' => $item->price * 100,
+                    'unit_amount' => $item->price,
                 ],
                 'quantity' => 1,
             ]],
@@ -107,5 +106,4 @@ class PurchaseController extends Controller
 
         return response()->json(['url' => $session->url]);
     }
-    */
 }
