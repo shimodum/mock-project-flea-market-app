@@ -15,7 +15,6 @@
         </div>
     </div>
 
-
     <div class="item-list">
         @foreach($items as $item)
             <div class="item">
@@ -27,8 +26,6 @@
                 <p>{{ $item->condition_label }}</p>
                 @if ($item->is_sold)
                     <p class="sold-label">Sold</p>
-                @else
-                    <a href="{{ route('purchase.create', $item->id) }}" class="purchase-link">購入手続きへ</a>
                 @endif
             </div>
         @endforeach
