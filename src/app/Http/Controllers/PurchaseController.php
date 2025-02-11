@@ -53,7 +53,6 @@ class PurchaseController extends Controller
         }
     }
 
-
     // 送付先住所変更画面を表示
     public function editAddress($item_id)
     {
