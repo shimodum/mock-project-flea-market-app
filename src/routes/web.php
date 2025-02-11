@@ -24,7 +24,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::get('/', [ItemController::class, 'index'])->name('items.index'); // 商品一覧
 Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show'); // 商品詳細
 
-// 購入成功・キャンセル画面（認証不要）
+// 購入成功・キャンセル画面（個人情報を含まないので、認証不要）
 Route::get('/purchase/success', function () {
     return view('purchase.success');
 })->name('purchase.success');
@@ -32,7 +32,6 @@ Route::get('/purchase/success', function () {
 Route::get('/purchase/cancel', function () {
     return view('purchase.cancel');
 })->name('purchase.cancel');
-
 
 
 // メール認証のルート
