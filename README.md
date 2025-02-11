@@ -10,7 +10,7 @@
 
 - users … ユーザー情報（認証やプロフィール）を管理  
 - items … 出品する商品情報を管理  
-- purchases … 購入履歴を管理（決済・住所など）  
+- purchases … 購入履歴とStripe決済情報（決済ID、支払いステータス）を管理（決済・住所など）  
 - comments … 商品に対するコメントを管理  
 - likes … 商品への「いいね」を管理（多対多を中間テーブルで実装）  
 - categories … 商品のカテゴリ情報を管理する  
@@ -52,8 +52,9 @@
   - 出品後に商品詳細 or 一覧へリダイレクト  
 - **購入機能**
   - 支払い方法選択（コンビニ支払い・カード支払い）  
-  - 配送先変更  
-  - 商品購入後は is_sold = true となり、一覧に「sold」表示  
+  - Stripeを利用した決済処理を実装  
+  - 配送先変更機能  
+  - 商品購入後は 「sold」ラベルがアニメーションで表示  
 - **マイページ (プロフィール)**
   - 購入履歴一覧、出品した商品一覧の閲覧  
   - プロフィール編集（住所、建物名、画像アップロードなど）  
@@ -68,6 +69,13 @@
 - **Docker Compose**: バージョン 2.0 以上
 - **MailHog**: バージョン 1.0 以上
   - メール送信を開発環境で確認するためのツール
+- **Stripe**: 決済処理用のAPI  
+  - `.env`ファイルに以下の内容を追加してください。
+    ```dotenv
+    STRIPE_KEY=your_test_public_key
+    STRIPE_SECRET=your_test_secret_key
+    ```
+  - Stripe Dashboardにアクセスして、[テスト決済](https://dashboard.stripe.com/test/payments)を確認できます。
 ---
 
 ## URL
@@ -136,4 +144,14 @@
 - MailHog コンテナは `docker-compose.yml` に含まれており、`http://localhost:8025` にアクセスすることで確認できます。    
 
 9.必要なJavaScriptファイルの読み込み  
-   会員登録画面・ログイン画面における「パスワード表示切替機能」を有効にするため、`common.js` などのJavaScriptファイルが正しくロードされていることを確認してください。
+   会員登録画面・ログイン画面における「パスワード表示切替機能」を有効にするため、`common.js` などのJavaScriptファイルが正しくロードされていることを確認してください。  
+
+10.Stripe APIキーの設定  
+  環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
+  STRIPE_KEY=your_test_public_key  
+  STRIPE_SECRET=your_test_secret_key  
+
+  **テスト決済確認:**  
+テスト用クレジットカード番号 `4242 4242 4242 4242` を使用できます。  
+有効期限は未来の日付、CVCは任意の3桁を入力してください。  
+決済結果は [Stripe Dashboard](https://dashboard.stripe.com/test/payments) で確認できます。  
