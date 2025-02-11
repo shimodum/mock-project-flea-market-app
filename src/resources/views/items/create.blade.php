@@ -16,7 +16,7 @@
         <div class="form-group">
             <label for="image" class="form-label">商品画像</label>
             <div class="image-upload">
-                <img src="#" alt="プレビュー画像" class="uploaded-image" style="display:none; width: 100%; max-height: 200px; object-fit: cover;">
+                <img src="#" alt="プレビュー画像" class="uploaded-image">
                 <label for="image" class="upload-button">画像を選択する</label>
                 <input type="file" id="image" name="image" style="display:none;">
             </div>
