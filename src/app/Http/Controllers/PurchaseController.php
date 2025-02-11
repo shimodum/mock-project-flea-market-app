@@ -33,21 +33,26 @@ class PurchaseController extends Controller
             return redirect()->route('items.show', $item_id)->with('error', 'この商品はすでに売り切れています');
         }
 
-        DB::transaction(function () use ($request, $item) {
-            // 購入情報を作成
-            Purchase::create([
-                'user_id' => Auth::id(),
-                'item_id' => $item->id,
-                'payment_method' => $request->payment_method,
-            ]);
+        try {
+            DB::transaction(function () use ($request, $item) {
+                Purchase::create([
+                    'user_id' => Auth::id(),
+                    'item_id' => $item->id,
+                    'payment_method' => $request->payment_method,
+                    'shipping_address' => Auth::user()->postal_code . ' ' . Auth::user()->address . ' ' . (Auth::user()->building ?? ''),
+                ]);
 
-            // 商品の `is_sold` フラグを更新
-            $item->is_sold = true;
-            $item->save();
-        });
+                $item->update(['is_sold' => true]);
 
-        return redirect()->route('profile.index', ['tab' => 'buy'])->with('success', '商品を購入しました');
+                \Log::info('PurchaseController@store called');
+            });
+
+            return redirect()->route('items.show', ['item_id' => $item_id])->with('success', '商品を購入しました');
+        } catch (\Exception $e) {
+            return back()->with('error', '購入処理中にエラーが発生しました。もう一度お試しください。');
+        }
     }
+
 
     // 送付先住所変更画面を表示
     public function editAddress($item_id)
@@ -77,7 +82,8 @@ class PurchaseController extends Controller
         return redirect()->route('purchase.editAddress', ['item_id' => $item_id])->with('success', '住所が更新されました');
     }
 
-    // Stripe 決済処理（応用機能用に残す）
+    // Stripe 決済処理（応用機能用のため、一旦コメントアウト）
+    /*
     public function checkout(Request $request)
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
@@ -101,4 +107,5 @@ class PurchaseController extends Controller
 
         return response()->json(['url' => $session->url]);
     }
+    */
 }

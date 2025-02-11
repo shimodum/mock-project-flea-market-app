@@ -14,6 +14,10 @@
         </div>
         <div class="purchase-info">
             <h2>{{ $item->name }}</h2>
+            @if($item->is_sold)
+                <span class="sold-label">Sold</span>
+            @endif
+
             <p class="price">¥{{ number_format($item->price) }}</p>
         </div>
     </div>

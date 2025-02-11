@@ -26,7 +26,9 @@
                 <p>¥{{ number_format($item->price) }}</p>
                 <p>{{ $item->condition_label }}</p>
                 @if ($item->is_sold)
-                    <p class="sold">Sold</p>
+                    <p class="sold-label">Sold</p>
+                @else
+                    <a href="{{ route('purchase.create', $item->id) }}" class="purchase-link">購入手続きへ</a>
                 @endif
             </div>
         @endforeach

@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
@@ -64,8 +64,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'editAddress'])->name('purchase.editAddress');
     Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.updateAddress');
 
-    // Stripe の決済処理関連
-    Route::post('/stripe/checkout', [PurchaseController::class, 'checkout'])->name('stripe.checkout');
+    // Stripe の決済処理関連（応用機能のため一旦コメントアウト）
+    // Route::post('/stripe/checkout', [PurchaseController::class, 'checkout'])->name('stripe.checkout');
 
     // 商品出品関連
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
