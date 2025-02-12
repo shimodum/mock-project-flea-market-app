@@ -16,19 +16,27 @@
     </div>
 
     <div class="item-list">
-        @foreach($items as $item)
-            <div class="item">
-                <a href="{{ route('items.show', $item->id) }}">
-                    <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
-                    <h3>{{ $item->name }}</h3>
-                </a>
-                <p>¥{{ number_format($item->price) }}</p>
-                <p>{{ $item->condition_label }}</p>
-                @if ($item->is_sold)
-                    <p class="sold-label">Sold</p>
-                @endif
-            </div>
-        @endforeach
+        @if (request('tab') === 'mylist' && !auth()->check())
+            <p class="alert alert-warning">
+                マイリストを表示するには <a href="{{ route('login.form') }}">ログイン</a> が必要です。
+            </p>
+        @elseif ($items->isEmpty())
+            <p class="alert alert-info">表示する商品がありません。</p>
+        @else
+            @foreach($items as $item)
+                <div class="item">
+                    <a href="{{ route('items.show', $item->id) }}">
+                        <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
+                        <h3>{{ $item->name }}</h3>
+                    </a>
+                    <p>¥{{ number_format($item->price) }}</p>
+                    <p>{{ $item->condition_label }}</p>
+                    @if ($item->is_sold)
+                        <p class="sold-label">Sold</p>
+                    @endif
+                </div>
+            @endforeach
+        @endif
     </div>
 </div>
 @endsection
