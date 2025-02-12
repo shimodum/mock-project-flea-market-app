@@ -29,15 +29,22 @@
                 </form>
             </div>
             <div class="navigation">
-                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
-                    @csrf
-                    <button type="submit">ログアウト</button>
-                </form>
+                {{-- ユーザーがログインしているかを判定し、ログインしている場合は「ログアウト」を表示する --}}
+                @if (auth()->check())
+                    <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                        @csrf
+                        <button type="submit">ログアウト</button>
+                    </form>
+                {{-- 未ログインの場合は「ログイン」を表示する --}}
+                @else
+                    <a href="{{ route('login.form') }}">ログイン</a>
+                @endif
                 <a href="/mypage">マイページ</a>
                 <a href="{{ route('items.create') }}" class="sell-button">出品</a>
             </div>
         @endif
     </header>
+
 
     <div class="container">
         @yield('content')
