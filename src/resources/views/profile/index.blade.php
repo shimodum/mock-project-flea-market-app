@@ -8,24 +8,24 @@
 @section('content')
 <div class="container">
     <div class="profile-header">
-        <!-- プロフィール画像の表示 -->
+        {{-- プロフィール画像の表示 --}}
         <div class="profile-image">
             <img src="{{ $user->profile_image_url }}" alt="プロフィール画像">
         </div>
         
         <h2 class="profile-name">{{ $user->name }}</h2>
 
-        <!-- プロフィール編集ボタン -->
+        {{-- プロフィール編集ボタン --}}
         <a href="{{ route('profile.edit') }}" class="profile-edit-btn">プロフィールを編集</a>
     </div>
 
-    <!-- タブで切り替え -->
+    {{-- タブで切り替える --}}
     <div class="tab-menu">
         <a href="{{ route('profile.index', ['tab' => 'sell']) }}" class="{{ $tab == 'sell' ? 'active' : '' }}">出品した商品</a>
         <a href="{{ route('profile.index', ['tab' => 'buy']) }}" class="{{ $tab == 'buy' ? 'active' : '' }}">購入した商品</a>
     </div>
 
-    <!-- 商品リスト -->
+    {{-- 商品リスト --}}
     <div class="product-list">
         @if ($tab == 'sell')
             @if ($sellItems->isEmpty())
