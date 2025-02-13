@@ -9,7 +9,7 @@
 <div class="container">
     <h1 class="page-title">プロフィール設定</h1>
 
-    <!-- プロフィール画像 -->
+    {{-- プロフィール画像 --}}
     <div class="profile-image-container">
         <h2 class="image-title"></h2>
         <div class="profile-image-placeholder">
@@ -18,7 +18,7 @@
         <button type="button" class="upload-button" onclick="document.getElementById('profile_image').click()">画像を選択する</button>
     </div>
 
-    <!-- フォーム -->
+    {{-- フォーム --}}
     <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data" class="profile-form">
         @csrf
         @method('PUT')
