@@ -46,7 +46,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    
+    protected $appends = ['profile_image_url'];
+
+
     // ユーザーが出品する商品
     public function items()
     {
@@ -75,8 +77,6 @@ class User extends Authenticatable
     }
 
 
-    protected $appends = ['profile_image_url']; 
-
     /**
      * プロフィール画像のURLを取得
      *
@@ -84,11 +84,9 @@ class User extends Authenticatable
      */
     public function getProfileImageUrlAttribute()
     {
-        if (!empty($this->attributes['profile_image'])) {
-            return asset('storage/' . $this->attributes['profile_image']);
-        }
-
-        return asset('images/default_profile.png');
+        return $this->profile_image
+            ? asset('storage/' . $this->profile_image)
+            : asset('images/default_profile.png');
     }
 
 }
