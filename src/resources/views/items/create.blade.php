@@ -63,7 +63,8 @@
         <div class="form-group">
             <label for="price" class="form-label">販売価格</label>
             <div class="price-container">
-                <input type="text" id="price" name="price" class="form-control with-yen" value="￥" required>
+                <span class="yen-symbol">￥</span>
+                <input type="text" id="price" name="price" class="form-control" required>
             </div>
         </div>
 

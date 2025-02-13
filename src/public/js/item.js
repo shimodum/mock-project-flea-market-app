@@ -9,4 +9,10 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         reader.readAsDataURL(event.target.files[0]);
     });
+
+    // 数値のみ入力可能にする処理
+    const priceInput = document.getElementById('price');
+    priceInput.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, ''); // 数字以外を削除
+    });
 });
