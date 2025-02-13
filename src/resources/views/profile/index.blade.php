@@ -33,7 +33,9 @@
             @else
                 @foreach ($sellItems as $item)
                     <div class="product-item">
-                        <img src="{{ $item->image_url }}" alt="商品画像">
+                        @if ($item->image_path)
+                            <img src="{{ $item->image_url }}" alt="商品画像">
+                        @endif
                         <p>{{ $item->name }}</p>
                     </div>
                 @endforeach
@@ -43,9 +45,11 @@
                 <p>購入した商品はありません。</p>
             @else
                 @foreach ($buyItems as $purchase)
-                    @if ($purchase->item)  {{-- item が存在する場合のみ表示 --}}
+                    @if ($purchase->item) {{-- item が存在する場合のみ表示 --}}
                         <div class="product-item">
-                            <img src="{{ $purchase->item->image_url }}" alt="商品画像">
+                            @if ($purchase->item->image_path)
+                                <img src="{{ $purchase->item->image_path }}" alt="商品画像">
+                            @endif
                             <p>{{ $purchase->item->name }}</p>
                         </div>
                     @endif

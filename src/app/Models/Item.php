@@ -89,10 +89,12 @@ class Item extends Model
      */
     public function getImageUrlAttribute()
     {
-        return $this->image_path
-            ? asset('storage/' . $this->image_path)
-            : asset('images/default_item.png');
+        if (!empty($this->image_path) && file_exists(storage_path('app/public/' . $this->image_path))) {
+            return asset('storage/' . $this->image_path);
+        }
+        return null;  // 画像が存在しない場合は null を返す
     }
+
 
     /**
      * 指定したユーザーがこの商品を「いいね」しているか判定
