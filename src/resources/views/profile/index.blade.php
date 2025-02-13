@@ -33,7 +33,7 @@
             @else
                 @foreach ($sellItems as $item)
                     <div class="product-item">
-                        @if ($item->image_path)
+                        @if ($item->image_url)
                             <img src="{{ $item->image_url }}" alt="商品画像">
                         @endif
                         <p>{{ $item->name }}</p>
