@@ -304,22 +304,26 @@
 .image-upload {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    gap: 10px;
 }
 
 .uploaded-image {
     width: 100%;
     max-height: 300px;
     object-fit: contain;
-    display: none;
+    display: block;
 }
 
 .upload-button {
     background-color: #e2a16b;
     color: white;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    height: auto;
+    font-size: 14px;
 }
 
 .upload-button:hover {
