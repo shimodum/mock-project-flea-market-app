@@ -40,7 +40,7 @@ class ItemController extends Controller
     //商品詳細画面表示
     public function show($id)
     {
-        $item = Item::with('categories')->findOrFail($id); // カテゴリ情報を一緒に取得
+        $item = Item::with(['categories', 'comments.user'])->findOrFail($id);
         return view('items.show', compact('item'));
     }
 

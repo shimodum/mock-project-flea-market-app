@@ -67,7 +67,7 @@
         <div class="comments-container">
             @foreach($item->comments->sortByDesc('created_at') as $comment)
                 <div class="comment">
-                    <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}"
+                    <img src="{{ $comment->user->profile_image_url ?? asset('images/default-profile.png') }}"
                         alt="{{ $comment->user->name }}"
                         class="profile-image">
                     <div class="comment-content">
