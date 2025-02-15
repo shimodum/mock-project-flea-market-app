@@ -25,7 +25,7 @@ class PurchaseController extends Controller
 
     // 商品購入処理
     // store メソッドは、Stripe決済を利用しない購入処理（例：簡易購入やテスト用処理）に使用されるため、残しておく。
-    // 現在は checkout メソッド経由で Stripe 決済が主流だがだが、複数の決済方法に対応する場合に役立つ。
+    // 現在は checkout メソッド経由で Stripe 決済が主流だが、複数の決済方法に対応する場合に役立つ。
     public function store(Request $request, $item_id)
     {
         $request->validate(['payment_method' => 'required']);
