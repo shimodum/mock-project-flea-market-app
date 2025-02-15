@@ -14,18 +14,19 @@
 .purchase-item {
     display: flex;
     gap: 20px;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
 .purchase-image img {
-    max-width: 100%;
+    width: 300px;
     height: auto;
     border-radius: 5px;
 }
 
 .purchase-info {
     flex: 1;
+    padding-left: 20px;
 }
 
 .purchase-info h2 {
@@ -114,7 +115,7 @@
     width: 100%;
     background-color: red;
     color: white;
-    padding: 12px 24px;
+    padding: 12px 20px;
     border: none;
     border-radius: 5px;
     font-size: 18px;

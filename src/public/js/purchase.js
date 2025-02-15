@@ -1,16 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const paymentSelect = document.getElementById("payment_method");
-    const paymentSummary = document.getElementById("payment-summary");
     const purchaseButton = document.getElementById("purchase-button");
-
     let selectedPaymentMethod = "";
 
     if (paymentSelect) {
         paymentSelect.addEventListener("change", function () {
             selectedPaymentMethod = this.value;
-            if (paymentSummary) {
-                paymentSummary.textContent = selectedPaymentMethod;
-            }
         });
     }
 
@@ -23,10 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            if (selectedPaymentMethod === "コンビニ支払い" || selectedPaymentMethod === "カード支払い") {
-                alert(`${selectedPaymentMethod}で購入しました。`);
-                document.getElementById("purchase-form").submit();
-            } else {
+            if (selectedPaymentMethod === "Stripe決済") {
                 // Stripe の決済ページへリダイレクト
                 fetch("/stripe/checkout", {
                     method: "POST",
@@ -35,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
                     },
                     body: JSON.stringify({
-                        item_id: this.dataset.itemId,
-                        payment_method: selectedPaymentMethod
+                        item_id: this.dataset.itemId
                     })
                 })
                 .then(response => response.json())
@@ -50,6 +41,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 .catch(error => {
                     console.error("決済処理でエラーが発生しました:", error);
                 });
+            } else {
+                alert(`${selectedPaymentMethod} の処理を実装してください。`);
             }
         });
     }

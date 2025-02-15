@@ -40,6 +40,7 @@
                     <option value="" disabled selected>選択してください</option>
                     <option value="コンビニ支払い">コンビニ支払い</option>
                     <option value="カード支払い">カード支払い</option>
+                    <option value="Stripe決済">Stripe決済</option> {{-- Stripe決済を追加 --}}
                 </select>
             </div>
 
