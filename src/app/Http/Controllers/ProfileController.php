@@ -20,8 +20,8 @@ class ProfileController extends Controller
 
         // 購入した商品一覧
         $buyItems = Purchase::where('user_id', $user->id)
-            ->whereHas('item')
-            ->with('item')
+        ->whereHas('item') // item が存在するものだけ取得
+            ->with('item') // item の情報を取得
             ->get();
 
         return view('profile.index', compact('user', 'sellItems', 'buyItems', 'tab'));

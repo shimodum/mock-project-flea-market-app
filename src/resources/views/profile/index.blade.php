@@ -21,13 +21,13 @@
 
     {{-- タブで切り替える --}}
     <div class="tab-menu">
-        <a href="{{ route('profile.index', ['tab' => 'sell']) }}" class="{{ $tab == 'sell' ? 'active' : '' }}">出品した商品</a>
-        <a href="{{ route('profile.index', ['tab' => 'buy']) }}" class="{{ $tab == 'buy' ? 'active' : '' }}">購入した商品</a>
+        <a href="{{ route('profile.index', ['tab' => 'sell']) }}" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
+        <a href="{{ route('profile.index', ['tab' => 'buy']) }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
     </div>
 
     {{-- 商品リスト --}}
     <div class="product-list">
-        @if ($tab == 'sell')
+        @if ($tab === 'sell')
             @if ($sellItems->isEmpty())
                 <p>出品した商品はありません。</p>
             @else
@@ -40,18 +40,18 @@
                     </div>
                 @endforeach
             @endif
-        @elseif ($tab == 'buy')
+        @elseif ($tab === 'buy')
             @if ($buyItems->isEmpty())
                 <p>購入した商品はありません。</p>
             @else
                 @foreach ($buyItems as $purchase)
-                    @if ($purchase->item) {{-- item が存在する場合のみ表示 --}}
+                    @if ($purchase->item && $purchase->item->image_path)
                         <div class="product-item">
-                            @if ($purchase->item->image_path)
-                                <img src="{{ $purchase->item->image_path }}" alt="商品画像">
-                            @endif
+                            <img src="{{ $purchase->item->image_path }}" alt="商品画像">
                             <p>{{ $purchase->item->name }}</p>
                         </div>
+                    @else
+                        <p>商品の情報が見つかりません。</p>
                     @endif
                 @endforeach
             @endif

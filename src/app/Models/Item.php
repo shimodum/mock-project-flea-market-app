@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Item extends Model
 {
@@ -83,18 +84,16 @@ class Item extends Model
     }
 
     /**
-     * 商品画像のURLを取得
+     * 商品画像のURLを取得するアクセサ
      *
-     * @return string
+     * @return string|null
      */
     public function getImageUrlAttribute()
     {
-        if (!empty($this->image_path) && file_exists(storage_path('app/public/' . $this->image_path))) {
-            return asset('storage/' . $this->image_path);
-        }
-        return null;  // 画像が存在しない場合は null を返す
+        return $this->image_path
+            ? Storage::url($this->image_path)  // Storage::url を使用してパスを生成
+            : asset('images/default-item.png');
     }
-
 
     /**
      * 指定したユーザーがこの商品を「いいね」しているか判定
