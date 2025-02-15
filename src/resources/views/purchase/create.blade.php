@@ -1,11 +1,6 @@
 {{-- 商品購入画面 --}}
 @extends('layouts.app')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('css/common.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/purchase.css') }}">
-@endsection
-
 @section('content')
 <div class="purchase-container">
     <div class="purchase-item">
@@ -17,7 +12,6 @@
             @if($item->is_sold)
                 <span class="sold-label">Sold</span>
             @endif
-
             <p class="price">¥{{ number_format($item->price) }}</p>
         </div>
     </div>
@@ -36,6 +30,7 @@
         </table>
     </div>
 
+    @if(!$item->is_sold) {{-- 商品が売り切れていない場合のみボタンを表示 --}}
     <div class="purchase-form">
         <form id="purchase-form" action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST">
             @csrf
@@ -57,9 +52,8 @@
             <button type="submit" id="purchase-button" class="purchase-button" data-item-id="{{ $item->id }}">購入する</button>
         </form>
     </div>
+    @else
+        <p class="alert alert-info">この商品はすでに購入されています。</p>
+    @endif
 </div>
-@endsection
-
-@section('js')
-    <script src="{{ asset('js/purchase.js') }}" defer></script>
 @endsection

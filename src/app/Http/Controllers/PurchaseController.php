@@ -24,6 +24,8 @@ class PurchaseController extends Controller
     }
 
     // 商品購入処理
+    // store メソッドは、Stripe決済を利用しない購入処理（例：簡易購入やテスト用処理）に使用されるため、残しておく。
+    // 現在は checkout メソッド経由で Stripe 決済が主流だがだが、複数の決済方法に対応する場合に役立つ。
     public function store(Request $request, $item_id)
     {
         $request->validate(['payment_method' => 'required']);
@@ -87,6 +89,7 @@ class PurchaseController extends Controller
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $item = Item::findOrFail($request->item_id);
+        $paymentMethod = $request->payment_method;  // 支払い方法を取得
 
         $session = \Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
@@ -99,10 +102,28 @@ class PurchaseController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => url('/purchase/success'),
+            'success_url' => url('/purchase/success/' . $item->id),
             'cancel_url' => url('/purchase/cancel'),
         ]);
 
         return response()->json(['url' => $session->url]);
+    }
+
+    // 成功画面処理
+    public function success($item_id)
+    {
+        $item = Item::findOrFail($item_id);
+
+        if (!$item->is_sold) {
+            $item->update(['is_sold' => true]);
+        }
+
+        return view('purchase.success', compact('item'));
+    }
+
+    // キャンセル画面処理
+    public function cancel()
+    {
+        return view('purchase.cancel');
     }
 }

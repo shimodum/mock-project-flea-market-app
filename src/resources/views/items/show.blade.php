@@ -28,11 +28,15 @@
                 </button>
             </div>
 
-            {{-- 購入ボタン（認証済みのユーザーのみ表示） --}}
+            {{-- 購入ボタン（is_sold が false の場合のみ表示） --}}
             @auth
-                <a href="{{ route('purchase.create', ['item_id' => $item->id]) }}" class="purchase-button">
-                    購入手続きへ
-                </a>
+                @if (!$item->is_sold)
+                    <a href="{{ route('purchase.create', ['item_id' => $item->id]) }}" class="purchase-button">
+                        購入手続きへ
+                    </a>
+                @else
+                    <p class="alert alert-info">この商品はすでに購入されています。</p>
+                @endif
             @else
                 <p class="login-warning">購入するには <a href="{{ route('login.form') }}">ログイン</a> してください。</p>
             @endauth
@@ -63,7 +67,6 @@
         <div class="comments-container">
             @foreach($item->comments->sortByDesc('created_at') as $comment)
                 <div class="comment">
-                    {{-- ユーザーのプロフィール画像 --}}
                     <img src="{{ $comment->user->profile_image ?? asset('images/default-profile.png') }}"
                         alt="{{ $comment->user->name }}"
                         class="profile-image">
@@ -94,7 +97,6 @@
     @endauth
 </div>
 
-{{-- JavaScriptの読み込み --}}
 @section('js')
     <script src="{{ asset('js/like.js') }}" defer></script>
     <script>

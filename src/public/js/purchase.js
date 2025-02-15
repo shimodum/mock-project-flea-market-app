@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
     const paymentSelect = document.getElementById("payment_method");
-    const paymentSummary = document.getElementById("payment-summary");
     const purchaseButton = document.getElementById("purchase-button");
 
     let selectedPaymentMethod = "";
@@ -8,9 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (paymentSelect) {
         paymentSelect.addEventListener("change", function () {
             selectedPaymentMethod = this.value;
-            if (paymentSummary) {
-                paymentSummary.textContent = selectedPaymentMethod;
-            }
         });
     }
 
@@ -31,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').content
                 },
                 body: JSON.stringify({
-                    item_id: this.dataset.itemId
+                    item_id: this.dataset.itemId,
+                    payment_method: selectedPaymentMethod  // 支払い方法を追加
                 })
             })
             .then(response => response.json())
