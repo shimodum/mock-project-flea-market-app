@@ -5,7 +5,7 @@
 <div class="purchase-container">
     <div class="purchase-item">
         <div class="purchase-image">
-            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}">
+            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}" class="responsive-img">
         </div>
         <div class="purchase-info">
             <h2>{{ $item->name }}</h2>
@@ -30,9 +30,9 @@
         </table>
     </div>
 
-    @if(!$item->is_sold) {{-- 商品が売り切れていない場合のみボタンを表示 --}}
+    @if(!$item->is_sold)
     <div class="purchase-form">
-        <form id="purchase-form" action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST">
+        <form id="purchase-form" method="POST">
             @csrf
             <div class="payment-method">
                 <label for="payment_method" class="bold-label">支払い方法</label>
@@ -49,11 +49,19 @@
                 <a href="{{ route('purchase.editAddress', ['item_id' => $item->id]) }}" class="change-address">変更する</a>
             </div>
 
-            <button type="submit" id="purchase-button" class="purchase-button" data-item-id="{{ $item->id }}">購入する</button>
+            <button type="button" id="purchase-button" class="purchase-button" data-item-id="{{ $item->id }}">購入する</button>
         </form>
     </div>
     @else
         <p class="alert alert-info">この商品はすでに購入されています。</p>
     @endif
 </div>
+@endsection
+
+@section('css')
+    <link rel="stylesheet" href="{{ asset('css/purchase.css') }}">
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/purchase.js') }}" defer></script>
 @endsection
