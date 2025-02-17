@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -15,6 +14,16 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
+        // 🔹 外部キー制約を一時的に無効化
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // 🔹 itemsテーブルをリセット（既存データを削除してIDをリセット）
+        DB::table('items')->truncate();
+
+        // 🔹 外部キー制約を再度有効化
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // 商品データを挿入
         DB::table('items')->insert([
             [
                 'user_id' => 1,
