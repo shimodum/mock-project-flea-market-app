@@ -36,9 +36,9 @@ Route::middleware(['auth'])->group(function () {
     })->name('verification.notice');
 
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
+        $request->fulfill(); // 認証を完了、ここで `email_verified_at` が更新される
         return redirect('/');
-    })->middleware(['signed'])->name('verification.verify');
+    })->middleware(['signed'])->name('verification.verify'); // 認証後のリダイレクト先
 
     Route::post('/email/verification-notification', function (Request $request) {
         $request->user()->sendEmailVerificationNotification();
