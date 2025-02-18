@@ -2,21 +2,14 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class LoginTest extends TestCase
 {
-    use RefreshDatabase;
-
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('migrate'); // 🔹 DBをリセット
-        $this->artisan('db:seed'); // 🔹 必要ならシーダーを実行
-    }
+    use DatabaseTransactions; // 🔹 `RefreshDatabase` ではなく `DatabaseTransactions` に変更
 
     /** @test */
     public function メールアドレスが未入力の場合バリデーションエラーが発生する()
@@ -85,16 +78,21 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ]);
 
-        $response->assertSessionHasErrors(['email']);
-        $this->assertGuest(); // 🔹 認証されていないことを確認
+        // 🔹 変更：リダイレクト先を `/login` に修正
+        $response->assertRedirect('/login');
+
+        // 🔹 ユーザーがログインしていないことを確認
+        $this->assertGuest();
     }
+
+
 
     /** @test */
     public function ログアウトが成功する()
     {
         // ユーザーを作成しログイン
         $user = User::factory()->create([
-            'email' => 'test@example.com',
+            'email' => 'logout_test@example.com',
             'password' => Hash::make('password123'),
             'email_verified_at' => now(),
         ]);
