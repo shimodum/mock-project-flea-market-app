@@ -8,7 +8,7 @@ use App\Models\User;
 
 class RegisterTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase; // 🔹 データベースを毎回リセット
 
     public function test_名前が未入力の場合バリデーションエラーが発生する()
     {
@@ -19,7 +19,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        $response->assertSessionHasErrors(['name']);
+        $response->assertInvalid(['name']);
     }
 
     public function test_メールアドレスが未入力の場合バリデーションエラーが発生する()
@@ -31,7 +31,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'password123',
         ]);
 
-        $response->assertSessionHasErrors(['email']);
+        $response->assertInvalid(['email']);
     }
 
     public function test_パスワードが未入力の場合バリデーションエラーが発生する()
@@ -43,7 +43,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => '',
         ]);
 
-        $response->assertSessionHasErrors(['password']);
+        $response->assertInvalid(['password']);
     }
 
     public function test_パスワードが8文字未満の場合バリデーションエラーが発生する()
@@ -55,7 +55,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'pass',
         ]);
 
-        $response->assertSessionHasErrors(['password']);
+        $response->assertInvalid(['password']);
     }
 
     public function test_確認用パスワードが一致しない場合バリデーションエラーが発生する()
@@ -67,7 +67,7 @@ class RegisterTest extends TestCase
             'password_confirmation' => 'differentpassword',
         ]);
 
-        $response->assertSessionHasErrors(['password']);
+        $response->assertInvalid(['password']);
     }
 
     public function test_正しい情報を入力すると登録が成功しログイン画面に遷移する()
