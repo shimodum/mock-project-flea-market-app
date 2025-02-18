@@ -23,4 +23,14 @@ class LikeFactory extends Factory
             'item_id' => Item::factory(), // 商品を自動生成
         ];
     }
+
+    public function uniqueLike()
+    {
+        return $this->state(function () {
+            return [
+                'user_id' => User::factory()->create()->id,
+                'item_id' => Item::factory()->create()->id,
+            ];
+        })->unique();
+    }
 }
