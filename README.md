@@ -137,7 +137,13 @@
 
     php artisan db:seed
    
-8.メール送信環境を確認する  
+8.MailHog のセットアップと確認
+  MailHog は Docker コンテナ内で動作するメールキャプチャツールです。  
+  開発環境で送信されるメールを MailHog で確認できます。  
+
+  - MailHog は `docker-compose up -d` を実行すると自動的に起動します。  
+  - MailHogは`http://localhost:8025` にアクセスすることで確認できます。  
+
    環境設定ファイル `.env` に以下の内容が設定されていることを確認してください。
 
        MAIL_MAILER=smtp  
@@ -147,10 +153,21 @@
        MAIL_PASSWORD=null  
        MAIL_ENCRYPTION=null   
   
-- MailHogは`http://localhost:8025` にアクセスすることで確認できます。    
+9.JavaScript ファイルのロード確認  
+   本アプリでは以下の JavaScript ファイルを使用しています。  
 
-9.必要なJavaScriptファイルの読み込み  
-   会員登録画面・ログイン画面における「パスワード表示切替機能」を有効にするため、`common.js` などのJavaScriptファイルが正しくロードされていることを確認してください。  
+- `common.js`  
+  - パスワード表示切替機能（パスワードトグルアイコン）
+- `item.js`  
+  - 商品情報の管理に関連する処理
+- `like.js`  
+  - いいね機能の処理（追加・削除）
+- `profile.js`  
+  - プロフィール編集・画像アップロードの処理
+- `purchase.js`  
+  - 購入手続き関連の処理
+
+これらのファイルが `resources/js/` に存在し、適切にビルド・読み込まれていることを確認してください。
 
 10.Stripe APIキーの設定  
   環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
