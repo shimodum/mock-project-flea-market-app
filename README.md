@@ -202,7 +202,7 @@
 
    　 決済結果は、[Stripe Dashboard](https://dashboard.stripe.com/test/payments)で確認できます。
 
-### テスト手順
+## テスト手順
 本アプリケーションでは PHPUnit による自動テストを実行できます。
 
 ### 1. テストデータの準備
@@ -218,7 +218,7 @@
     php artisan test --testdox
 
 
-### テスト成功の確認基準
+## テスト成功の確認基準
 
 以下の項目が確認できれば、テストは成功と判断できます。
 
