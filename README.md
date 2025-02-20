@@ -106,8 +106,8 @@
       cd mock-project-flea-market-app
    
 2.Docker コンテナを起動する  
-   Docker Compose を使用して必要なサービスを立ち上げます。  
-      初回起動や Dockerfile に変更があった場合には、以下のコマンドを実行してコンテナをビルドし直します。
+ 　 Docker Compose を使用して必要なサービスを立ち上げます。  
+ 　 初回起動や Dockerfile に変更があった場合には、以下のコマンドを実行してコンテナをビルドし直します。
 
     docker-compose up -d --build
    
@@ -123,12 +123,12 @@
      php artisan key:generate
 
 5.ストレージへのシンボリックリンクを作成する  
-  アップロード画像が適切に表示されるよう、ストレージと公開フォルダをリンクします。
+ 　 アップロード画像が適切に表示されるよう、ストレージと公開フォルダをリンクします。
    
     php artisan storage:link
    
 6.データベースをマイグレートする  
-  アプリケーションで使用するデータベースのテーブルを作成します。
+ 　 アプリケーションで使用するデータベースのテーブルを作成します。
    
     php artisan migrate
    
@@ -138,8 +138,8 @@
     php artisan db:seed
    
 8.MailHog のセットアップと確認  
-  MailHog は Docker コンテナ内で動作するメールキャプチャツールです。  
-  開発環境で送信されるメールを MailHog で確認できます。  
+ 　 MailHog は Docker コンテナ内で動作するメールキャプチャツールです。  
+ 　 開発環境で送信されるメールを MailHog で確認できます。  
 
   - MailHog は `docker-compose up -d` を実行すると自動的に起動します。  
   - MailHogは`http://localhost:8025` にアクセスすることで確認できます。  
@@ -154,7 +154,7 @@
        MAIL_ENCRYPTION=null   
   
 9.JavaScript ファイルのロード確認  
-   本アプリでは以下の JavaScript ファイルを使用しています。  
+ 　 本アプリでは以下の JavaScript ファイルを使用しています。  
 
 - `common.js`  
   - パスワード表示切替機能（パスワードトグルアイコン）
@@ -170,7 +170,7 @@
 これらのファイルが `resources/js/` に存在し、適切にビルド・読み込まれていることを確認してください。
 
 10.Stripe APIキーの設定  
-  環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
+ 　 環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
 
     STRIPE_KEY=your_test_public_key  
     STRIPE_SECRET=your_test_secret_key
