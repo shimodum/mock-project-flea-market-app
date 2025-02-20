@@ -45,7 +45,7 @@ class Purchase extends Model
     /**
      * 送付先住所を適切に分割して表示
      *
-     * @return string
+     * @return array
      */
     public function getFormattedShippingAddressAttribute()
     {
