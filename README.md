@@ -128,7 +128,7 @@
     php artisan storage:link
    
 6.データベースをマイグレートする  
-   アプリケーションで使用するデータベースのテーブルを作成します。
+  アプリケーションで使用するデータベースのテーブルを作成します。
    
     php artisan migrate
    
@@ -137,7 +137,7 @@
 
     php artisan db:seed
    
-8.MailHog のセットアップと確認
+8.MailHog のセットアップと確認  
   MailHog は Docker コンテナ内で動作するメールキャプチャツールです。  
   開発環境で送信されるメールを MailHog で確認できます。  
 
