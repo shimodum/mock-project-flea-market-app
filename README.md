@@ -173,9 +173,9 @@
 開発環境で JavaScript ファイルを適用するには、以下のコマンドを実行してください。  
 
     npm install  
-    npm run dev  
+    npm run dev
 
-本番環境の場合は以下を実行  
+- 本番環境の場合は以下を実行  
 
     npm run prod  
 
