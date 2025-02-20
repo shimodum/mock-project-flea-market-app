@@ -174,4 +174,5 @@
 ### 3. テスト結果の確認
   test_report.html を開いて結果を確認できます。  
   ターミナル上で直接出力する場合は以下を実行します。  
+  
     php artisan test --testdox
