@@ -8,6 +8,7 @@
 下記は本アプリケーションで使用しているテーブルとリレーションを表したER図です。  
 ![ER図](ER.drawio.png)
 
+### テーブル概要
 - users … ユーザー情報（認証やプロフィール）を管理  
 - items … 出品する商品情報を管理  
 - purchases … 購入履歴とStripe決済情報（決済ID、支払いステータス）を管理（決済・住所など）  
@@ -28,7 +29,7 @@
   - 会員登録（フォームバリデーション：メールアドレスの重複、パスワード8文字以上 など）  
   - ログイン／ログアウト（Fortify を利用）  
   - 初回ログイン時のプロフィール設定・編集  
-  - メール認証機能（Fortifyを使用）  
+  - メール認証機能  
     - 登録時に認証メールが送信され、リンクをクリックして認証を完了するまでログインできない仕様  
     - MailHogを使用して開発環境でメール送信を確認可能  
     - **パスワード表示切替機能**
@@ -146,7 +147,7 @@
        MAIL_PASSWORD=null  
        MAIL_ENCRYPTION=null   
   
-- MailHog コンテナは `docker-compose.yml` に含まれており、`http://localhost:8025` にアクセスすることで確認できます。    
+- MailHogは`http://localhost:8025` にアクセスすることで確認できます。    
 
 9.必要なJavaScriptファイルの読み込み  
    会員登録画面・ログイン画面における「パスワード表示切替機能」を有効にするため、`common.js` などのJavaScriptファイルが正しくロードされていることを確認してください。  
@@ -160,3 +161,17 @@
 テスト用クレジットカード番号 `4242 4242 4242 4242` を使用できます。  
 有効期限は未来の日付、CVCは任意の3桁を入力してください。  
 決済結果は [Stripe Dashboard](https://dashboard.stripe.com/test/payments) で確認できます。  
+
+## テスト手順
+本アプリケーションでは PHPUnit による自動テストを実行できます。
+
+### 1. テストデータの準備
+    php artisan migrate:fresh --seed
+
+### 2. PHPUnit テストの実行
+    php artisan test --testdox > test_report.html
+
+### 3. テスト結果の確認
+    test_report.html を開いて結果を確認できます。  
+    ターミナル上で直接出力する場合は以下を実行します。
+    php artisan test --testdox
