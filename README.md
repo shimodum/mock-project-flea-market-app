@@ -154,7 +154,8 @@
 
 10.Stripe APIキーの設定  
   環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
-    STRIPE_KEY=your_test_public_key
+
+    STRIPE_KEY=your_test_public_key  
     STRIPE_SECRET=your_test_secret_key
 
   **テスト決済確認:**  
@@ -174,5 +175,5 @@
 ### 3. テスト結果の確認
   test_report.html を開いて結果を確認できます。  
   ターミナル上で直接出力する場合は以下を実行します。  
-  
+
     php artisan test --testdox
