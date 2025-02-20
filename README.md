@@ -137,14 +137,15 @@
     php artisan db:seed
    
 8.メール送信環境を確認する  
-   環境設定ファイル `.env` に以下の内容が設定されていることを確認してください。  
-   MAIL_MAILER=smtp  
+   環境設定ファイル `.env` に以下の内容が設定されていることを確認してください。
+
+       MAIL_MAILER=smtp  
    MAIL_HOST=mailhog  
    MAIL_PORT=1025  
    MAIL_USERNAME=null  
    MAIL_PASSWORD=null  
-   MAIL_ENCRYPTION=null  
-
+   MAIL_ENCRYPTION=null   
+  
 - MailHog コンテナは `docker-compose.yml` に含まれており、`http://localhost:8025` にアクセスすることで確認できます。    
 
 9.必要なJavaScriptファイルの読み込み  
