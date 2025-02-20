@@ -171,11 +171,13 @@
 
 - ビルドコマンド  
 開発環境で JavaScript ファイルを適用するには、以下のコマンドを実行してください。  
-    npm install
-    npm run dev
+
+    npm install  
+    npm run dev  
 
 本番環境の場合は以下を実行  
-    npm run prod
+
+    npm run prod  
 
 10.Stripe APIキーの設定  
  　 環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
