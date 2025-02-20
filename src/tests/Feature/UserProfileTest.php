@@ -33,8 +33,8 @@ class UserProfileTest extends TestCase
         ]);
 
         // 購入する商品を明示的に作成
-        $purchasedItem1 = Item::factory()->create(['name' => 'スマートフォン']);
-        $purchasedItem2 = Item::factory()->create(['name' => 'イヤホン']);
+        $purchasedItem1 = Item::factory()->create(['name' => '腕時計']);
+        $purchasedItem2 = Item::factory()->create(['name' => 'タンブラー']);
 
         // ユーザーが購入した商品を作成（上で作成したアイテムに紐付ける）
         $this->purchasedItems = collect([
@@ -48,8 +48,6 @@ class UserProfileTest extends TestCase
             ]),
         ]);
 
-        // デバッグ用
-        dump($this->purchasedItems->pluck('item_id'));
     }
 
     /** @test */
@@ -59,8 +57,8 @@ class UserProfileTest extends TestCase
             ->get('/mypage');
 
         $response->assertStatus(200)
-            ->assertSee($this->user->name) // ユーザー名
-            ->assertSee($this->user->profile_image); // プロフィール画像
+            ->assertSee($this->user->name)
+            ->assertSee($this->user->profile_image);
 
         // 出品した商品が表示されるか
         foreach ($this->listedItems as $item) {
@@ -69,7 +67,6 @@ class UserProfileTest extends TestCase
 
         // 購入した商品が表示されるか
         foreach ($this->purchasedItems as $purchase) {
-            dump($purchase->item->name); // デバッグ用
             $response->assertSee($purchase->item->name);
         }
     }
