@@ -179,16 +179,27 @@
   
     npm run prod  
 
-10.Stripe APIキーの設定  
- 　 環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
+10.Stripe のセットアップ  
+ 　 本アプリでは、Stripe を利用した決済機能を提供します。  
+ 　 Stripe を使用するには、まず以下の手順で環境を整えてください。  
+  
+  -Stripe のパッケージをインストール  
+ 　 Laravel で Stripe API を利用するために、以下のコマンドで `stripe/stripe-php` をインストールしてください。  
 
+    composer require stripe/stripe-php
+
+  -Stripe APIキーの設定  
+   　 環境ファイル`.env`にStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
+  
     STRIPE_KEY=your_test_public_key  
     STRIPE_SECRET=your_test_secret_key
 
-  **テスト決済確認:**  
-テスト用クレジットカード番号 `4242 4242 4242 4242` を使用できます。  
-有効期限は未来の日付、CVCは任意の3桁を入力してください。  
-決済結果は [Stripe Dashboard](https://dashboard.stripe.com/test/payments) で確認できます。  
+  -テスト決済の確認  
+   　 テスト決済を行う際は、以下のクレジットカード番号を使用してください。  
+   　    　 -カード番号: 4242 4242 4242 4242  
+   　    　 -有効期限: 未来の日付（例: 12/30）  
+   　    　 -CVC: 任意の3桁（例: 123）  
+   　 決済結果は、Stripe Dashboard で確認できます。
 
 ### テスト手順
 本アプリケーションでは PHPUnit による自動テストを実行できます。
