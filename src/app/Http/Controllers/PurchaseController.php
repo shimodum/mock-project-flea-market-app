@@ -17,15 +17,13 @@ class PurchaseController extends Controller
         $item = Item::findOrFail($item_id);
         $user = Auth::user();
         $address = $user->postal_code ? 
-            "〒 {$user->postal_code} {$user->address} " . ($user->building ? "({$user->building})" : "") 
+            "〒 {$user->postal_code} {$user->address} " . ($user->address_building ? "({$user->address_building})" : "") 
             : "住所が登録されていません。";
 
         return view('purchase.create', compact('item', 'address'));
     }
 
     // 商品購入処理
-    // store メソッドは、Stripe決済を利用しない購入処理（例：簡易購入やテスト用処理）に使用されるため、残しておく。
-    // 現在は checkout メソッド経由で Stripe 決済が主流だが、複数の決済方法に対応する場合に役立つ。
     public function store(Request $request, $item_id)
     {
         $request->validate(['payment_method' => 'required']);
@@ -70,18 +68,28 @@ class PurchaseController extends Controller
         $request->validate([
             'postal_code' => 'required|string|max:8',
             'address' => 'required|string|max:255',
-            'building' => 'nullable|string|max:255',
+            'address_building' => 'nullable|string|max:255',
         ]);
 
         $user = Auth::user();
         $user->update([
             'postal_code' => $request->postal_code,
             'address' => $request->address,
-            'building' => $request->building,
+            'address_building' => $request->address_building,
         ]);
+
+        // 購入情報を更新する（該当商品が購入済みである場合のみ）
+        $purchase = Purchase::where('user_id', $user->id)->where('item_id', $item_id)->first();
+        if ($purchase) {
+            $purchase->update([
+                'shipping_address' => "{$request->postal_code} {$request->address} " .
+                                    ($request->address_building ? "({$request->address_building})" : "")
+            ]);
+        }
 
         return redirect()->route('purchase.editAddress', ['item_id' => $item_id])->with('success', '住所が更新されました');
     }
+
 
     // Stripe 決済処理
     public function checkout(Request $request)
