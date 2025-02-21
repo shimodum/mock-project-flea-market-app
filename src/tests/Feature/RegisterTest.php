@@ -8,7 +8,7 @@ use App\Models\User;
 
 class RegisterTest extends TestCase
 {
-    use RefreshDatabase; // 🔹 データベースを毎回リセット
+    use RefreshDatabase; //  データベースを毎回リセット
 
     public function test_名前が未入力の場合バリデーションエラーが発生する()
     {

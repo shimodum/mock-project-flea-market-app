@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginTest extends TestCase
 {
-    use DatabaseTransactions; // 🔹 `RefreshDatabase` ではなく `DatabaseTransactions` に変更
+    use DatabaseTransactions; // `RefreshDatabase` ではなく `DatabaseTransactions` に変更
 
     /** @test */
     public function メールアドレスが未入力の場合バリデーションエラーが発生する()
@@ -51,7 +51,7 @@ class LoginTest extends TestCase
         $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => Hash::make('password123'),
-            'email_verified_at' => now(), // 🔹 メール認証済み
+            'email_verified_at' => now(), // メール認証済み
         ]);
 
         $response = $this->post('/login', [
@@ -60,7 +60,7 @@ class LoginTest extends TestCase
         ]);
 
         $this->assertAuthenticatedAs($user);
-        $response->assertRedirect('/'); // 🔹 ログイン後のリダイレクト先を確認
+        $response->assertRedirect('/'); // ログイン後のリダイレクト先を確認
     }
 
     /** @test */
@@ -70,7 +70,7 @@ class LoginTest extends TestCase
         $user = User::factory()->create([
             'email' => 'unverified@example.com',
             'password' => Hash::make('password123'),
-            'email_verified_at' => null, // 🔹 未認証
+            'email_verified_at' => null, // 未認証
         ]);
 
         $response = $this->post('/login', [
@@ -78,10 +78,10 @@ class LoginTest extends TestCase
             'password' => 'password123',
         ]);
 
-        // 🔹 変更：リダイレクト先を `/login` に修正
+        //  変更：リダイレクト先を `/login` に修正
         $response->assertRedirect('/login');
 
-        // 🔹 ユーザーがログインしていないことを確認
+        //  ユーザーがログインしていないことを確認
         $this->assertGuest();
     }
 
@@ -97,11 +97,11 @@ class LoginTest extends TestCase
             'email_verified_at' => now(),
         ]);
 
-        $this->actingAs($user); // 🔹 ログイン状態にする
+        $this->actingAs($user); //  ログイン状態にする
 
         $response = $this->post('/logout');
 
-        $this->assertGuest(); // 🔹 ログアウト後に認証されていないことを確認
-        $response->assertRedirect('/login'); // 🔹 ログアウト後のリダイレクト先を確認
+        $this->assertGuest(); //  ログアウト後に認証されていないことを確認
+        $response->assertRedirect('/login'); //  ログアウト後のリダイレクト先を確認
     }
 }
