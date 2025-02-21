@@ -231,6 +231,8 @@
     DB_USERNAME=laravel_user
     DB_PASSWORD=laravel_pass
 
+**⚠ 注意:** `DB_CONNECTION=mysql_test` を使用する場合は、`config/database.php` に `mysql_test` の設定があることを確認してください!
+
 #### **phpunit.xml にテストDBを設定**
 以下の記述を phpunit.xml に追加してください。  
 
