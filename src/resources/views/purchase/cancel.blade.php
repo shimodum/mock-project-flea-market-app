@@ -1,3 +1,4 @@
+{{-- 商品購入キャンセル画面 --}}
 @extends('layouts.app')
 
 @section('content')

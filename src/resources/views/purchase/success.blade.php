@@ -1,3 +1,4 @@
+{{-- 商品購入成功画面 --}}
 @extends('layouts.app')
 
 @section('content')
