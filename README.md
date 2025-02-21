@@ -194,6 +194,7 @@
     docker-compose exec node npm run dev  
 
 本番環境用のビルドは以下のように実行します。  
+
     docker-compose exec node npm run prod  
 
 10.Stripe のセットアップ  
