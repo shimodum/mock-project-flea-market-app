@@ -28,7 +28,7 @@ class ItemCreateTest extends TestCase
     {
         $response = $this->actingAs($this->user)->get('/sell');
         $response->assertStatus(200)
-                 ->assertSee('商品出品');
+                 ->assertSee('商品を出品');
     }
 
     /** @test */
