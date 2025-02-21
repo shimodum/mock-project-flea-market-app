@@ -226,7 +226,7 @@
 
 #### **.env.testing の DB_DATABASE を 通常環境とは異なるテスト専用DB に設定してください。**  
 
-    DB_CONNECTION=mysql_test
+    DB_CONNECTION=mysql
     DB_DATABASE=laravel_test_db   # 通常環境と異なるDB名を設定
     DB_USERNAME=laravel_user
     DB_PASSWORD=laravel_pass
@@ -236,7 +236,7 @@
 
     <php>
     <env name="APP_ENV" value="testing"/>
-    <env name="DB_CONNECTION" value="mysql_test"/>
+    <env name="DB_CONNECTION" value="mysql"/>
     <env name="DB_DATABASE" value="laravel_test_db"/>
     </php>
 
