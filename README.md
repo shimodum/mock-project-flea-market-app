@@ -212,8 +212,7 @@
     2.ログイン後、Stripe Dashboard に移動します。  
 
    -APIキーの取得  
-    1.開発モード でAPIキーを取得するため、  
-    [Stripeの開発者ダッシュボード](https://dashboard.stripe.com/test/apikeys) にアクセスします。  
+    1.開発モード でAPIキーを取得するため、[Stripeの開発者ダッシュボード](https://dashboard.stripe.com/test/apikeys) にアクセスします。  
     2.「公開可能キー (Publishable Key)」と「シークレットキー (Secret Key)」が表示されるので、それぞれコピーします。  
 
    -APIキーの設定  
