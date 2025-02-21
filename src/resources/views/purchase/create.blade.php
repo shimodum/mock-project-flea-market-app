@@ -5,7 +5,7 @@
 <div class="purchase-container">
     <div class="purchase-item">
         <div class="purchase-image">
-            <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}" class="responsive-img">
+            <img src="{{ asset($item->image_url) }}" alt="{{ $item->name }}" class="responsive-img">
         </div>
         <div class="purchase-info">
             <h2>{{ $item->name }}</h2>

@@ -10,7 +10,7 @@
 <div class="item-detail">
     {{-- 商品情報 --}}
     <div class="item-detail-header">
-        <img src="{{ asset($item->image_path) }}" alt="{{ $item->name }}" class="item-image">
+        <img src="{{ asset($item->image_url) }}" alt="{{ $item->name }}" class="item-image">
         <div class="item-info">
             <h1>{{ $item->name }}</h1>
             <p>ブランド名: {{ $item->brand ?? '不明' }}</p>
