@@ -18,7 +18,9 @@
 
 <body>
     <header class="header">
+      <a href="{{ route('items.index') }}">
         <img src="{{ asset('images/logo.svg') }}" alt="COACHTECH ロゴ">
+      </a>
 
         {{-- 会員登録画面とログイン画面以外で表示 --}}
         @if (!request()->is('register') && !request()->is('login'))
