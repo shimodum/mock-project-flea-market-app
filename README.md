@@ -208,14 +208,15 @@
 
   -Stripe APIキーの取得方法  
    -Stripeのアカウントを作成  
-    1.[Stripe公式サイト]https://stripe.com/jp にアクセスし、アカウントを作成してください。  
+    1.[Stripe公式サイト](https://stripe.com/jp )にアクセスし、アカウントを作成してください。  
     2.ログイン後、Stripe Dashboard に移動します。  
 
    -APIキーの取得  
-    1.開発モード でAPIキーを取得するため、[Stripeの開発者ダッシュボード]https://dashboard.stripe.com/test/apikeys にアクセスします。  
+    1.開発モード でAPIキーを取得するため、  
+    [Stripeの開発者ダッシュボード](https://dashboard.stripe.com/test/apikeys) にアクセスします。  
     2.「公開可能キー (Publishable Key)」と「シークレットキー (Secret Key)」が表示されるので、それぞれコピーします。  
 
-  -Stripe APIキーの設定  
+   -APIキーの設定  
    　 環境ファイル`.env`に取得したStripeのAPIキーを設定します。これにより、アプリケーションでStripe決済機能が有効になります。  
   
     STRIPE_KEY=your_test_public_key  
