@@ -252,7 +252,7 @@
 
 または、ターミナル上で直接出力する場合は以下を実行します。  
 
-    php artisan test --testdox
+    php artisan test --env=testing --testdox
 
 ### 4. テスト結果の確認
 テスト結果は test_report.html を開いて確認できます。  
