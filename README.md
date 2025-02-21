@@ -169,17 +169,32 @@
 - `purchase.js`  
   - 購入手続き関連の処理 | 商品購入画面  
 
-これらのファイルが `resources/js/` に存在し、適切にビルド・読み込まれていることを確認してください。
+これらのファイルが `src/public/js/` に存在し、適切にビルド・読み込まれていることを確認してください。  
 
--ビルドコマンド  
-開発環境で JavaScript ファイルを適用するには、以下のコマンドを実行してください。
-  
-    npm install  
-    npm run dev
+#### **ビルドコマンドの実行場所**  
+- JavaScript のビルドは **`node.js` が動作する環境** で行う必要があります。  
+- **ホスト環境（ローカル環境）** で実行してください。  
 
--本番環境の場合は以下を実行
-  
+#### **開発環境でのビルド**  
+開発環境で JavaScript ファイルを適用するには、**ホスト環境（ローカル）で以下のコマンドを実行** してください。  
+
+    npm install
+    npm run dev  
+
+#### **本番環境でのビルド**  
+本番環境の場合は、最適化されたビルドを行うため、以下のコマンドを実行してください。  
+
     npm run prod  
+
+#### **Docker環境でのビルド（node.js を Docker で動かす場合）  
+もし node.js を コンテナ内 で実行する場合は、node.js のセットアップが必要です。  
+その場合は node 用のコンテナを作成し、以下のコマンドを node コンテナ内 で実行してください。  
+
+    docker-compose exec node npm install  
+    docker-compose exec node npm run dev  
+
+本番環境用のビルドは以下のように実行します。  
+    docker-compose exec node npm run prod  
 
 10.Stripe のセットアップ  
  　 本アプリでは、Stripe を利用した決済機能を提供します。  
