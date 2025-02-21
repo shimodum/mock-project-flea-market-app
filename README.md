@@ -206,16 +206,24 @@
    　 決済結果は、[Stripe Dashboard](https://dashboard.stripe.com/test/payments)で確認できます。
 
 ## テスト手順
-本アプリケーションでは PHPUnit による自動テストを実行できます。
+本アプリケーションでは PHPUnit による自動テストを実行できます。  
+テスト実行時に **通常環境のデータベースが初期化されないよう、必ずテスト環境（`.env.testing`）を使用してください。**
 
-### 1. テストデータの準備
-    php artisan migrate:fresh --seed
+### 1. テストデータの準備（テストDBのみ初期化）
+まず、 **テスト用データベース** にマイグレーションを適用し、必要な初期データを投入します。  
 
-### 2. PHPUnit テストの実行
-    php artisan test --testdox > test_report.html
+    php artisan migrate:fresh --seed --env=testing
 
-### 3. テスト結果の確認
-  test_report.html を開いて結果を確認できます。  
+### 2. PHPUnit テストの実行（テスト環境のDBを使用）
+テストを実行し、結果を test_report.html に出力します。  
+
+    php artisan test --env=testing --testdox > test_report.html
+
+### 3. テスト結果を確認
+ 以下のコマンドでテスト結果を確認できます。  
+
+    cat test_report.html  
+
   ターミナル上で直接出力する場合は以下を実行します。  
 
     php artisan test --testdox
