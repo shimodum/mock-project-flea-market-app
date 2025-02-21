@@ -204,7 +204,7 @@
     有効期限: 未来の日付（例: 12/30）    
     CVC: 任意の3桁（例: 123）    
 
-   　 決済結果は、[Stripe Dashboard](https://dashboard.stripe.com/test/payments)で確認できます。
+   　 テスト決済の結果は、[Stripe Dashboard](https://dashboard.stripe.com/test/payments)で確認できます。
 
 ## テスト手順
 本アプリケーションでは PHPUnit による自動テストを実行できます。  
