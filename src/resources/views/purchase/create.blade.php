@@ -38,8 +38,8 @@
                 <label for="payment_method" class="bold-label">支払い方法</label>
                 <select name="payment_method" id="payment_method">
                     <option value="" disabled selected>選択してください</option>
-                    <option value="コンビニ支払い">コンビニ支払い</option>
-                    <option value="カード支払い">カード支払い</option>
+                    <option value="1">コンビニ支払い</option>
+                    <option value="2">カード支払い</option>
                 </select>
             </div>
 

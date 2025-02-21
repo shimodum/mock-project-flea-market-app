@@ -110,7 +110,7 @@ class PurchaseController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => url('/purchase/success/' . $item->id),
+            'success_url' => url('/purchase/success/' . $item->id . '/?payment_method=' . $paymentMethod),
             'cancel_url' => url('/purchase/cancel'),
         ]);
 
@@ -118,9 +118,17 @@ class PurchaseController extends Controller
     }
 
     // 成功画面処理
-    public function success($item_id)
+    public function success($item_id, Request $request)
     {
         $item = Item::findOrFail($item_id);
+
+        Purchase::create([
+            'user_id' => Auth::id(),
+            'item_id' => $item->id,
+            'payment_method' => $request->payment_method,
+            'shipping_address' => Auth::user()->postal_code . ' ' 
+                . Auth::user()->address . ' ' . (Auth::user()->building ?? ''),
+        ]);
 
         if (!$item->is_sold) {
             $item->update(['is_sold' => true]);
