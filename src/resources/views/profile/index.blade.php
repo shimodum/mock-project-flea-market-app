@@ -45,9 +45,9 @@
                 <p>購入した商品はありません。</p>
             @else
                 @foreach ($buyItems as $purchase)
-                    @if ($purchase->item && $purchase->item->image_path)
+                    @if ($purchase->item && $purchase->item->image_url)
                         <div class="product-item">
-                            <img src="{{ $purchase->item->image_path }}" alt="商品画像">
+                            <img src="{{ $purchase->item->image_url }}" alt="商品画像">
                             <p>{{ $purchase->item->name }}</p>
                         </div>
                     @else
