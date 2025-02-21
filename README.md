@@ -130,15 +130,15 @@
    
     php artisan migrate
    
+  **開発者向け情報**  
+   phpMyAdmin を使用してデータベースを管理する場合は、以下の URL にアクセスしてください。  
+   - **phpMyAdmin**: [http://localhost:8080](http://localhost:8080)  
+
 7.データをシーディングする  
 　必要な初期データをデータベースに投入します。
 
     php artisan db:seed
    
-  **開発者向け情報**  
-   phpMyAdmin を使用してデータベースを管理する場合は、以下の URL にアクセスしてください。  
-   - **phpMyAdmin**: [http://localhost:8080](http://localhost:8080)  
-
 8.MailHog のセットアップと確認  
  　 MailHog は Docker コンテナ内で動作するメールキャプチャツールです。  
  　 開発環境で送信されるメールを MailHog で確認できます。  
