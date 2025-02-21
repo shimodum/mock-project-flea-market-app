@@ -154,6 +154,7 @@
        MAIL_USERNAME=null  
        MAIL_PASSWORD=null  
        MAIL_ENCRYPTION=null   
+       MAIL_FROM_ADDRESS=mailhog@mailhog.com  
   
 9.JavaScript ファイルのロード確認  
  　 本アプリでは以下の JavaScript ファイルを使用しています。  
