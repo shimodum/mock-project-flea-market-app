@@ -207,21 +207,29 @@
 
 ## テスト手順
 本アプリケーションでは PHPUnit による自動テストを実行できます。  
-テストを実行する前に、 **必ず `.env.testing` を作成し、 `phpunit.xml` の設定を確認してください。**  
-テスト実行時は **通常環境のデータベースが初期化されないよう、必ずテスト環境（`.env.testing`）を使用してください。**
+- テストを実行する前に、 **必ず `.env.testing` を作成し、 `phpunit.xml` の設定を確認してください。**  
+- テスト実行時は **通常環境のデータベースが初期化されないよう、必ずテスト環境（`.env.testing`）を使用してください。**
 
 ### 1. **テスト環境の準備**
+#### **テスト環境の切り替え**
+テスト実行時に **誤って通常環境のデータベースを初期化しないよう、必ずテスト環境に切り替えてください。**  
+以下のコマンドを実行し、 `APP_ENV` を `testing` に設定します。  
+
+    export APP_ENV=testing
+
+または、 --env=testing をすべてのテスト実行コマンドに付与してください。  
+
 #### **`.env.testing` を作成**
 通常の `.env` をコピーして、テスト用の環境設定を作成します。  
 
-    cp .env .env.testing  
+    cp .env .env.testing
 
 #### **.env.testing の DB_DATABASE を 通常環境とは異なるテスト専用DB に設定してください。**  
 
-    DB_CONNECTION=mysql
+    DB_CONNECTION=mysql_test
     DB_DATABASE=laravel_test_db   # 通常環境と異なるDB名を設定
-    DB_USERNAME=root
-    DB_PASSWORD=root
+    DB_USERNAME=laravel_user
+    DB_PASSWORD=laravel_pass
 
 #### **phpunit.xml にテストDBを設定**
 以下の記述を phpunit.xml に追加してください。  
@@ -246,10 +254,11 @@
 
     php artisan test --testdox
 
-### 4. テスト環境の切り替え
-テスト環境を明示的に指定する場合は、以下のコマンドで APP_ENV を testing に設定してからテストを実行してください。  
+### 4. テスト結果の確認
+テスト結果は test_report.html を開いて確認できます。  
+また、ターミナルで以下のコマンドを実行すると直接確認できます。  
 
-    export APP_ENV=testing
+    cat test_report.html
 
 ## テスト成功の確認基準
 
