@@ -94,7 +94,7 @@ class PurchaseController extends Controller
     // Stripe 決済処理
     public function checkout(Request $request)
     {
-        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+        \Stripe\Stripe::setApiKey(config('services.stripe.secret'));
 
         $item = Item::findOrFail($request->item_id);
         $paymentMethod = $request->payment_method;  // 支払い方法を取得
