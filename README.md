@@ -207,7 +207,8 @@
 
 ## テスト手順
 本アプリケーションでは PHPUnit による自動テストを実行できます。  
-テスト実行時に **通常環境のデータベースが初期化されないよう、必ずテスト環境（`.env.testing`）を使用してください。**
+テストを実行する前に、 **必ず `.env.testing` を作成し、 `phpunit.xml` の設定を確認してください。**
+テスト実行時は **通常環境のデータベースが初期化されないよう、必ずテスト環境（`.env.testing`）を使用してください。**
 
 ### 1. **テスト環境の準備**
 #### **`.env.testing` を作成**
@@ -227,7 +228,7 @@
 
     <php>
     <env name="APP_ENV" value="testing"/>
-    <env name="DB_CONNECTION" value="mysql"/>
+    <env name="DB_CONNECTION" value="mysql_test"/>
     <env name="DB_DATABASE" value="laravel_test_db"/>
     </php>
 
