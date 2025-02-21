@@ -78,12 +78,8 @@
     STRIPE_KEY=your_test_public_key
     STRIPE_SECRET=your_test_secret_key
     ```
-  - Stripe Dashboardにアクセスして、[テスト決済](https://dashboard.stripe.com/test/payments)を確認できます。
----
+  - Stripe Dashboardにアクセスして、[テスト決済](https://dashboard.stripe.com/test/payments)を確認できます。  
 
-## URL
-- アプリケーション: `http://localhost` （Nginx経由）  
-- phpMyAdmin: `http://localhost:8080`  
 ---
 
 ## デフォルトのデータベース設定
@@ -139,6 +135,10 @@
 
     php artisan db:seed
    
+  **開発者向け情報**  
+   phpMyAdmin を使用してデータベースを管理する場合は、以下の URL にアクセスしてください。  
+   - **phpMyAdmin**: [http://localhost:8080](http://localhost:8080)  
+
 8.MailHog のセットアップと確認  
  　 MailHog は Docker コンテナ内で動作するメールキャプチャツールです。  
  　 開発環境で送信されるメールを MailHog で確認できます。  
