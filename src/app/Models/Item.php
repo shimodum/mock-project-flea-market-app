@@ -90,8 +90,14 @@ class Item extends Model
      */
     public function getImageUrlAttribute()
     {
+        // すでにURL形式の場合はそのまま返す
+        if (preg_match('/^https?:\/\//', $this->image_path)) {
+            return $this->image_path;
+        }
+
+        // ローカルのstorageパスを返す
         return $this->image_path
-            ? Storage::url($this->image_path)  // Storage::url を使用してパスを生成
+            ? Storage::url($this->image_path)
             : asset('images/default-item.png');
     }
 
