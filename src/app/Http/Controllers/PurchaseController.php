@@ -122,19 +122,18 @@ class PurchaseController extends Controller
     {
         $item = Item::findOrFail($item_id);
 
-        Purchase::create([
+        $purchase = Purchase::create([
             'user_id' => Auth::id(),
             'item_id' => $item->id,
             'payment_method' => $request->payment_method,
-            'shipping_address' => Auth::user()->postal_code . ' ' 
+            'shipping_address' => Auth::user()->postal_code . ' '
                 . Auth::user()->address . ' ' . (Auth::user()->building ?? ''),
         ]);
 
         if (!$item->is_sold) {
             $item->update(['is_sold' => true]);
         }
-
-        return view('purchase.success', compact('item'));
+        return view('purchase.success', compact('item', 'purchase'));
     }
 
     // キャンセル画面処理

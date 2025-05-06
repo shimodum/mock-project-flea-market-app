@@ -60,4 +60,14 @@ class Purchase extends Model
             'building' => $addressLines[2] ?? '',
         ];
     }
+
+    public function getPaymentMethodLabelAttribute()
+    {
+        $methods = [
+            1 => 'コンビニ支払い',
+            2 => 'カード支払い',
+        ];
+
+        return $methods[(int) $this->payment_method] ?? '未設定';
+    }
 }
