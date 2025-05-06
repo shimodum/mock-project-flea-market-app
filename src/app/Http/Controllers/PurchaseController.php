@@ -122,16 +122,27 @@ class PurchaseController extends Controller
     {
         $item = Item::findOrFail($item_id);
 
-        $purchase = Purchase::create([
-            'user_id' => Auth::id(),
-            'item_id' => $item->id,
-            'payment_method' => $request->payment_method,
-            'shipping_address' => Auth::user()->postal_code . ' '
-                . Auth::user()->address . ' ' . (Auth::user()->building ?? ''),
-        ]);
+        // すでに同じユーザーによる購入が存在するか確認
+        $existingPurchase = Purchase::where('user_id', Auth::id())
+            ->where('item_id', $item->id)
+            ->first();
 
-        if (!$item->is_sold) {
-            $item->update(['is_sold' => true]);
+        if ($existingPurchase) {
+            $purchase = $existingPurchase; // 既存の購入を使う
+        } else {
+            // 新規購入記録を作成
+            $purchase = Purchase::create([
+                'user_id' => Auth::id(),
+                'item_id' => $item->id,
+                'payment_method' => $request->payment_method,
+                'shipping_address' => Auth::user()->postal_code . ' '
+                    . Auth::user()->address . ' ' . (Auth::user()->building ?? ''),
+            ]);
+
+            // 商品を売却済みに更新（まだ売却されていなければ）
+            if (!$item->is_sold) {
+                $item->update(['is_sold' => true]);
+            }
         }
         return view('purchase.success', compact('item', 'purchase'));
     }
