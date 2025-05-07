@@ -13,6 +13,9 @@ class DatabaseSeeder extends Seeder
             ItemsTableSeeder::class, // その後に商品を作成
             CategorySeeder::class,
             ItemCategorySeeder::class,
+            TransactionSeeder::class,
+            ChatMessageSeeder::class,
+            EvaluationSeeder::class,
         ]);
     }
 }
