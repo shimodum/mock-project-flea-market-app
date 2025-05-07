@@ -7,15 +7,6 @@
 ## ER図
 下記は本アプリケーションで使用しているテーブルとリレーションを表したER図です。  
 ![ER図](ER.drawio.png)
-
-### テーブル概要
-- users … ユーザー情報（認証やプロフィール）を管理  
-- items … 出品する商品情報を管理  
-- purchases … 購入履歴とStripe決済情報（決済ID、支払いステータス）を管理（決済・住所など）  
-- comments … 商品に対するコメントを管理  
-- likes … 商品への「いいね」を管理（多対多を中間テーブルで実装）  
-- categories … 商品のカテゴリ情報を管理する  
-- items_categories … itemsとcategoriesの多対多関係を管理する中間テーブル  
 ---
 
 ## プロジェクト概要
@@ -82,6 +73,13 @@
 
 ---
 
+## URL
+ユーザ登録画面: http://localhost/register  
+ログイン画面: http://localhost/login  
+商品一覧画面（トップページ）: http://localhost/  
+phpMyAdmin: http://localhost:8080  
+
+---
 ## デフォルトのデータベース設定
 `docker-compose.yml` で設定されているデータベースの初期情報は以下の通りです。  
 デフォルトのパスワードをそのまま本番環境で使用しないでください。
