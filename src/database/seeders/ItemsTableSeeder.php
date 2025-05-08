@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\Item;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -14,137 +15,120 @@ class ItemsTableSeeder extends Seeder
      */
     public function run()
     {
-        // 🔹 外部キー制約を一時的に無効化
+        // 外部キー制約を一時的に無効化
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        // 🔹 itemsテーブルをリセット（既存データを削除してIDをリセット）
+        // itemsテーブルをリセット（既存データを削除してIDをリセット）
         DB::table('items')->truncate();
 
-        // 🔹 外部キー制約を再度有効化
+        // 外部キー制約を再度有効化
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
-        // 商品データを挿入
-        DB::table('items')->insert([
+        // 商品データの定義
+        $items = [
             [
                 'user_id' => 1,
                 'name' => '腕時計',
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'price' => 15000,
-                'condition' => 1,
+                'condition' => '良好',
                 'brand' => 'EMPORIO ARMANI',
-                'image_path' => 'item_images/Armani+Mens+Clock.jpg',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/armani-watch.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 2,
+                'user_id' => 1,
                 'name' => 'HDD',
                 'description' => '高速で信頼性の高いハードディスク',
                 'price' => 5000,
-                'condition' => 2,
-                'brand' => '',
-                'image_path' => 'item_images/HDD+Hard+Disk.jpg',
+                'condition' => '良好',
+                'brand' => 'Western Digital',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/hdd.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 3,
+                'user_id' => 1,
                 'name' => '玉ねぎ3束',
-                'description' => '新鮮な玉ねぎ3本のセット',
+                'description' => '新鮮な玉ねぎ3束のセット',
                 'price' => 300,
-                'condition' => 3,
-                'brand' => '',
-                'image_path' => 'item_images/iLoveIMG+d.jpg',
+                'condition' => 'やや傷や汚れあり',
+                'brand' => 'Local Farm',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/onion.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 4,
+                'user_id' => 1,
                 'name' => '革靴',
                 'description' => 'クラシックなデザインの革靴',
                 'price' => 4000,
-                'condition' => 4,
-                'brand' => '',
-                'image_path' => 'item_images/Leather+Shoes+Product+Photo.jpg',
+                'condition' => '状態が悪い',
+                'brand' => 'LeatherCraft',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/shoes.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 5,
+                'user_id' => 1,
                 'name' => 'ノートPC',
                 'description' => '高性能なノートパソコン',
                 'price' => 45000,
-                'condition' => 1,
-                'brand' => '',
-                'image_path' => 'item_images/Living+Room+Laptop.jpg',
+                'condition' => '良好',
+                'brand' => 'DELL',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/laptop.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 6,
+                'user_id' => 2,
                 'name' => 'マイク',
                 'description' => '高音質のレコーディング用マイク',
                 'price' => 8000,
-                'condition' => 2,
-                'brand' => '',
-                'image_path' => 'item_images/Music+Mic+4632231.jpg',
+                'condition' => '良好',
+                'brand' => 'SHURE',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/mic.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 7,
+                'user_id' => 2,
                 'name' => 'ショルダーバッグ',
                 'description' => 'おしゃれなショルダーバッグ',
                 'price' => 3500,
-                'condition' => 3,
-                'brand' => '',
-                'image_path' => 'item_images/Purse+fashion+pocket.jpg',
+                'condition' => 'やや傷や汚れあり',
+                'brand' => 'GUCCI',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/bag.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 8,
-                'name' => 'タンブラー',
-                'description' => '使いやすいタンブラー',
-                'price' => 500,
-                'condition' => 4,
-                'brand' => '',
-                'image_path' => 'item_images/Tumbler+souvenir.jpg',
-                'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'user_id' => 9,
+                'user_id' => 2,
                 'name' => 'コーヒーミル',
                 'description' => '手動のコーヒーミル',
                 'price' => 4000,
-                'condition' => 1,
-                'brand' => '',
-                'image_path' => 'item_images/Waitress+with+Coffee+Grinder.jpg',
+                'condition' => '良好',
+                'brand' => 'Kalita',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/coffee-mill.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
             [
-                'user_id' => 10,
+                'user_id' => 2,
+                'name' => 'タンブラー',
+                'description' => '使いやすいタンブラー',
+                'price' => 500,
+                'condition' => '良好',
+                'brand' => 'Starbucks',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/tumbler.jpg',
+                'is_sold' => false,
+            ],
+            [
+                'user_id' => 2,
                 'name' => 'メイクセット',
                 'description' => '便利なメイクアップセット',
                 'price' => 2500,
-                'condition' => 2,
-                'brand' => '',
-                'image_path' => 'item_images/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg',
+                'condition' => '良好',
+                'brand' => 'SHISEIDO',
+                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/makeup-set.jpg',
                 'is_sold' => false,
-                'created_at' => now(),
-                'updated_at' => now(),
             ],
-        ]);
+        ];
+
+        // 商品データの挿入
+        Item::insert($items);
     }
 }
