@@ -1,0 +1,112 @@
+/* ========================= */
+/* 取引チャット画面のスタイル */
+/* ========================= */
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.transaction-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+}
+
+.transaction-info {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================= */
+/* チャットエリア */
+/* ========================= */
+.chat-container {
+    max-height: 500px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.chat-message {
+    margin-bottom: 15px;
+    max-width: 80%;
+    padding: 10px;
+    border-radius: 8px;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.my-message {
+    background-color: #d1e7dd;
+    margin-left: auto;
+    text-align: right;
+}
+
+.their-message {
+    background-color: #f8d7da;
+    margin-right: auto;
+    text-align: left;
+}
+
+.chat-image {
+    max-width: 100%;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
+.timestamp {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+/* ========================= */
+/* メッセージ送信フォーム */
+/* ========================= */
+.message-input {
+    margin-bottom: 10px;
+}
+
+.message-input textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    font-size: 14px;
+}
+
+.file-input {
+    margin-bottom: 10px;
+}
+
+.file-input input {
+    margin-left: 5px;
+}
+
+.send-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: #45a049;
+}

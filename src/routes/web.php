@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,6 @@ Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('items.show
 // 購入成功・キャンセル画面（個人情報を含まないので、認証不要）
 Route::get('/purchase/success/{item_id}', [PurchaseController::class, 'success'])->name('purchase.success');
 Route::get('/purchase/cancel', [PurchaseController::class, 'cancel'])->name('purchase.cancel');
-
 
 // メール認証のルート
 Route::middleware(['auth'])->group(function () {
@@ -75,4 +75,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品出品関連
     Route::get('/sell', [ItemController::class, 'create'])->name('items.create');
     Route::post('/sell', [ItemController::class, 'store'])->name('items.store');
+
+    // 取引中商品の確認（マイページ）
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+
+    // 取引中商品の詳細画面
+    Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
 });
