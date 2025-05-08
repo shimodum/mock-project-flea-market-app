@@ -35,7 +35,7 @@ class UsersTableSeeder extends Seeder
             'email_verified_at' => Carbon::now(), // 認証済み
         ]);
 
-        // ダミーユーザー3: 紐づけのないユーザー
+        // ダミーユーザー3: 紐づけのない（商品を出品していない）ユーザー
         User::factory()->create([
             'name' => 'User3',
             'email' => 'user3@example.com',
