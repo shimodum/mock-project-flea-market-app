@@ -33,7 +33,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 15000,
                 'condition' => '良好',
                 'brand' => 'EMPORIO ARMANI',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/armani-watch.jpg',
+                'image_path' => 'item_images/Armani+Mens+Clock.jpg',
                 'is_sold' => false,
             ],
             [
@@ -43,7 +43,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 5000,
                 'condition' => '良好',
                 'brand' => 'Western Digital',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/hdd.jpg',
+                'image_path' => 'item_images/HDD+Hard+Disk.jpg',
                 'is_sold' => false,
             ],
             [
@@ -53,7 +53,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 300,
                 'condition' => 'やや傷や汚れあり',
                 'brand' => 'Local Farm',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/onion.jpg',
+                'image_path' => 'item_images/iLoveIMG+d.jpg',
                 'is_sold' => false,
             ],
             [
@@ -63,7 +63,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 4000,
                 'condition' => '状態が悪い',
                 'brand' => 'LeatherCraft',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/shoes.jpg',
+                'image_path' => 'item_images/Leather+Shoes+Product+Photo.jpg',
                 'is_sold' => false,
             ],
             [
@@ -73,7 +73,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 45000,
                 'condition' => '良好',
                 'brand' => 'DELL',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/laptop.jpg',
+                'image_path' => 'item_images/Living+Room+Laptop.jpg',
                 'is_sold' => false,
             ],
             [
@@ -83,7 +83,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 8000,
                 'condition' => '良好',
                 'brand' => 'SHURE',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/mic.jpg',
+                'image_path' => 'item_images/Music+Mic+4632231.jpg',
                 'is_sold' => false,
             ],
             [
@@ -93,7 +93,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 3500,
                 'condition' => 'やや傷や汚れあり',
                 'brand' => 'GUCCI',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/bag.jpg',
+                'image_path' => 'item_images/Purse+fashion+pocket.jpg',
                 'is_sold' => false,
             ],
             [
@@ -103,7 +103,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 4000,
                 'condition' => '良好',
                 'brand' => 'Kalita',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/coffee-mill.jpg',
+                'image_path' => 'item_images/Waitress+with+Coffee+Grinder.jpg',
                 'is_sold' => false,
             ],
             [
@@ -113,7 +113,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 500,
                 'condition' => '良好',
                 'brand' => 'Starbucks',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/tumbler.jpg',
+                'image_path' => 'item_images/Tumbler+souvenir.jpg',
                 'is_sold' => false,
             ],
             [
@@ -123,7 +123,7 @@ class ItemsTableSeeder extends Seeder
                 'price' => 2500,
                 'condition' => '良好',
                 'brand' => 'SHISEIDO',
-                'image_path' => 'https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/makeup-set.jpg',
+                'image_path' => 'item_images/makeup_set.jpg',
                 'is_sold' => false,
             ],
         ];

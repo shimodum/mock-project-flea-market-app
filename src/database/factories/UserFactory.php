@@ -4,12 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\User;
 
 class UserFactory extends Factory
 {
-    protected $model = User::class;
-
     /**
      * Define the model's default state.
      *
@@ -21,10 +18,10 @@ class UserFactory extends Factory
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'password' => bcrypt('password'), // デフォルトパスワード
+            'password' => bcrypt('password'), // password
             'postal_code' => $this->faker->postcode,
             'address' => $this->faker->address,
-            'building' => $this->faker->secondaryAddress,
+            'address_building' => $this->faker->secondaryAddress,
             'profile_image' => 'profile_images/default.png',
             'remember_token' => Str::random(10),
         ];

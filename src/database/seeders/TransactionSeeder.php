@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Transaction;
 use App\Models\Item;
 use App\Models\User;
@@ -11,24 +12,37 @@ class TransactionSeeder extends Seeder
 {
     public function run()
     {
-        // 既存のデータを削除
-        Transaction::truncate();
+        // 外部キー制約を無効化
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        
+        // テーブルをクリア
+        DB::table('transactions')->truncate();
+        DB::table('chat_messages')->truncate();
 
-        // User1 の出品商品 (CO01 ～ CO05) を User2 が購入する取引
-        for ($i = 1; $i <= 5; $i++) {
+        // 外部キー制約を再度有効化
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        // ユーザーとアイテムを取得
+        $user1 = User::where('email', 'user1@example.com')->first();
+        $user2 = User::where('email', 'user2@example.com')->first();
+
+        $items1 = Item::whereBetween('id', [1, 5])->get(); // 商品CO01〜CO05
+        $items2 = Item::whereBetween('id', [6, 10])->get(); // 商品CO06〜CO10
+
+        // それぞれのユーザーに取引を追加
+        foreach ($items1 as $item) {
             Transaction::create([
-                'item_id' => $i,
-                'buyer_id' => 2, // User2 が購入者
-                'status' => 'negotiating', // 交渉中のステータス
+                'item_id' => $item->id,
+                'buyer_id' => $user2->id, // User2が購入者
+                'status' => 'negotiating',
             ]);
         }
 
-        // User2 の出品商品 (CO06 ～ CO10) を User1 が購入する取引
-        for ($i = 6; $i <= 10; $i++) {
+        foreach ($items2 as $item) {
             Transaction::create([
-                'item_id' => $i,
-                'buyer_id' => 1, // User1 が購入者
-                'status' => 'negotiating', // 交渉中のステータス
+                'item_id' => $item->id,
+                'buyer_id' => $user1->id, // User1が購入者
+                'status' => 'negotiating',
             ]);
         }
     }
