@@ -119,7 +119,7 @@ phpMyAdmin: http://localhost:8080
 
      git clone -b feature/new-function-from-review https://github.com/shimodum/mock-project-flea-market-app.git
 
-   **クローン後、プロジェクトディレクトリに移動します**:  
+   クローン後、プロジェクトディレクトリに移動します。  
 
       cd mock-project-flea-market-app
    
@@ -175,50 +175,8 @@ phpMyAdmin: http://localhost:8080
        MAIL_PASSWORD=null  
        MAIL_ENCRYPTION=null   
        MAIL_FROM_ADDRESS=mailhog@mailhog.com  
-  
-9.JavaScript ファイルのロード確認  
- 　 本アプリでは以下の JavaScript ファイルを使用しています。  
 
-- `common.js`  
-  - パスワード表示切替機能（パスワードトグルアイコン）| 会員登録画面・ログイン画面  
-- `item.js`  
-  - 商品情報の管理に関連する処理 | 商品出品画面  
-- `like.js`  
-  - いいね機能の処理（追加・解除）| 商品詳細画面  
-- `profile.js`  
-  - プロフィール編集・画像アップロードの処理 | マイページ  
-- `purchase.js`  
-  - 購入手続き関連の処理 | 商品購入画面  
-
-これらのファイルが `src/public/js/` に存在し、適切にビルド・読み込まれていることを確認してください。  
-
-#### **ビルドコマンドの実行場所**  
-- JavaScript のビルドは **`node.js` が動作する環境** で行う必要があります。  
-- **ホスト環境（ローカル環境）** で実行してください。  
-
-#### **開発環境でのビルド**  
-開発環境で JavaScript ファイルを適用するには、**ホスト環境（ローカル）で以下のコマンドを実行** してください。  
-
-    npm install
-    npm run dev  
-
-#### **本番環境でのビルド**  
-本番環境の場合は、最適化されたビルドを行うため、以下のコマンドを実行してください。  
-
-    npm run prod  
-
-#### **Docker環境でのビルド（node.js を Docker で動かす場合）  
-もし node.js を コンテナ内 で実行する場合は、node.js のセットアップが必要です。  
-その場合は node 用のコンテナを作成し、以下のコマンドを node コンテナ内 で実行してください。  
-
-    docker-compose exec node npm install  
-    docker-compose exec node npm run dev  
-
-本番環境用のビルドは以下のように実行します。  
-
-    docker-compose exec node npm run prod  
-
-10.Stripe のセットアップ  
+9.Stripe のセットアップ  
  　 本アプリでは、Stripe を利用した決済機能を提供します。  
  　 Stripe を使用するには、まず以下の手順で環境を整えてください。  
   
