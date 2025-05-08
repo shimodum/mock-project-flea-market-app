@@ -9,6 +9,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ChatMessageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
@@ -81,4 +82,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // 取引中商品の詳細画面
     Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
+
+    // チャットメッセージ関連
+    Route::post('/transactions/{id}/messages', [ChatMessageController::class, 'store'])->name('transactions.messages.store');
+    Route::get('/messages/{id}/download', [ChatMessageController::class, 'downloadImage'])->name('messages.download');
 });
