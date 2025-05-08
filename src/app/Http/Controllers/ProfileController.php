@@ -65,7 +65,7 @@ class ProfileController extends Controller
             'name' => $request->name,
             'postal_code' => $request->postal_code,
             'address' => $request->address,
-            'building' => $request->building,
+            'address_building' => $request->address_building,
             'profile_image' => $user->profile_image,
         ]);
 

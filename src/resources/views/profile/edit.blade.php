@@ -41,8 +41,8 @@
         </div>
 
         <div class="form-group">
-            <label for="building">建物名</label>
-            <input type="text" id="building" name="building" value="{{ old('building', $user->building ?? '') }}">
+            <label for="address_building">建物名</label>
+            <input type="text" id="address_building" name="address_building" value="{{ old('address_building', $user->address_building ?? '') }}">
         </div>
 
         <button type="submit" class="update-button">更新する</button>
