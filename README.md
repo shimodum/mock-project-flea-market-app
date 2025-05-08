@@ -115,7 +115,7 @@ phpMyAdmin: http://localhost:8080
 
 ## セットアップ方法
 1.リポジトリをクローンする  
-   リポジトリを GitHub からローカルにコピーします。  
+ 　 リポジトリを GitHub からローカルにコピーします。  
 
      git clone -b feature/new-function-from-review https://github.com/shimodum/mock-project-flea-market-app.git
 
