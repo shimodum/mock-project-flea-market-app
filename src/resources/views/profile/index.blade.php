@@ -22,9 +22,9 @@
         <a href="{{ route('profile.index', ['tab' => 'sell']) }}" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
         <a href="{{ route('profile.index', ['tab' => 'buy']) }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
         <a href="{{ route('profile.index', ['tab' => 'transaction']) }}" class="{{ $tab === 'transaction' ? 'active' : '' }}">
-            取引中の商品 
-            @if($transactions->count() > 0)
-                <span class="badge">{{ $transactions->count() }}</span>
+            取引中の商品
+            @if ($transactions->sum('unread_messages_count') > 0)
+                <span class="badge">{{ $transactions->sum('unread_messages_count') }}</span>
             @endif
         </a>
     </div>
@@ -73,8 +73,8 @@
                         <a href="{{ route('transactions.show', $transaction->id) }}">
                             <div class="product-image-wrapper">
                                 <img src="{{ asset('storage/' . $transaction->item->image_path) }}" alt="商品画像">
-                                @if ($transaction->unread_messages_count > 0)
-                                    <div class="badge">{{ $transaction->unread_messages_count }}</div>
+                                @if ($transaction->unreadMessagesCount() > 0)
+                                    <div class="badge">{{ $transaction->unreadMessagesCount() }}</div> <!-- 修正箇所 -->
                                 @endif
                             </div>
                             <p>{{ $transaction->item->name }}</p>

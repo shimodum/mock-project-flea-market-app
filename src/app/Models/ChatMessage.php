@@ -11,7 +11,9 @@ class ChatMessage extends Model
 
     protected $fillable = [
         'transaction_id',
+        'user_id',
         'message',
+        'is_read',
         'image_path',
     ];
 

@@ -33,12 +33,8 @@ class ProfileController extends Controller
             ->with(['item', 'item.user', 'chatMessages'])
             ->get()
             ->map(function ($transaction) {
-                // メッセージ未読数の取得
-                if ($transaction->chat_messages !== null) {
-                    $transaction->unread_messages_count = $transaction->chat_messages->where('is_read', false)->count();
-                } else {
-                    $transaction->unread_messages_count = 0;
-                }
+                // メソッドを使って未読メッセージの数を取得
+                $transaction->unread_messages_count = $transaction->unreadMessagesCount();
                 return $transaction;
             });
 

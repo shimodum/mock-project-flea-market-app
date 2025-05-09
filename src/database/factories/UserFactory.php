@@ -19,7 +19,7 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // password
-            'postal_code' => $this->faker->postcode,
+            'postal_code' => $this->faker->regexify('[0-9]{3}-[0-9]{4}'),
             'address' => $this->faker->address,
             'address_building' => $this->faker->secondaryAddress,
             'profile_image' => 'profile_images/default.png',
