@@ -20,4 +20,10 @@ class ChatMessage extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    // ユーザーとのリレーション（N:1）
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
