@@ -54,12 +54,6 @@
                 @endforeach
             @endif
         @endif
-        <pre>
-        未読メッセージ一覧:
-        @foreach ($transactions as $transaction)
-            商品ID: {{ $transaction->id }}, 未読: {{ $transaction->unreadMessagesCount() }}
-        @endforeach
-        </pre>
     </div>
 </div>
 @endsection

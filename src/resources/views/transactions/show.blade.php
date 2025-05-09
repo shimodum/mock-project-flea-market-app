@@ -39,10 +39,6 @@
             @endforeach
         </div>
 
-        {{-- ログの追加 --}}
-        <pre>
-        未読メッセージ件数: {{ $transaction->unreadMessagesCount() }}
-        </pre>
 
         <form action="{{ route('chat_messages.store', $transaction->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
