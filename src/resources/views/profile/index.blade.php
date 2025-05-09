@@ -35,6 +35,43 @@
 
     {{-- 商品リスト --}}
     <div class="product-list">
+        {{-- 出品した商品 --}}
+        @if ($tab === 'sell')
+            @if ($sellItems->isEmpty())
+                <p>出品した商品はありません。</p>
+            @else
+                @foreach ($sellItems as $item)
+                    <div class="product-item">
+                        <a href="{{ route('items.show', $item->id) }}">
+                            <div class="product-image-wrapper">
+                                <img src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
+                            </div>
+                            <p>{{ $item->name }}</p>
+                        </a>
+                    </div>
+                @endforeach
+            @endif
+        @endif
+
+        {{-- 購入した商品 --}}
+        @if ($tab === 'buy')
+            @if ($buyItems->isEmpty())
+                <p>購入した商品はありません。</p>
+            @else
+                @foreach ($buyItems as $purchase)
+                    <div class="product-item">
+                        <a href="{{ route('items.show', $purchase->item->id) }}">
+                            <div class="product-image-wrapper">
+                                <img src="{{ asset('storage/' . $purchase->item->image_path) }}" alt="商品画像">
+                            </div>
+                            <p>{{ $purchase->item->name }}</p>
+                        </a>
+                    </div>
+                @endforeach
+            @endif
+        @endif
+
+        {{-- 取引中の商品 --}}
         @if ($tab === 'transaction')
             @if ($transactions->isEmpty())
                 <p>取引中の商品はありません。</p>
