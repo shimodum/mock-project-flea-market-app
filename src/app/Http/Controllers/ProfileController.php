@@ -16,22 +16,31 @@ class ProfileController extends Controller
         $user = auth()->user();
         $tab = $request->query('tab', 'sell');
 
-        // 出品した商品
-        $sellItems = $user->items;
+        // 出品した商品を取得（itemsテーブルと関連付け）
+        $sellItems = Item::where('user_id', $user->id)->get();
 
-        // 購入した商品
+        // 購入した商品を取得（purchasesテーブルと関連付け）
         $buyItems = $user->purchases()->with('item')->get();
 
         // 取引中の商品 (出品者 or 購入者が自分で、状態が negotiating のもの)
         $transactions = Transaction::where(function ($query) use ($user) {
-            $query->where('buyer_id', $user->id)
-                  ->orWhereHas('item', function ($query) use ($user) {
-                      $query->where('user_id', $user->id);
-                  });
-        })
-        ->where('status', 'negotiating')
-        ->with(['item', 'item.user'])
-        ->get();
+                $query->where('buyer_id', $user->id)
+                    ->orWhereHas('item', function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    });
+            })
+            ->where('status', 'negotiating')
+            ->with(['item', 'item.user', 'chatMessages'])
+            ->get()
+            ->map(function ($transaction) {
+                // メッセージ未読数の取得
+                if ($transaction->chat_messages !== null) {
+                    $transaction->unread_messages_count = $transaction->chat_messages->where('is_read', false)->count();
+                } else {
+                    $transaction->unread_messages_count = 0;
+                }
+                return $transaction;
+            });
 
         return view('profile.index', compact('user', 'tab', 'sellItems', 'buyItems', 'transactions'));
     }

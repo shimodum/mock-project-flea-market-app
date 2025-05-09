@@ -12,6 +12,7 @@ class CreateChatMessagesTable extends Migration
             $table->id();
             $table->foreignId('transaction_id')->constrained()->cascadeOnDelete();
             $table->text('message');
+            $table->boolean('is_read')->default(false);
             $table->string('image_path')->nullable();
             $table->timestamps();
         });

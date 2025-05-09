@@ -30,7 +30,18 @@ class Transaction extends Model
     // チャットメッセージとのリレーション（1:N）
     public function chatMessages()
     {
-        return $this->hasMany(ChatMessage::class);
+        return $this->hasMany(ChatMessage::class, 'transaction_id');
+    }
+
+    /**
+     * 未読メッセージのカウントを取得
+     *
+     * @return int
+     */
+    public function unreadMessagesCount()
+    {
+        // is_read フラグが false のものをカウント
+        return $this->chatMessages()->where('is_read', false)->count();
     }
 
     // 評価とのリレーション（1:N）

@@ -34,7 +34,7 @@ class TransactionController extends Controller
         $user = Auth::user();
 
         // 取引の詳細を取得
-        $transaction = Transaction::with(['item', 'messages.user'])
+        $transaction = Transaction::with(['item', 'item.user', 'chatMessages'])
             ->where('id', $id)
             ->where(function ($query) use ($user) {
                 $query->where('buyer_id', $user->id)
@@ -44,11 +44,8 @@ class TransactionController extends Controller
             })
             ->firstOrFail();
 
-        // メッセージ一覧
-        $messages = ChatMessage::where('transaction_id', $id)
-            ->with('user')
-            ->orderBy('created_at', 'asc')
-            ->get();
+        // メッセージ一覧を取得
+        $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
 
         return view('transactions.show', compact('transaction', 'messages'));
     }

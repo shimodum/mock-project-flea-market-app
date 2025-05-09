@@ -62,17 +62,38 @@
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
+/* 商品の表示アイテム */
 .product-item {
-    width: 150px;
+    width: 180px;
     text-align: center;
+    position: relative;
+    /* バッジの絶対位置指定のため */
 }
 
+/* 商品の画像ラッパー */
+.product-image-wrapper {
+    position: relative;
+}
+
+/* 商品画像 */
 .product-item img {
     width: 100%;
     border-radius: 10px;
+}
+
+/* バッジ表示（メッセージ件数） */
+.badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 12px;
 }
 
 /* ========================= */

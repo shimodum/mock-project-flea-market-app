@@ -84,6 +84,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
 
     // チャットメッセージ関連
-    Route::post('/transactions/{id}/messages', [ChatMessageController::class, 'store'])->name('transactions.messages.store');
+    Route::post('/transactions/{id}/messages', [ChatMessageController::class, 'store'])->name('chat_messages.store');
     Route::get('/messages/{id}/download', [ChatMessageController::class, 'downloadImage'])->name('messages.download');
 });

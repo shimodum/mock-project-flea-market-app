@@ -1,5 +1,4 @@
 {{-- 取引チャット画面 --}}
-{{-- 取引詳細ページ --}}
 @extends('layouts.app')
 
 @section('css')
@@ -19,7 +18,7 @@
 
     {{-- チャット履歴 --}}
     <div class="chat-container">
-        @foreach ($transaction->chatMessages as $message)
+        @foreach ($messages as $message)
             <div class="chat-message {{ $message->user_id === auth()->id() ? 'my-message' : 'their-message' }}">
                 <p>{{ $message->message }}</p>
                 
