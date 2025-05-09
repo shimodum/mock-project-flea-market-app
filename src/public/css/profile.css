@@ -4,8 +4,11 @@
 
 /* プロフィールヘッダー */
 .profile-header {
-    text-align: center;
+    display: flex;
+    align-items: center;
     margin-bottom: 20px;
+    position: relative;
+    padding-left: 30px;
 }
 
 /* プロフィール画像 */
@@ -13,73 +16,101 @@
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: 10px;
 }
 
-.profile-placeholder {
-    width: 100px;
-    height: 100px;
-    background-color: #ccc;
-    border-radius: 50%;
+/* 名前の表示 */
+.profile-name {
+    font-size: 22px;
+    margin-bottom: 5px;
+    margin-right: 15px;
 }
 
-/* プロフィール編集ボタン */
+/* ★評価の表示 */
+.rating-stars {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    justify-content: flex-start;
+}
+
+.rating-stars img {
+    width: 18px;
+    height: 18px;
+}
+
+/* 編集ボタンの表示 */
 .profile-edit-btn {
-    display: inline-block;
-    background-color: #e74c3c;
-    color: white;
-    padding: 10px 15px;
+    background-color: transparent;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    padding: 5px 15px;
     border-radius: 5px;
-    text-decoration: none;
     font-size: 14px;
-    margin-top: 10px;
+    margin-left: auto;
+    margin-right: 50px;
+    cursor: pointer;
 }
 
 .profile-edit-btn:hover {
-    background-color: #c0392b;
+    background-color: #e74c3c;
+    color: white;
 }
 
+/* ========================= */
 /* タブメニュー */
+/* ========================= */
 .tab-menu {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 30px;
     margin-bottom: 20px;
-    position: relative;
+    border-bottom: 1px solid #ccc;
 }
 
 .tab-menu a {
-    padding: 10px 20px;
+    padding: 10px 25px;
     text-decoration: none;
     font-weight: bold;
     color: black;
     position: relative;
+    margin-right: 5px;
+}
+
+.tab-menu a:last-child {
+    margin-right: 0;
 }
 
 .tab-menu a.active {
     color: red;
-    border-bottom: 2px solid red;
-    position: relative;
+    border-bottom: 3px solid red;
 }
 
+/* タブのバッジ */
 .tab-menu .badge {
     position: absolute;
-    top: -10px;
-    right: 110px;
+    top: -8px;
+    right: -8px;
     background-color: red;
     color: white;
     border-radius: 50%;
-    padding: 2px 5px;
+    padding: 3px 6px;
     font-size: 12px;
     font-weight: bold;
     display: inline-block;
-    z-index: 10;
 }
 
+/* ========================= */
 /* 商品リスト */
+/* ========================= */
 .product-list {
     display: flex;
-    flex-wrap: wrap;
     gap: 15px;
+    flex-wrap: wrap;
     justify-content: flex-start;
+    margin-left: 30px;
 }
 
 /* 商品の表示アイテム */
@@ -87,139 +118,34 @@
     width: 180px;
     text-align: center;
     position: relative;
-    /* バッジの絶対位置指定のため */
 }
 
 /* 商品の画像ラッパー */
 .product-image-wrapper {
     position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #f7f7f7;
 }
 
 /* 商品画像 */
 .product-item img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     border-radius: 10px;
 }
 
 /* バッジ表示（メッセージ件数） */
-.badge {
+.product-image-wrapper .badge {
     position: absolute;
     top: 5px;
     left: 5px;
     background-color: red;
     color: white;
-    padding: 2px 5px;
+    padding: 4px 6px;
     border-radius: 50%;
     font-size: 12px;
-}
-
-/* ========================= */
-/* プロフィール設定画面（初回ログイン時）*/
-/* プロフィール編集画面 共通設定 */
-/* ========================= */
-.container {
-    max-width: 500px;
-    margin: 50px auto;
-    text-align: center;
-}
-
-.page-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* プロフィール画像の枠 */
-.profile-image-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.image-title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.profile-image-placeholder {
-    width: 150px;
-    height: 150px;
-    background-color: #ccc;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-
-.profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-/* 画像選択ボタン */
-.upload-button {
-    background-color: #e2a16b;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.upload-button:hover {
-    background-color: #c28558;
-}
-
-/* フォームスタイル */
-.profile-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.form-group {
-    width: 100%;
-    text-align: left;
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    font-size: 16px;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-/* 更新ボタン */
-.update-button {
-    background-color: #e74c3c;
-    color: white;
-    font-size: 16px;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    max-width: 300px;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
-
-.update-button:hover {
-    background-color: #c0392b;
 }
