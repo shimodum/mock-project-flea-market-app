@@ -14,7 +14,7 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
-        // 取引中の商品一覧を取得
+        // 取引中の商品一覧を取得（最新メッセージの時間でソート）
         $transactions = Transaction::where(function ($query) use ($user) {
             $query->where('buyer_id', $user->id)
                   ->orWhereHas('item', function ($query) use ($user) {
@@ -22,7 +22,11 @@ class TransactionController extends Controller
                   });
         })
         ->where('status', 'negotiating')
-        ->with('item')
+        ->with(['item', 'item.user', 'chatMessages'])
+        ->withCount(['chatMessages as latest_message' => function ($query) {
+            $query->latest();
+        }])
+        ->orderByDesc('latest_message')
         ->get();
 
         return view('transactions.index', compact('transactions'));
@@ -47,6 +51,17 @@ class TransactionController extends Controller
         // メッセージ一覧を取得
         $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
 
-        return view('transactions.show', compact('transaction', 'messages'));
+        // サイドバーの取引一覧を追加
+        $sidebarTransactions = Transaction::where(function ($query) use ($user) {
+                $query->where('buyer_id', $user->id)
+                    ->orWhereHas('item', function ($query) use ($user) {
+                        $query->where('user_id', $user->id);
+                    });
+            })
+            ->where('status', 'negotiating')
+            ->with('item')
+            ->get();
+
+        return view('transactions.show', compact('transaction', 'messages', 'sidebarTransactions'));
     }
 }
