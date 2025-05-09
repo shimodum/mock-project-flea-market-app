@@ -38,7 +38,10 @@ class ProfileController extends Controller
                 return $transaction;
             });
 
-        return view('profile.index', compact('user', 'tab', 'sellItems', 'buyItems', 'transactions'));
+        // ここで合計未読件数を計算
+        $totalUnreadCount = $transactions->sum('unread_messages_count');
+
+        return view('profile.index', compact('user', 'tab', 'sellItems', 'buyItems', 'transactions', 'totalUnreadCount'));
     }
 
     // プロフィール設定画面の表示

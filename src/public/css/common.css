@@ -119,3 +119,18 @@ body {
 .sell-button:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
+
+
+/* バッジの表示設定 */
+.badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    position: relative;
+    top: -5px;
+    left: 5px;
+    display: inline-block;
+}

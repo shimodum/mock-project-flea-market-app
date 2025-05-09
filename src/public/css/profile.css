@@ -43,6 +43,7 @@
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    position: relative;
 }
 
 .tab-menu a {
@@ -50,11 +51,27 @@
     text-decoration: none;
     font-weight: bold;
     color: black;
+    position: relative;
 }
 
 .tab-menu a.active {
     color: red;
     border-bottom: 2px solid red;
+    position: relative;
+}
+
+.tab-menu .badge {
+    position: absolute;
+    top: -10px;
+    right: -15px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    display: inline-block;
+    z-index: 10;
 }
 
 /* 商品リスト */

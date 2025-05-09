@@ -19,51 +19,22 @@
 
     {{-- タブメニュー --}}
     <div class="tab-menu">
-        <a href="{{ route('profile.index', ['tab' => 'sell']) }}" class="{{ $tab === 'sell' ? 'active' : '' }}">出品した商品</a>
-        <a href="{{ route('profile.index', ['tab' => 'buy']) }}" class="{{ $tab === 'buy' ? 'active' : '' }}">購入した商品</a>
+        <a href="{{ route('profile.index', ['tab' => 'sell']) }}" class="{{ $tab === 'sell' ? 'active' : '' }}">
+            出品した商品
+        </a>
+        <a href="{{ route('profile.index', ['tab' => 'buy']) }}" class="{{ $tab === 'buy' ? 'active' : '' }}">
+            購入した商品
+        </a>
         <a href="{{ route('profile.index', ['tab' => 'transaction']) }}" class="{{ $tab === 'transaction' ? 'active' : '' }}">
             取引中の商品
-            @if ($transactions->sum('unread_messages_count') > 0)
-                <span class="badge">{{ $transactions->sum('unread_messages_count') }}</span>
+            @if ($totalUnreadCount > 0)
+                <span class="badge">{{ $totalUnreadCount }}</span>
             @endif
         </a>
     </div>
 
     {{-- 商品リスト --}}
     <div class="product-list">
-        {{-- 出品した商品 --}}
-        @if ($tab === 'sell')
-            @if ($sellItems->isEmpty())
-                <p>出品した商品はありません。</p>
-            @else
-                @foreach ($sellItems as $item)
-                    <div class="product-item">
-                        <a href="{{ route('items.show', $item->id) }}">
-                            <img src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
-                            <p>{{ $item->name }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            @endif
-        @endif
-
-        {{-- 購入した商品 --}}
-        @if ($tab === 'buy')
-            @if ($buyItems->isEmpty())
-                <p>購入した商品はありません。</p>
-            @else
-                @foreach ($buyItems as $purchase)
-                    <div class="product-item">
-                        <a href="{{ route('items.show', $purchase->item->id) }}">
-                            <img src="{{ asset('storage/' . $purchase->item->image_path) }}" alt="商品画像">
-                            <p>{{ $purchase->item->name }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            @endif
-        @endif
-
-        {{-- 取引中の商品 --}}
         @if ($tab === 'transaction')
             @if ($transactions->isEmpty())
                 <p>取引中の商品はありません。</p>
@@ -74,7 +45,7 @@
                             <div class="product-image-wrapper">
                                 <img src="{{ asset('storage/' . $transaction->item->image_path) }}" alt="商品画像">
                                 @if ($transaction->unreadMessagesCount() > 0)
-                                    <div class="badge">{{ $transaction->unreadMessagesCount() }}</div> <!-- 修正箇所 -->
+                                    <div class="badge">{{ $transaction->unreadMessagesCount() }}</div>
                                 @endif
                             </div>
                             <p>{{ $transaction->item->name }}</p>
