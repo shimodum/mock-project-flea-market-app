@@ -24,6 +24,7 @@
             </div>
         </div>
 
+        {{-- チャット履歴 --}}
         <div class="chat-container">
             @foreach ($messages as $message)
                 <div class="chat-message {{ $message->user_id === auth()->id() ? 'my-message' : 'their-message' }}">
@@ -37,6 +38,11 @@
                 </div>
             @endforeach
         </div>
+
+        {{-- ログの追加 --}}
+        <pre>
+        未読メッセージ件数: {{ $transaction->unreadMessagesCount() }}
+        </pre>
 
         <form action="{{ route('chat_messages.store', $transaction->id) }}" method="POST" enctype="multipart/form-data">
             @csrf

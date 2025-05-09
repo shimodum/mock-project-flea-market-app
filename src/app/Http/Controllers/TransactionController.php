@@ -44,20 +44,19 @@ class TransactionController extends Controller
             })
             ->firstOrFail();
 
-        // 未読メッセージを既読にする処理
-        $unreadMessages = ChatMessage::where('transaction_id', $transaction->id)
+        // 未読メッセージ一覧をログに出力
+        \Log::info('Before Update - Unread Messages:', $transaction->chatMessages()->where('is_read', false)->pluck('id')->toArray());
+
+        // 更新処理
+        $updated = $transaction->chatMessages()
             ->where('is_read', false)
-            ->where('user_id', '!=', Auth::id()) // 自分のメッセージはスキップ
-            ->get();
+            ->update(['is_read' => true]);
 
-        if ($unreadMessages->isNotEmpty()) {
-            foreach ($unreadMessages as $message) {
-                $message->is_read = true;
-                $message->save();
-            }
-        }
+        // 更新後の確認
+        \Log::info('After Update - Unread Messages:', $transaction->chatMessages()->where('is_read', false)->pluck('id')->toArray());
+        \Log::info("Updated unread messages: {$updated}");
 
-        // メッセージ一覧を取得
+        // ⭐ 再度データを取得して反映
         $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
 
         // サイドバーの取引一覧を追加
@@ -71,7 +70,13 @@ class TransactionController extends Controller
             ->with('item')
             ->get();
 
+        // ⭐ ここで未読件数の確認
+        foreach ($sidebarTransactions as $sidebarTransaction) {
+            \Log::info("Sidebar Transaction: {$sidebarTransaction->id}, Unread: {$sidebarTransaction->unreadMessagesCount()}");
+        }
+
         return view('transactions.show', compact('transaction', 'messages', 'sidebarTransactions'));
     }
+
 
 }
