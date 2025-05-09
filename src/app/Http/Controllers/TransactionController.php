@@ -23,10 +23,6 @@ class TransactionController extends Controller
         })
         ->where('status', 'negotiating')
         ->with(['item', 'item.user', 'chatMessages'])
-        ->withCount(['chatMessages as latest_message' => function ($query) {
-            $query->latest();
-        }])
-        ->orderByDesc('latest_message')
         ->get();
 
         return view('transactions.index', compact('transactions'));
@@ -48,6 +44,19 @@ class TransactionController extends Controller
             })
             ->firstOrFail();
 
+        // 未読メッセージを既読にする処理
+        $unreadMessages = ChatMessage::where('transaction_id', $transaction->id)
+            ->where('is_read', false)
+            ->where('user_id', '!=', Auth::id()) // 自分のメッセージはスキップ
+            ->get();
+
+        if ($unreadMessages->isNotEmpty()) {
+            foreach ($unreadMessages as $message) {
+                $message->is_read = true;
+                $message->save();
+            }
+        }
+
         // メッセージ一覧を取得
         $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
 
@@ -64,4 +73,5 @@ class TransactionController extends Controller
 
         return view('transactions.show', compact('transaction', 'messages', 'sidebarTransactions'));
     }
+
 }
