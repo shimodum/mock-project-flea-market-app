@@ -34,7 +34,6 @@
     margin-top: 5px;
     margin-bottom: -5px;
     justify-content: flex-start;
-    position: relative;
 }
 
 .rating-stars img {
@@ -72,7 +71,6 @@
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
     position: relative;
-    /* 追加 */
 }
 
 .tab-menu a {
@@ -96,29 +94,27 @@
 /* タブのバッジ */
 .tab-menu .badge {
     position: absolute;
-    top: -10px;
-    right: -15px;
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    top: -8px;
+    right: -20px;
+    width: 18px;
+    height: 18px;
 }
 
-.badge img {
+.tab-menu .badge img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
 }
 
-.badge-count {
+.tab-menu .badge .badge-count {
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
     color: white;
-    font-size: 12px;
-    font-weight: bold;
-    left: 6px;
-    top: 2px;
-    z-index: 10;
+    font-size: 10px;
+    text-align: center;
+    line-height: 18px;
 }
 
 /* ========================= */
@@ -155,4 +151,30 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+/* バッジ表示（メッセージ件数） */
+.product-image-wrapper .badge {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 15px;
+    height: 15px;
+}
+
+.product-image-wrapper .badge img {
+    width: 100%;
+    height: 100%;
+}
+
+.product-image-wrapper .badge .badge-count {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    line-height: 15px;
 }
