@@ -23,6 +23,12 @@ class TransactionController extends Controller
         })
         ->where('status', 'negotiating')
         ->with(['item', 'item.user', 'chatMessages'])
+        ->orderByDesc(
+            ChatMessage::select('created_at')
+                ->whereColumn('transaction_id', 'transactions.id')
+                ->latest()
+                ->take(1)
+        )
         ->get();
 
         return view('transactions.index', compact('transactions'));
