@@ -24,6 +24,9 @@
             </div>
         </div>
 
+        {{-- 取引完了ボタン --}}
+        <button id="completeTransactionButton" class="complete-button">取引を完了する</button>
+
         {{-- チャット履歴 --}}
         <div class="chat-container">
             @foreach ($messages as $message)
@@ -39,7 +42,7 @@
             @endforeach
         </div>
 
-
+        {{-- メッセージ送信フォーム --}}
         <form action="{{ route('chat_messages.store', $transaction->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="message-input">
@@ -55,4 +58,11 @@
         </form>
     </div>
 </div>
+
+{{-- モーダルの読み込み --}}
+@include('transactions.modal')
+@endsection
+
+@section('js')
+    <script src="{{ asset('js/transaction.js') }}" defer></script>
 @endsection
