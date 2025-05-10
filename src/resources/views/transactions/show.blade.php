@@ -1,4 +1,4 @@
-{{-- 取引チャット画面 --}}
+""{{-- 取引チャット画面 --}}
 @extends('layouts.app')
 
 @section('css')
@@ -23,9 +23,38 @@
             </div>
         </div>
 
-        <button id="completeTransactionButton">取引を完了する</button>
+        {{-- メッセージ一覧 --}}
+        <div class="chat-container">
+            @foreach ($messages as $message)
+                <div class="chat-message {{ $message->user_id == Auth::id() ? 'my-message' : 'their-message' }}">
+                    <p>{{ $message->message }}</p>
+                    @if ($message->image_path)
+                        <img src="{{ asset('storage/' . $message->image_path) }}" alt="画像" class="chat-image">
+                    @endif
+                    <span class="timestamp">{{ $message->created_at->format('Y/m/d H:i') }}</span>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- メッセージ送信フォーム --}}
+        <form action="{{ route('chat_messages.store', $transaction->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="message-input">
+                <textarea name="message" placeholder="取引メッセージを記入してください" required></textarea>
+            </div>
+            <div class="file-input">
+                <label for="image">画像を追加</label>
+                <input type="file" name="image">
+            </div>
+            <button type="submit" class="send-button">
+                <img src="{{ asset('images/send_icon.png') }}" alt="送信">
+                送信
+            </button>
+        </form>
 
         {{-- 評価モーダル --}}
+        <button id="completeTransactionButton">取引を完了する</button>
+
         <div id="evaluationModal" class="modal">
             <div class="modal-content">
                 <span id="closeModal" class="close">&times;</span>
@@ -48,6 +77,7 @@
                 </form>
             </div>
         </div>
+
     </div>
 </div>
 @endsection
