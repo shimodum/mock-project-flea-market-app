@@ -42,10 +42,7 @@
         <a href="{{ route('profile.index', ['tab' => 'transaction']) }}" class="{{ $tab === 'transaction' ? 'active' : '' }}">
             取引中の商品
             @if ($totalUnreadCount > 0)
-                <div class="badge">
-                    <img src="{{ asset('storage/Ellipse 6@2x.png') }}" alt="バッジ">
-                    <span class="badge-count">{{ $totalUnreadCount }}</span>
-                </div>
+                <span class="badge">{{ $totalUnreadCount }}</span>
             @endif
         </a>
     </div>
@@ -58,10 +55,7 @@
                     <div class="product-image-wrapper">
                         <img src="{{ asset('storage/' . $transaction->item->image_path) }}" alt="商品画像">
                         @if ($transaction->unreadMessagesCount() > 0)
-                            <div class="badge">
-                                <img src="{{ asset('storage/Ellipse 6.png') }}" alt="未読バッジ">
-                                <span class="badge-count">{{ $transaction->unreadMessagesCount() }}</span>
-                            </div>
+                            <div class="badge">{{ $transaction->unreadMessagesCount() }}</div>
                         @endif
                     </div>
                     <p>{{ $transaction->item->name }}</p>
