@@ -9,6 +9,7 @@
     margin-bottom: 20px;
     position: relative;
     padding-left: 30px;
+    flex-wrap: wrap;
 }
 
 /* プロフィール画像 */
@@ -71,6 +72,8 @@
     margin-bottom: 20px;
     border-bottom: 1px solid #ccc;
     position: relative;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .tab-menu a {
@@ -95,7 +98,7 @@
 .tab-menu .badge {
     position: absolute;
     top: 12px;
-    right: 2px;
+    right: -15px;
     background-color: red;
     color: white;
     border-radius: 50%;
@@ -122,7 +125,8 @@
 
 /* 商品の表示アイテム */
 .product-item {
-    width: 180px;
+    width: calc(20% - 15px);
+    /* 5つ並ぶ計算 */
     text-align: center;
     position: relative;
 }
@@ -160,4 +164,64 @@
     border-radius: 50%;
     font-size: 10px;
     z-index: 10;
+}
+
+/* ========================= */
+/* レスポンシブ対応 */
+/* ========================= */
+
+/* タブレットサイズ対応 (768px ~ 850px) */
+@media (max-width: 850px) {
+    .tab-menu {
+        justify-content: space-between;
+        margin-left: 15px;
+    }
+
+    .product-item {
+        width: calc(33.33% - 10px);
+        /* 3列表示 */
+    }
+
+    .profile-edit-btn {
+        margin-right: 20px;
+    }
+}
+
+/* PCサイズ対応 (1400px ~ 1540px) */
+@media (max-width: 1540px) {
+    .product-item {
+        width: calc(25% - 15px);
+        /* 4列表示 */
+    }
+}
+
+@media (max-width: 1400px) {
+    .product-item {
+        width: calc(33.33% - 10px);
+        /* 3列表示 */
+    }
+}
+
+/* スマホ対応 (768px以下) */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab-menu {
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .product-item {
+        width: calc(50% - 10px);
+        /* 2列表示 */
+        margin-bottom: 15px;
+    }
+
+    .profile-edit-btn {
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
