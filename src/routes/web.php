@@ -86,4 +86,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // チャットメッセージ関連
     Route::post('/transactions/{id}/messages', [ChatMessageController::class, 'store'])->name('chat_messages.store');
     Route::get('/messages/{id}/download', [ChatMessageController::class, 'downloadImage'])->name('messages.download');
+
+    // 評価の送信処理
+    Route::post('/transactions/{id}/rate', [TransactionController::class, 'rate'])->name('transactions.rate');
+
 });

@@ -1,15 +1,23 @@
-{{-- モーダルのレイアウト --}}
-<div id="evaluationModal" class="modal-overlay" style="display: none;">
+{{-- 評価モーダル --}}
+<div id="evaluationModal" class="modal">
     <div class="modal-content">
-        <h3>取引が完了しました。</h3>
+        <span id="closeModal" class="close">&times;</span>
+        <h2>取引が完了しました。</h2>
         <p>今回の取引相手はどうでしたか？</p>
-        <div class="star-rating">
-            <img src="{{ asset('images/star_empty.png') }}" class="star" data-value="1">
-            <img src="{{ asset('images/star_empty.png') }}" class="star" data-value="2">
-            <img src="{{ asset('images/star_empty.png') }}" class="star" data-value="3">
-            <img src="{{ asset('images/star_empty.png') }}" class="star" data-value="4">
-            <img src="{{ asset('images/star_empty.png') }}" class="star" data-value="5">
+
+        {{-- 星評価 --}}
+        <div class="stars">
+            <img class="star" data-value="1" src="{{ asset('images/star_empty.png') }}">
+            <img class="star" data-value="2" src="{{ asset('images/star_empty.png') }}">
+            <img class="star" data-value="3" src="{{ asset('images/star_empty.png') }}">
+            <img class="star" data-value="4" src="{{ asset('images/star_empty.png') }}">
+            <img class="star" data-value="5" src="{{ asset('images/star_empty.png') }}">
         </div>
-        <button id="submitRating" class="submit-button">送信する</button>
+
+        <form id="ratingForm" method="POST" action="{{ route('transactions.rate', $transaction->id) }}">
+            @csrf
+            <input type="hidden" id="ratingValue" name="rating" value="0">
+            <button type="submit" class="submit-button">送信する</button>
+        </form>
     </div>
 </div>
