@@ -51,7 +51,8 @@
                     <p>{{ $message->message }}</p>
                     <div class="message-options">
                         <span>{{ $message->created_at->format('Y/m/d H:i') }}</span>
-                        <span>編集</span> <span>削除</span>
+                        <span class="message-action">編集</span>
+                        <span class="message-action">削除</span>
                     </div>
                 </div>
             @endforeach
