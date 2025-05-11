@@ -228,4 +228,31 @@
         margin-right: 0;
         margin-left: 0;
     }
+
+    .rating-stars {
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+        /* 修正部分：フル幅対応 */
+    .product-list {
+        justify-content: center;
+        gap: 5px;
+        margin-left: 0;
+    }
+
+    .product-image-wrapper {
+        width: 100%;
+    }
+
+    /* フル幅対応 */
+    .product-list {
+        justify-content: center;
+        gap: 5px;
+        margin-left: 0;
+    }
+
+    .product-image-wrapper {
+        width: 100%;
+    }
 }
