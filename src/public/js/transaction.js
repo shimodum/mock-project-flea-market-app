@@ -41,4 +41,10 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
     }
+
+    // ハンバーガーメニューの開閉
+    window.toggleSidebar = function () {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('open');
+    };
 });

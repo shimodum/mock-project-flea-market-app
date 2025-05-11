@@ -21,6 +21,7 @@
     z-index: 1;
     color: white;
     text-align: center;
+    transition: 0.3s;
 }
 
 .sidebar h3 {
@@ -52,6 +53,26 @@
     text-decoration: underline;
 }
 
+/* ハンバーガーメニュー */
+.hamburger-menu {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 2;
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* ハンバーガー開閉時の処理 */
+.sidebar.open {
+    left: 0;
+}
+
 /* ========================= */
 /* メインの取引チャット画面 */
 /* ========================= */
@@ -59,6 +80,7 @@
     flex: 1;
     margin-left: 270px;
     padding: 20px;
+    transition: 0.3s;
 }
 
 /* 商品情報ヘッダー */
@@ -119,7 +141,6 @@
     background-color: #333;
     margin-bottom: 20px;
     margin-top: 10px;
-    margin-left: -20px;
 }
 
 /* ========================= */
@@ -319,12 +340,12 @@
 }
 
 @media (max-width: 850px) {
-    .transaction-header {
-        flex-direction: column;
+    .hamburger-menu {
+        display: block;
     }
 
-    .divider-line {
-        width: 100%;
+    .sidebar {
+        left: -270px;
     }
 
     .transaction-main {

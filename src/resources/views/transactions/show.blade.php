@@ -6,6 +6,9 @@
 @endsection
 
 @section('content')
+{{-- ハンバーガーメニュー --}}
+<button class="hamburger-menu" onclick="toggleSidebar()">☰</button>
+
 <div class="transaction-wrapper">
     {{-- サイドバーの読み込み --}}
     @include('transactions.sidebar', ['sidebarTransactions' => $sidebarTransactions, 'transaction' => $transaction])
