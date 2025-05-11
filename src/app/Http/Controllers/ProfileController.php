@@ -14,7 +14,7 @@ class ProfileController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-        $tab = $request->query('tab', 'sell');
+        $tab = $request->query('tab', 'sell'); // デフォルトは 'sell'
 
         // 出品した商品を取得（itemsテーブルと関連付け）
         $sellItems = Item::where('user_id', $user->id)->get();
@@ -41,7 +41,17 @@ class ProfileController extends Controller
         // ここで合計未読件数を計算
         $totalUnreadCount = $transactions->sum('unread_messages_count');
 
-        return view('profile.index', compact('user', 'tab', 'sellItems', 'buyItems', 'transactions', 'totalUnreadCount'));
+        // タブに応じたリストの選択
+        $items = [];
+        if ($tab === 'sell') {
+            $items = $sellItems;
+        } elseif ($tab === 'buy') {
+            $items = $buyItems;
+        } elseif ($tab === 'transaction') {
+            $items = $transactions;
+        }
+
+        return view('profile.index', compact('user', 'tab', 'items', 'totalUnreadCount'));
     }
 
     // プロフィール設定画面の表示

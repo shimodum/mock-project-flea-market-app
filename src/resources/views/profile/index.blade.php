@@ -49,16 +49,28 @@
 
     {{-- 商品リスト --}}
     <div class="product-list">
-        @foreach ($transactions as $transaction)
+        @foreach ($items as $item)
             <div class="product-item">
-                <a href="{{ route('transactions.show', $transaction->id) }}">
+                <a href="{{ route('transactions.show', $item->id) }}">
                     <div class="product-image-wrapper">
-                        <img src="{{ asset('storage/' . $transaction->item->image_path) }}" alt="商品画像">
-                        @if ($transaction->unreadMessagesCount() > 0)
-                            <div class="badge">{{ $transaction->unreadMessagesCount() }}</div>
+                        @if ($tab === 'transaction')
+                            <img src="{{ asset('storage/' . $item->item->image_path) }}" alt="商品画像">
+                        @else
+                            <img src="{{ asset('storage/' . $item->image_path) }}" alt="商品画像">
+                        @endif
+
+                        {{-- 取引中商品のみバッジを表示 --}}
+                        @if ($tab === 'transaction' && $item->unread_messages_count > 0)
+                            <div class="badge">{{ $item->unread_messages_count }}</div>
                         @endif
                     </div>
-                    <p>{{ $transaction->item->name }}</p>
+                    <p>
+                        @if ($tab === 'transaction')
+                            {{ $item->item->name }}
+                        @else
+                            {{ $item->name }}
+                        @endif
+                    </p>
                 </a>
             </div>
         @endforeach
