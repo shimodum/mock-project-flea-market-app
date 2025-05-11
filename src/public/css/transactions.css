@@ -72,42 +72,55 @@
     position: relative;
 }
 
+/* 区切り線 */
+.divider-line {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+}
+
 /* 商品画像の表示 */
 .transaction-item-image {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     border-radius: 5px;
     object-fit: cover;
     margin-bottom: 10px;
 }
 
-.product-display {
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #000;
-    margin-bottom: 10px;
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
+.product-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-info h3 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.product-info p {
+    font-size: 18px;
+    color: #333;
+}
+
+/* プロフィール画像 */
 .profile-image {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
-}
-
-/* 商品の情報 */
-.transaction-info {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.transaction-info h3 {
-    background-color: #f8f8f8;
-    text-align: center;
-    padding: 5px;
-    font-size: 24px;
-    margin-bottom: 10px;
 }
 
 /* 完了ボタン */
@@ -152,8 +165,8 @@
 }
 
 .profile-image-small {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
@@ -178,7 +191,53 @@
     font-size: 12px;
 }
 
+/* ========================= */
+/* メッセージ送信フォーム */
+/* ========================= */
+.message-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.message-input textarea {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+    /* リサイズを無効にする */
+    font-size: 14px;
+}
+
+.send-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.send-icon {
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+}
+
+.send-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.send-button img {
+    width: 35px;
+    height: 35px;
+}
+
+/* ========================= */
 /* モーダル */
+/* ========================= */
 .modal {
     display: none;
     position: absolute;
