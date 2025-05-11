@@ -11,7 +11,7 @@
 /* ================== */
 .sidebar {
     width: 250px;
-    background-color: #f7f7f7;
+    background-color: #868686;
     border-right: 1px solid #ccc;
     height: calc(100vh - 70px);
     overflow-y: auto;
@@ -19,11 +19,14 @@
     top: 70px;
     left: 0;
     z-index: 1;
+    color: white;
+    text-align: center;
 }
 
 .sidebar h3 {
     font-size: 18px;
     margin-bottom: 10px;
+    color: white;
 }
 
 .sidebar ul {
@@ -41,7 +44,7 @@
 }
 
 .sidebar a {
-    color: #007bff;
+    color: white;
     text-decoration: none;
 }
 
@@ -64,16 +67,32 @@
     align-items: flex-start;
     gap: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #000;
     padding-bottom: 10px;
+    position: relative;
 }
 
 /* 商品画像の表示 */
 .transaction-item-image {
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     border-radius: 5px;
     object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.product-display {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+    margin-bottom: 10px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
 }
 
 /* 商品の情報 */
@@ -84,19 +103,24 @@
 }
 
 .transaction-info h3 {
-    margin-bottom: 10px;
+    background-color: #f8f8f8;
+    text-align: center;
+    padding: 5px;
     font-size: 24px;
+    margin-bottom: 10px;
 }
 
+/* 完了ボタン */
 .complete-transaction-btn {
-    background-color: #f56363;
+    background-color: #FF8282;
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
-    margin-top: auto;
-    align-self: flex-end;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 .complete-transaction-btn:hover {
@@ -117,12 +141,22 @@
 }
 
 .chat-message {
+    display: flex;
+    align-items: center;
     margin-bottom: 15px;
     max-width: 80%;
     padding: 10px;
     border-radius: 8px;
     position: relative;
     word-wrap: break-word;
+}
+
+.profile-image-small {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
 }
 
 .my-message {
@@ -137,63 +171,11 @@
     text-align: left;
 }
 
-.chat-image {
-    max-width: 100%;
+.message-options {
     margin-top: 5px;
-    border-radius: 5px;
-}
-
-.timestamp {
-    display: block;
-    font-size: 12px;
-    color: #888;
-    margin-top: 5px;
-}
-
-/* ========================= */
-/* メッセージ送信フォーム */
-/* ========================= */
-.message-input {
-    margin-bottom: 10px;
-}
-
-.message-input textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    resize: vertical;
-    font-size: 14px;
-}
-
-.file-input {
-    margin-bottom: 10px;
-}
-
-.file-input input {
-    margin-left: 5px;
-}
-
-.send-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
     display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.send-button img {
-    width: 20px;
-    height: 20px;
-}
-
-.send-button:hover {
-    background-color: #45a049;
+    gap: 10px;
+    font-size: 12px;
 }
 
 /* モーダル */

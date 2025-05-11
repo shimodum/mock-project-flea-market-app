@@ -1,35 +1,44 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const stars = document.querySelectorAll('.star');
-    const ratingValue = document.getElementById('ratingValue');
+    // モーダル関連の要素を取得
+    const completeTransactionButton = document.getElementById('completeTransactionButton');
     const modal = document.getElementById('evaluationModal');
     const closeModal = document.getElementById('closeModal');
-    const completeTransactionButton = document.getElementById('completeTransactionButton');
+    const stars = document.querySelectorAll('.star');
+    const ratingValue = document.getElementById('ratingValue');
 
-    // モーダル表示
-    completeTransactionButton.addEventListener('click', function () {
-        modal.style.display = 'block';
-    });
+    // 要素が存在するか確認
+    if (completeTransactionButton && modal && closeModal) {
+        console.log("モーダル要素が見つかりました。イベントをバインドします。");
 
-    // モーダル閉じる処理
-    closeModal.addEventListener('click', function () {
-        modal.style.display = 'none';
-    });
+        // モーダル表示処理
+        completeTransactionButton.addEventListener('click', function () {
+            console.log("モーダル表示処理が発火しました。");
+            modal.style.display = 'block';
+        });
 
-    // 星評価のクリック処理
-    stars.forEach((star, index) => {
-        star.addEventListener('click', () => {
-            ratingValue.value = index + 1;
+        // モーダル閉じる処理
+        closeModal.addEventListener('click', function () {
+            modal.style.display = 'none';
+        });
 
-            stars.forEach((s, i) => {
-                s.src = i < index + 1 ? "/images/star_filled.png" : "/images/star_empty.png";
+        // モーダル外クリックで閉じる
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // 星評価のクリック処理
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                ratingValue.value = index + 1;
+
+                stars.forEach((s, i) => {
+                    s.src = i < index + 1 ? "/images/star_filled.png" : "/images/star_empty.png";
+                });
             });
         });
-    });
-
-    // モーダル外クリックで閉じる
-    window.addEventListener('click', function (event) {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
+    } else {
+        console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
+    }
 });
