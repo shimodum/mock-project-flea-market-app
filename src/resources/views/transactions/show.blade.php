@@ -13,8 +13,16 @@
     <div class="transaction-main">
         <div class="transaction-header">
             <div class="profile-header">
-                <img src="{{ asset('storage/' . $transaction->buyer->profile_image) }}" alt="User Image" class="profile-image">
-                <h2>{{ $transaction->item->user->name }}さんとの取引画面</h2>
+                {{-- ログイン中のユーザーが購入者の場合 --}}
+                @if (Auth::id() === $transaction->buyer_id)
+                    {{-- 出品者のプロフィール画像を表示 --}}
+                    <img src="{{ asset('storage/' . $transaction->item->user->profile_image) }}" alt="User Image" class="profile-image">
+                    <h2>{{ $transaction->item->user->name }}さんとの取引画面</h2>
+                @else
+                    {{-- 購入者のプロフィール画像を表示 --}}
+                    <img src="{{ asset('storage/' . $transaction->buyer->profile_image) }}" alt="User Image" class="profile-image">
+                    <h2>{{ $transaction->buyer->name }}さんとの取引画面</h2>
+                @endif
             </div>
 
             {{-- 商品画像 --}}
