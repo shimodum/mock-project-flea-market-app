@@ -64,12 +64,51 @@
 /* 商品情報ヘッダー */
 .transaction-header {
     display: flex;
+    justify-content: space-between;
     align-items: flex-start;
-    gap: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #000;
     padding-bottom: 10px;
     position: relative;
+}
+
+/* ヘッダー左側のスタイル */
+.header-left {
+    width: 60%;
+}
+
+.product-display {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.product-image-container {
+    flex-shrink: 0;
+}
+
+.transaction-item-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+}
+
+.product-info h3 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.product-info p {
+    font-size: 18px;
+    color: #333;
+    margin: 0;
 }
 
 /* 区切り線 */
@@ -78,50 +117,13 @@
     margin-bottom: 20px;
     border: 0;
     height: 1px;
-    background-color: #ccc;
+    background-color: #333;
+    /* <-- 黒の区切り線 */
 }
 
-/* 商品画像の表示 */
-.transaction-item-image {
-    width: 250px;
-    height: 250px;
-    border-radius: 5px;
-    object-fit: cover;
-    margin-bottom: 10px;
-}
-
-.profile-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-
-.product-display {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.product-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.product-info h3 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.product-info p {
-    font-size: 18px;
-    color: #333;
-}
-
+/* ========================= */
 /* プロフィール画像 */
+/* ========================= */
 .profile-image {
     width: 50px;
     height: 50px;

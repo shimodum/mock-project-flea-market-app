@@ -12,28 +12,32 @@
 
     <div class="transaction-main">
         <div class="transaction-header">
-            <div class="profile-header">
-                {{-- ログイン中のユーザーが購入者の場合 --}}
-                @if (Auth::id() === $transaction->buyer_id)
-                    {{-- 出品者のプロフィール画像を表示 --}}
-                    <img src="{{ asset('storage/' . $transaction->item->user->profile_image) }}" alt="User Image" class="profile-image">
-                    <h2>{{ $transaction->item->user->name }}さんとの取引画面</h2>
-                @else
-                    {{-- 購入者のプロフィール画像を表示 --}}
-                    <img src="{{ asset('storage/' . $transaction->buyer->profile_image) }}" alt="User Image" class="profile-image">
-                    <h2>{{ $transaction->buyer->name }}さんとの取引画面</h2>
-                @endif
-            </div>
+            <div class="header-left">
+                <div class="profile-header">
+                    {{-- ログイン中のユーザーが購入者の場合 --}}
+                    @if (Auth::id() === $transaction->buyer_id)
+                        {{-- 出品者のプロフィール画像を表示 --}}
+                        <img src="{{ asset('storage/' . $transaction->item->user->profile_image) }}" alt="User Image" class="profile-image">
+                        <h2>{{ $transaction->item->user->name }}さんとの取引画面</h2>
+                    @else
+                        {{-- 購入者のプロフィール画像を表示 --}}
+                        <img src="{{ asset('storage/' . $transaction->buyer->profile_image) }}" alt="User Image" class="profile-image">
+                        <h2>{{ $transaction->buyer->name }}さんとの取引画面</h2>
+                    @endif
+                </div>
 
-            {{-- 区切り線 --}}
-            <hr class="divider-line">
-
-            {{-- 商品画像と情報 --}}
-            <div class="product-display">
-                <img src="{{ $transaction->item->image_url }}" alt="{{ $transaction->item->name }}" class="transaction-item-image">
-                <div class="product-info">
-                    <h3>{{ $transaction->item->name }}</h3>
-                    <p>¥{{ number_format($transaction->item->price) }}</p>
+                {{-- 黒い区切り線 --}}
+                <hr class="divider-line">
+                
+                {{-- 商品情報 --}}
+                <div class="product-display">
+                    <div class="product-image-container">
+                        <img src="{{ $transaction->item->image_url }}" alt="{{ $transaction->item->name }}" class="transaction-item-image">
+                    </div>
+                    <div class="product-info">
+                        <h3>{{ $transaction->item->name }}</h3>
+                        <p>¥{{ number_format($transaction->item->price) }}</p>
+                    </div>
                 </div>
             </div>
 
@@ -42,6 +46,9 @@
                 <button id="completeTransactionButton" class="complete-transaction-btn">取引を完了する</button>
             @endif
         </div>
+
+        {{-- 区切り線 --}}
+        <hr class="divider-line">
 
         {{-- メッセージ一覧 --}}
         <div class="chat-container">
