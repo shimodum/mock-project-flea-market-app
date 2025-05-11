@@ -139,13 +139,8 @@ phpMyAdmin: http://localhost:8080
 
      cp .env.example .env  
      php artisan key:generate
-
-5.ストレージへのシンボリックリンクを作成する  
- 　 アップロード画像が適切に表示されるよう、ストレージと公開フォルダをリンクします。
    
-    php artisan storage:link
-   
-6.データベースをマイグレートする  
+5.データベースをマイグレートする  
  　 アプリケーションで使用するデータベースのテーブルを作成します。
    
     php artisan migrate
@@ -153,6 +148,11 @@ phpMyAdmin: http://localhost:8080
   **開発者向け情報**  
    phpMyAdmin を使用してデータベースを管理する場合は、以下の URL にアクセスしてください。  
    - **phpMyAdmin**: [http://localhost:8080](http://localhost:8080)  
+
+6.ストレージへのシンボリックリンクを作成する  
+ 　 アップロード画像が適切に表示されるよう、ストレージと公開フォルダをリンクします。
+   
+    php artisan storage:link
 
 7.データをシーディングする  
 　必要な初期データをデータベースに投入します。
