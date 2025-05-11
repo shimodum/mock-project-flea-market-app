@@ -14,7 +14,7 @@
         <div class="transaction-header">
             <div class="profile-header">
                 <img src="{{ asset('storage/' . $transaction->buyer->profile_image) }}" alt="User Image" class="profile-image">
-                <h2>{{ $transaction->buyer->name }}さんとの取引画面</h2>
+                <h2>{{ $transaction->item->user->name }}さんとの取引画面</h2>
             </div>
 
             {{-- 商品画像 --}}
