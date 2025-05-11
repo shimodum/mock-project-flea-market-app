@@ -307,3 +307,45 @@
 .submit-button:hover {
     background-color: #c0392b;
 }
+
+
+/* ========================= */
+/* レスポンシブ対応 */
+/* ========================= */
+@media (max-width: 1400px) {
+    .transaction-main {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 850px) {
+    .transaction-header {
+        flex-direction: column;
+    }
+
+    .divider-line {
+        width: 100%;
+    }
+
+    .transaction-main {
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .transaction-header {
+        flex-direction: column;
+    }
+
+    .divider-line {
+        width: 100%;
+    }
+
+    .transaction-main {
+        margin-left: 0;
+    }
+
+    .sidebar {
+        display: none;
+    }
+}
