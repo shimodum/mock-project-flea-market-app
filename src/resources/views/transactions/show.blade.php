@@ -25,16 +25,16 @@
                 @endif
             </div>
 
-            {{-- 商品画像 --}}
-            <div class="product-display">
-                <div class="black-border"></div>
-                <img src="{{ $transaction->item->image_url }}" alt="{{ $transaction->item->name }}" class="transaction-item-image">
-                <div class="black-border"></div>
-            </div>
+            {{-- 区切り線 --}}
+            <hr class="divider-line">
 
-            <div class="product-info">
-                <h3>{{ $transaction->item->name }}</h3>
-                <p>¥{{ number_format($transaction->item->price) }}</p>
+            {{-- 商品画像と情報 --}}
+            <div class="product-display">
+                <img src="{{ $transaction->item->image_url }}" alt="{{ $transaction->item->name }}" class="transaction-item-image">
+                <div class="product-info">
+                    <h3>{{ $transaction->item->name }}</h3>
+                    <p>¥{{ number_format($transaction->item->price) }}</p>
+                </div>
             </div>
 
             {{-- 購入者のみ表示 --}}
@@ -62,23 +62,23 @@
             @csrf
             <div class="message-input">
                 <textarea name="message" placeholder="取引メッセージを記入してください" required></textarea>
-            </div>
-            <div class="send-controls">
-                <label for="image">
-                    <img src="{{ asset('images/add_image.png') }}" alt="Add Image" class="send-icon">
-                </label>
-                <input type="file" id="image" name="image" style="display: none;">
-                <button type="submit" class="send-button">
-                    <img src="{{ asset('images/send_message.png') }}" alt="Send">
-                </button>
+                <div class="send-controls">
+                    <label for="image">
+                        <img src="{{ asset('images/add_image.png') }}" alt="Add Image" class="send-icon">
+                    </label>
+                    <input type="file" id="image" name="image" style="display: none;">
+                    <button type="submit" class="send-button">
+                        <img src="{{ asset('images/send_message.png') }}" alt="Send">
+                    </button>
+                </div>
             </div>
         </form>
+
         {{-- モーダルの読み込み --}}
         @include('transactions.modal', ['transaction' => $transaction])
     </div>
 </div>
 @endsection
-
 
 @section('js')
     <script src="{{ asset('js/transaction.js') }}"></script>
