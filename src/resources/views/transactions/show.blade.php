@@ -45,7 +45,7 @@
             </div>
 
             {{-- 購入者のみ表示 --}}
-            @if (Auth::id() === $transaction->buyer_id)
+            @if (Auth::id() === $transaction->buyer_id && $transaction->status === 'negotiating')
                 <button id="completeTransactionButton" class="complete-transaction-btn">取引を完了する</button>
             @endif
         </div>

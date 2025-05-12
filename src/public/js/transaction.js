@@ -48,8 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-
     // =====================
     // 保存ボタン処理
     // =====================
@@ -121,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.getElementById('closeModal');
     const stars = document.querySelectorAll('.star');
     const ratingValue = document.getElementById('ratingValue');
+    const ratingForm = document.getElementById('ratingForm');
 
     if (completeTransactionButton && modal && closeModal) {
         console.log("モーダル要素が見つかりました。イベントをバインドします。");
@@ -149,6 +148,42 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         });
+
+        // =====================
+        // 修正箇所: フォームの送信処理
+        // =====================
+        ratingForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // デフォルトのフォーム送信を防止
+
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ rating: ratingValue.value })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('サーバーエラーが発生しました');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // ✅ 修正：replace を使うことでリダイレクト
+                    window.location.replace(data.redirect);
+                } else {
+                    alert('評価の送信に失敗しました');
+                }
+            })
+            .catch(error => {
+                console.error('Fetchエラー:', error);
+                alert('評価の送信に失敗しました。ネットワークエラーかもしれません。');
+            });
+        });
+
     } else {
         console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
     }

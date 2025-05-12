@@ -12,7 +12,7 @@ class TransactionController extends Controller
 {
     /**
      * 取引中商品の一覧表示
-     * 
+     *
      * ユーザーが取引中の商品の一覧を取得し、最新メッセージの時間でソート
      */
     public function index()
@@ -41,7 +41,7 @@ class TransactionController extends Controller
 
     /**
      * 取引中商品の詳細表示
-     * 
+     *
      * 選択した取引の詳細を表示し、未読メッセージの更新も行う
      */
     public function show($id)
@@ -64,9 +64,8 @@ class TransactionController extends Controller
             ->where('is_read', false)
             ->update(['is_read' => true]);
 
-        // ログで確認
-        \Log::info('After Update - Unread Messages:', $transaction->chatMessages()->where('is_read', false)->pluck('id')->toArray());
-        \Log::info("Updated unread messages: {$updated}");
+        // データベースの最新状態を取得する
+        $transaction->refresh();
 
         // 再度データを取得して反映
         $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
@@ -78,17 +77,14 @@ class TransactionController extends Controller
                         $query->where('user_id', $user->id);
                     });
             })
-            ->where('status', 'negotiating')
             ->with('item')
             ->get();
 
         return view('transactions.show', compact('transaction', 'messages', 'sidebarTransactions'));
     }
 
-    /**
+    /*
      * 取引評価の保存処理
-     * 
-     * モーダルで評価された星の数を保存し、取引ステータスを「completed」に変更
      */
     public function rate(Request $request, $id)
     {
@@ -99,19 +95,46 @@ class TransactionController extends Controller
         if ($transaction->buyer_id === $user->id) {
             $evaluatorId = $transaction->buyer_id;
             $evaluateeId = $transaction->item->user_id;
-            $transaction->buyer_rated = true; // 購入者の評価を記録
-        } 
-        // 出品者が評価した場合
-        else if ($transaction->item->user_id === $user->id) {
+
+            if ($transaction->buyer_rated) {
+                return response()->json([
+                    'success' => false,
+                    'message' => '購入者の評価は既に完了しています。'
+                ]);
+            }
+
+            $transaction->buyer_rated = true;
+
+            // 購入者が評価した後、出品者の評価が完了している場合にステータスを更新
+            if ($transaction->seller_rated) {
+                $transaction->status = 'completed';
+            }
+
+        } else if ($transaction->item->user_id === $user->id) {
             $evaluatorId = $transaction->item->user_id;
             $evaluateeId = $transaction->buyer_id;
-            $transaction->seller_rated = true; // 出品者の評価を記録
-        } 
-        else {
-            abort(403, '権限がありません');
+
+            if ($transaction->seller_rated) {
+                return response()->json([
+                    'success' => false,
+                    'message' => '出品者の評価は既に完了しています。'
+                ]);
+            }
+
+            $transaction->seller_rated = true;
+
+            // 出品者が評価した後、購入者の評価が完了している場合にステータスを更新
+            if ($transaction->buyer_rated) {
+                $transaction->status = 'completed';
+            }
+
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => '権限がありません。'
+            ], 403);
         }
 
-        // 評価を保存
         Evaluation::create([
             'transaction_id' => $transaction->id,
             'evaluator_id' => $evaluatorId,
@@ -120,11 +143,14 @@ class TransactionController extends Controller
             'comment' => $request->input('comment')
         ]);
 
-        // フラグを更新
         $transaction->save();
 
-        // 商品一覧へリダイレクト
-        return redirect()->route('items.index')->with('message', '評価が完了しました。');
+        return response()->json([
+            'success' => true,
+            'message' => '評価が完了しました。',
+            'redirect' => route('items.index')
+        ]);
     }
+
 
 }
