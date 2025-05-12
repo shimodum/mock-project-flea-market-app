@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const chatContainer = document.querySelector('.chat-container');
 
     // =====================
-    // 編集処理
+    // 編集ボタン処理
     // =====================
     chatContainer.addEventListener('click', function (event) {
         if (event.target.classList.contains('edit-message')) {
@@ -13,13 +13,45 @@ document.addEventListener('DOMContentLoaded', function () {
             const editForm = document.querySelector(`#message-${messageId} .message-edit-form`);
             const messageContent = document.querySelector(`#message-${messageId} .message-content`);
 
+            // フォームを表示し、元のメッセージを非表示にする
             editForm.style.display = 'block';
             messageContent.style.display = 'none';
         }
     });
 
     // =====================
-    // 保存処理（フォームの中の保存ボタン）
+    // キャンセルボタン処理
+    // =====================
+    chatContainer.addEventListener('click', function (event) {
+        if (event.target.classList.contains('cancel-edit')) {
+            console.log("キャンセルボタンがクリックされました");
+
+            // 親要素から data-id を探す
+            const messageId = event.target.dataset.id || event.target.closest('.message-edit-form').querySelector('.save-edit').dataset.id;
+
+            console.log(`messageId = ${messageId}`);
+
+            const editForm = document.querySelector(`#message-${messageId} .message-edit-form`);
+            const messageContent = document.querySelector(`#message-${messageId} .message-content`);
+
+            console.log("editForm:", editForm);
+            console.log("messageContent:", messageContent);
+
+            if (editForm && messageContent) {
+                // フォームを非表示にし、元のメッセージを再表示
+                editForm.style.display = 'none';
+                messageContent.style.display = 'block';
+                console.log("キャンセル処理が正常に実行されました");
+            } else {
+                console.error(`キャンセル処理でフォームが見つかりませんでした: messageId = ${messageId}`);
+            }
+        }
+    });
+
+
+
+    // =====================
+    // 保存ボタン処理
     // =====================
     chatContainer.addEventListener('click', function (event) {
         if (event.target.classList.contains('save-edit')) {
@@ -39,13 +71,11 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    console.log("編集成功しました");
                     const messageContent = document.querySelector(`#message-${messageId} .message-content p`);
                     messageContent.textContent = newMessage;
-
-                    // 表示切り替え
                     editForm.style.display = 'none';
                     messageContent.parentNode.style.display = 'block';
+                    console.log("編集成功しました");
                 } else {
                     alert('メッセージの更新に失敗しました');
                 }
@@ -55,25 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // =====================
-    // キャンセル処理
-    // =====================
-    chatContainer.addEventListener('click', function (event) {
-        if (event.target.classList.contains('cancel-edit')) {
-            console.log("キャンセルボタンがクリックされました");
-            const messageId = event.target.dataset.id;
-
-            // 正しいターゲットの取得
-            const editForm = document.querySelector(`#message-${messageId} .message-edit-form`);
-            const messageContent = document.querySelector(`#message-${messageId} .message-content`);
-
-            // 表示切り替え
-            editForm.style.display = 'none';
-            messageContent.style.display = 'block';
-        }
-    });
-
-    // =====================
-    // 削除処理
+    // 削除ボタン処理
     // =====================
     chatContainer.addEventListener('click', function (event) {
         if (event.target.classList.contains('delete-message')) {
@@ -128,10 +140,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        // ⭐️ 星評価のクリック処理修正
         stars.forEach((star, index) => {
             star.addEventListener('click', () => {
-                console.log(`星 ${index + 1} がクリックされました`);
                 ratingValue.value = index + 1;
 
                 stars.forEach((s, i) => {
