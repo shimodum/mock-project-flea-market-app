@@ -86,10 +86,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // チャットメッセージ関連
     Route::post('/transactions/{id}/messages', [ChatMessageController::class, 'store'])->name('chat_messages.store');
     Route::get('/messages/{id}/download', [ChatMessageController::class, 'downloadImage'])->name('messages.download');
-    Route::put('/transactions/{transaction_id}/messages/{message_id}', [ChatMessageController::class, 'update'])->name('chat_messages.update');
-    Route::delete('/transactions/messages/{id}', [ChatMessageController::class, 'destroy'])->name('chat_messages.destroy');
-    Route::post('/transactions/messages/{messageId}/edit', [ChatMessageController::class, 'edit'])->name('chat_messages.edit');
-    Route::post('/transactions/messages/{messageId}/delete', [ChatMessageController::class, 'destroy'])->name('chat_messages.delete');
+    
+    // ここにルートを整理
+    Route::put('/transactions/messages/{id}', [ChatMessageController::class, 'update'])->name('chat_messages.update');
+    Route::delete('/transactions/messages/{id}', [ChatMessageController::class, 'delete'])->name('chat_messages.delete');
 
 
     // 評価の送信処理

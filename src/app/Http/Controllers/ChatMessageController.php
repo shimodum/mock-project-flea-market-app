@@ -60,12 +60,10 @@ class ChatMessageController extends Controller
     {
         $message = ChatMessage::findOrFail($id);
 
-        // ログインユーザーがメッセージの投稿者であるか確認
         if ($message->user_id !== Auth::id()) {
             return response()->json(['success' => false, 'message' => '編集権限がありません。'], 403);
         }
 
-        // メッセージ内容を更新
         $message->message = $request->message;
         $message->save();
 
@@ -77,17 +75,14 @@ class ChatMessageController extends Controller
     {
         $message = ChatMessage::findOrFail($id);
 
-        // ログインユーザーがメッセージの投稿者であるか確認
         if ($message->user_id !== Auth::id()) {
             return response()->json(['success' => false, 'message' => '削除権限がありません。'], 403);
         }
 
-        // 画像ファイルがある場合、ストレージから削除
         if ($message->image_path && Storage::disk('public')->exists($message->image_path)) {
             Storage::disk('public')->delete($message->image_path);
         }
 
-        // メッセージを削除
         $message->delete();
 
         return response()->json(['success' => true, 'message' => 'メッセージを削除しました。']);
