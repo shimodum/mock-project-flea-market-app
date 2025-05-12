@@ -95,24 +95,17 @@ class TransactionController extends Controller
         $user = Auth::user();
         $transaction = Transaction::findOrFail($id);
 
-        // 既に評価済みの場合はリダイレクト
-        $existingEvaluation = Evaluation::where('transaction_id', $id)
-            ->where('evaluator_id', $user->id)
-            ->first();
-
-        if ($existingEvaluation) {
-            return redirect()->route('items.index')->with('message', '既に評価済みです。');
-        }
-
         // 購入者が評価した場合
         if ($transaction->buyer_id === $user->id) {
             $evaluatorId = $transaction->buyer_id;
             $evaluateeId = $transaction->item->user_id;
+            $transaction->buyer_rated = true; // 購入者の評価を記録
         } 
         // 出品者が評価した場合
         else if ($transaction->item->user_id === $user->id) {
             $evaluatorId = $transaction->item->user_id;
             $evaluateeId = $transaction->buyer_id;
+            $transaction->seller_rated = true; // 出品者の評価を記録
         } 
         else {
             abort(403, '権限がありません');
@@ -127,13 +120,11 @@ class TransactionController extends Controller
             'comment' => $request->input('comment')
         ]);
 
-        // 取引ステータスを完了に更新
-        $transaction->status = 'completed';
+        // フラグを更新
         $transaction->save();
 
         // 商品一覧へリダイレクト
         return redirect()->route('items.index')->with('message', '評価が完了しました。');
     }
-
 
 }

@@ -92,7 +92,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/transactions/messages/{id}', [ChatMessageController::class, 'delete'])->name('chat_messages.delete');
 
 
-    // 評価の送信処理
+    // 評価処理のAPIエンドポイント
     Route::post('/transactions/{id}/rate', [TransactionController::class, 'rate'])->name('transactions.rate');
 
 });

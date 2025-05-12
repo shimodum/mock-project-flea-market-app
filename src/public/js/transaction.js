@@ -48,8 +48,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-
-
     // =====================
     // 保存ボタン処理
     // =====================
@@ -121,25 +119,30 @@ document.addEventListener('DOMContentLoaded', function () {
     const closeModal = document.getElementById('closeModal');
     const stars = document.querySelectorAll('.star');
     const ratingValue = document.getElementById('ratingValue');
+    const ratingForm = document.getElementById('ratingForm');
 
     if (completeTransactionButton && modal && closeModal) {
         console.log("モーダル要素が見つかりました。イベントをバインドします。");
 
+        // モーダルの表示処理
         completeTransactionButton.addEventListener('click', function () {
             console.log("モーダル表示処理が発火しました。");
             modal.style.display = 'block';
         });
 
+        // モーダルの閉じる処理
         closeModal.addEventListener('click', function () {
             modal.style.display = 'none';
         });
 
+        // モーダル外クリックで閉じる
         window.addEventListener('click', function (event) {
             if (event.target === modal) {
                 modal.style.display = 'none';
             }
         });
 
+        // 星のクリック処理
         stars.forEach((star, index) => {
             star.addEventListener('click', () => {
                 ratingValue.value = index + 1;
@@ -148,6 +151,30 @@ document.addEventListener('DOMContentLoaded', function () {
                     s.src = i < index + 1 ? "/images/star_filled.png" : "/images/star_empty.png";
                 });
             });
+        });
+
+        // フォームの送信処理（Ajax）
+        ratingForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // デフォルトのフォーム送信を防止
+
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ rating: ratingValue.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    window.location.href = data.redirect;
+                } else {
+                    alert('評価の送信に失敗しました');
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
     } else {
         console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
