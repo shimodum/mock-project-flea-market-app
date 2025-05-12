@@ -14,7 +14,7 @@ class ChatMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message' => 'nullable|string|max:400',
+            'message' => 'required|string|max:400',
             'image' => 'nullable|image|mimes:jpeg,png', // 画像は任意でjpegかpng形式
         ];
     }
@@ -23,10 +23,10 @@ class ChatMessageRequest extends FormRequest
     public function messages()
     {
         return [
-            'message.required' => '本文を入力してください。',
-            'message.max' => '本文は400文字以内で入力してください。',
-            'image.image' => '「.png 」または 「.jpeg 」形式でアップロードしてください。',
-            'image.mimes' => '「.png」 または 「.jpeg 」形式でアップロードしてください。',
+            'message.required' => '本文を入力してください',
+            'message.max' => '本文は400文字以内で入力してください',
+            'image.image' => '「.png 」または 「.jpeg 」形式でアップロードしてください',
+            'image.mimes' => '「.png」 または 「.jpeg 」形式でアップロードしてください',
         ];
     }
 }

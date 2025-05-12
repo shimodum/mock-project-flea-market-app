@@ -53,12 +53,25 @@
         {{-- 区切り線 --}}
         <hr class="divider-line">
 
+        {{-- バリデーションエラーメッセージ --}}
+        @if ($errors->has('message'))
+            <div class="alert alert-danger">
+                <p style="display: none;">{{ $errors->first('message') }}</p>
+            </div>
+        @endif
+
         {{-- メッセージ一覧 --}}
         <div class="chat-container">
             @foreach ($messages as $message)
                 <div class="chat-message {{ $message->user_id == Auth::id() ? 'my-message' : 'their-message' }}">
                     <img src="{{ asset('storage/' . $message->user->profile_image) }}" alt="User Image" class="profile-image-small">
                     <p>{{ $message->message }}</p>
+
+                    {{-- 画像がある場合の表示 --}}
+                    @if ($message->image_path)
+                        <img src="{{ asset('storage/' . $message->image_path) }}" alt="Image Attachment" class="attached-image">
+                    @endif
+
                     <div class="message-options">
                         <span>{{ $message->created_at->format('Y/m/d H:i') }}</span>
                         <span class="message-action">編集</span>
@@ -71,8 +84,21 @@
         {{-- メッセージ送信フォーム --}}
         <form action="{{ route('chat_messages.store', $transaction->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
+
+            {{-- エラーメッセージの表示 --}}
+            @if ($errors->any())
+                <div class="alert alert-danger" style="color: red; margin-bottom: 10px;">
+                    @foreach ($errors->all() as $error)
+                        <p class="error-message">{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
+
             <div class="message-input">
-                <textarea name="message" placeholder="取引メッセージを記入してください" required></textarea>
+                <textarea 
+                    name="message" 
+                    placeholder="取引メッセージを記入してください">
+                </textarea>
                 <div class="send-controls">
                     <label for="image">
                         <img src="{{ asset('images/add_image.png') }}" alt="Add Image" class="send-icon">

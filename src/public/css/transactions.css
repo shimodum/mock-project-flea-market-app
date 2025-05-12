@@ -53,6 +53,7 @@
     text-decoration: underline;
 }
 
+
 /* ハンバーガーメニュー */
 .hamburger-menu {
     display: none;
@@ -174,6 +175,13 @@
 /* ========================= */
 /* チャットエリア */
 /* ========================= */
+.attached-image {
+    width: 100px;
+    height: auto;
+    margin-top: 5px;
+    border-radius: 5px;
+}
+
 .chat-container {
     max-height: 300px;
     overflow-y: auto;
