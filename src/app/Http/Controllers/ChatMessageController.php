@@ -50,32 +50,46 @@ class ChatMessageController extends Controller
             $messageData['image'] = $imagePath;
         }
 
-        // セッションに保存（リロードしても保持するため）
-        session()->put('chat_message', $request->message);
-
         ChatMessage::create($messageData);
-
-        // 成功したらセッションをクリア
-        session()->forget('chat_message');
 
         return redirect()->route('transactions.show', ['id' => $transactionId])->with('success', 'メッセージを送信しました。');
     }
 
-    // 画像のダウンロード処理
-    public function downloadImage($id)
+    // メッセージの更新処理
+    public function update(Request $request, $id)
     {
         $message = ChatMessage::findOrFail($id);
 
-        if (!$message->image) {
-            abort(404, '画像が存在しません');
+        // ログインユーザーがメッセージの投稿者であるか確認
+        if ($message->user_id !== Auth::id()) {
+            return response()->json(['success' => false, 'message' => '編集権限がありません。'], 403);
         }
 
-        $path = storage_path('app/public/' . $message->image);
+        // メッセージ内容を更新
+        $message->message = $request->message;
+        $message->save();
 
-        if (!file_exists($path)) {
-            abort(404, '画像ファイルが見つかりません');
+        return response()->json(['success' => true, 'message' => 'メッセージを更新しました。']);
+    }
+
+    // メッセージの削除処理
+    public function delete($id)
+    {
+        $message = ChatMessage::findOrFail($id);
+
+        // ログインユーザーがメッセージの投稿者であるか確認
+        if ($message->user_id !== Auth::id()) {
+            return response()->json(['success' => false, 'message' => '削除権限がありません。'], 403);
         }
 
-        return response()->download($path);
+        // 画像ファイルがある場合、ストレージから削除
+        if ($message->image_path && Storage::disk('public')->exists($message->image_path)) {
+            Storage::disk('public')->delete($message->image_path);
+        }
+
+        // メッセージを削除
+        $message->delete();
+
+        return response()->json(['success' => true, 'message' => 'メッセージを削除しました。']);
     }
 }

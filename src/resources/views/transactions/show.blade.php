@@ -53,29 +53,35 @@
         {{-- 区切り線 --}}
         <hr class="divider-line">
 
-        {{-- バリデーションエラーメッセージ --}}
-        @if ($errors->has('message'))
-            <div class="alert alert-danger">
-                <p style="display: none;">{{ $errors->first('message') }}</p>
-            </div>
-        @endif
-
         {{-- メッセージ一覧 --}}
         <div class="chat-container">
             @foreach ($messages as $message)
-                <div class="chat-message {{ $message->user_id == Auth::id() ? 'my-message' : 'their-message' }}">
+                <div class="chat-message {{ $message->user_id == Auth::id() ? 'my-message' : 'their-message' }}" id="message-{{ $message->id }}">
                     <img src="{{ asset('storage/' . $message->user->profile_image) }}" alt="User Image" class="profile-image-small">
-                    <p>{{ $message->message }}</p>
+                    
+                    {{-- 表示部分 --}}
+                    <div class="message-content">
+                        <p>{{ $message->message }}</p>
+                        @if ($message->image_path)
+                            <img src="{{ asset('storage/' . $message->image_path) }}" alt="Image Attachment" class="attached-image">
+                        @endif
+                    </div>
 
-                    {{-- 画像がある場合の表示 --}}
-                    @if ($message->image_path)
-                        <img src="{{ asset('storage/' . $message->image_path) }}" alt="Image Attachment" class="attached-image">
-                    @endif
+                    {{-- 編集フォーム（非表示状態） --}}
+                    <form class="message-edit-form" style="display: none;">
+                        <textarea>{{ $message->message }}</textarea>
+                        <button type="button" class="save-edit" data-id="{{ $message->id }}">保存</button>
+                        <button type="button" class="cancel-edit">キャンセル</button>
+                    </form>
 
                     <div class="message-options">
                         <span>{{ $message->created_at->format('Y/m/d H:i') }}</span>
-                        <span class="message-action">編集</span>
-                        <span class="message-action">削除</span>
+                        
+                        {{-- 自分のメッセージのみ編集・削除が表示される --}}
+                        @if ($message->user_id == Auth::id())
+                            <span class="message-action edit-message" data-id="{{ $message->id }}">編集</span>
+                            <span class="message-action delete-message" data-id="{{ $message->id }}">削除</span>
+                        @endif
                     </div>
                 </div>
             @endforeach
