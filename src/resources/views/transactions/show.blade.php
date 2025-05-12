@@ -97,8 +97,8 @@
             <div class="message-input">
                 <textarea 
                     name="message" 
-                    placeholder="取引メッセージを記入してください">
-                </textarea>
+                    placeholder="取引メッセージを記入してください" 
+                    id="messageTextarea">{{ old('message') }}</textarea>
                 <div class="send-controls">
                     <label for="image">
                         <img src="{{ asset('images/add_image.png') }}" alt="Add Image" class="send-icon">

@@ -50,7 +50,13 @@ class ChatMessageController extends Controller
             $messageData['image'] = $imagePath;
         }
 
+        // セッションに保存（リロードしても保持するため）
+        session()->put('chat_message', $request->message);
+
         ChatMessage::create($messageData);
+
+        // 成功したらセッションをクリア
+        session()->forget('chat_message');
 
         return redirect()->route('transactions.show', ['id' => $transactionId])->with('success', 'メッセージを送信しました。');
     }

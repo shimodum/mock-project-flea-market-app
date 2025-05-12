@@ -6,7 +6,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const stars = document.querySelectorAll('.star');
     const ratingValue = document.getElementById('ratingValue');
 
-    // 要素が存在するか確認
+    // メッセージ入力欄の取得
+    const messageTextarea = document.getElementById('messageTextarea');
+
+    // モーダル要素の確認
     if (completeTransactionButton && modal && closeModal) {
         console.log("モーダル要素が見つかりました。イベントをバインドします。");
 
@@ -40,6 +43,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     } else {
         console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
+    }
+
+    // メッセージ入力のローカルストレージ保持
+    if (messageTextarea) {
+        // ローカルストレージから値を復元
+        const savedMessage = localStorage.getItem('transaction_message');
+        if (savedMessage) {
+            messageTextarea.value = savedMessage;
+        }
+
+        // テキストエリアの内容が変更されたら保存
+        messageTextarea.addEventListener('input', (event) => {
+            localStorage.setItem('transaction_message', event.target.value);
+        });
+
+        // フォームが送信されたらローカルストレージのデータをクリア
+        const form = messageTextarea.closest('form');
+        form.addEventListener('submit', () => {
+            localStorage.removeItem('transaction_message');
+        });
     }
 
     // ハンバーガーメニューの開閉
