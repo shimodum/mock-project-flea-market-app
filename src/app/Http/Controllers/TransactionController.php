@@ -84,7 +84,7 @@ class TransactionController extends Controller
     }
 
     /*
-     * 取引評価の保存処理
+     * 取引評価の保存処理など
      */
     public function rate(Request $request, $id)
     {
@@ -108,6 +108,9 @@ class TransactionController extends Controller
             // 購入者が評価した後、出品者の評価が完了している場合にステータスを更新
             if ($transaction->seller_rated) {
                 $transaction->status = 'completed';
+
+                // 出品者へメール送信
+                \Mail::to($transaction->item->user->email)->send(new \App\Mail\TransactionCompleteMail($transaction));
             }
 
         } else if ($transaction->item->user_id === $user->id) {
@@ -151,6 +154,5 @@ class TransactionController extends Controller
             'redirect' => route('items.index')
         ]);
     }
-
 
 }
