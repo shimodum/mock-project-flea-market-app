@@ -26,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (event.target.classList.contains('cancel-edit')) {
             console.log("キャンセルボタンがクリックされました");
 
-            // 親要素から data-id を探す
             const messageId = event.target.dataset.id || event.target.closest('.message-edit-form').querySelector('.save-edit').dataset.id;
 
             console.log(`messageId = ${messageId}`);
@@ -38,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log("messageContent:", messageContent);
 
             if (editForm && messageContent) {
-                // フォームを非表示にし、元のメッセージを再表示
                 editForm.style.display = 'none';
                 messageContent.style.display = 'block';
                 console.log("キャンセル処理が正常に実行されました");
@@ -148,11 +146,40 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         });
+
+        // =====================
+        // モーダルの送信処理
+        // =====================
+        ratingForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ rating: ratingValue.value })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message); // ✅ 文字化け解消済み
+                    window.location.replace(data.redirect);
+                } else {
+                    alert('評価の送信に失敗しました');
+                }
+            })
+            .catch(error => {
+                console.error('Fetchエラー:', error);
+                alert('評価の送信に失敗しました。ネットワークエラーかもしれません。');
+            });
+        });
     } else {
         console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
     }
 
-    // =====================
+        // =====================
     // 入力内容の保存処理
     // =====================
     const messageTextarea = document.getElementById('messageTextarea');

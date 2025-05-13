@@ -7,6 +7,8 @@ use App\Models\Transaction;
 use App\Models\ChatMessage;
 use App\Models\Evaluation;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TransactionCompleteMail;
 
 class TransactionController extends Controller
 {
@@ -150,9 +152,9 @@ class TransactionController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => '評価が完了しました。',
+            'message' => __('評価が完了しました。'), // Laravelのローカライズ機能を使用
             'redirect' => route('items.index')
-        ]);
+        ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 
 }
