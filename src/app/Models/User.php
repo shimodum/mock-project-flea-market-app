@@ -90,4 +90,26 @@ class User extends Authenticatable
             : asset('images/default_profile.png');
     }
 
+
+        /**
+     * 評価された取引のリレーション
+     */
+    public function evaluations()
+    {
+        return $this->hasMany(Evaluation::class, 'evaluatee_id');
+    }
+
+    /**
+     * 平均評価を計算するアクセサ
+     */
+    public function getAverageRatingAttribute()
+    {
+        if ($this->evaluations()->count() === 0) {
+            return null; // 評価がない場合は null を返す
+        }
+
+        // 評価の平均を計算し、四捨五入して返す
+        return round($this->evaluations()->avg('rating'), 1);
+    }
+
 }

@@ -18,13 +18,19 @@
             <h2 class="profile-name">{{ $user->name }}</h2>
 
             {{-- ★評価の表示 --}}
-            <div class="rating-stars">
-                <img src="{{ asset('images/star_filled.png') }}" alt="star">
-                <img src="{{ asset('images/star_filled.png') }}" alt="star">
-                <img src="{{ asset('images/star_filled.png') }}" alt="star">
-                <img src="{{ asset('images/star_empty.png') }}" alt="star">
-                <img src="{{ asset('images/star_empty.png') }}" alt="star">
-            </div>
+            @if ($user->average_rating)
+                <div class="rating-stars">
+                    @for ($i = 0; $i < 5; $i++)
+                        @if ($i < $user->average_rating)
+                            <img src="{{ asset('images/star_filled.png') }}" alt="star">
+                        @else
+                            <img src="{{ asset('images/star_empty.png') }}" alt="star">
+                        @endif
+                    @endfor
+                </div>
+            @else
+                <p>評価はまだありません。</p>
+            @endif
         </div>
 
         {{-- プロフィール編集ボタン --}}

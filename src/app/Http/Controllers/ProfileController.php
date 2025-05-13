@@ -51,7 +51,13 @@ class ProfileController extends Controller
             $items = $transactions;
         }
 
-        return view('profile.index', compact('user', 'tab', 'items', 'totalUnreadCount'));
+        return view('profile.index', [
+            'user' => $user,
+            'tab' => $tab,
+            'items' => $items,
+            'totalUnreadCount' => $totalUnreadCount,
+            'averageRating' => $user->average_rating
+        ]);
     }
 
     // プロフィール設定画面の表示
