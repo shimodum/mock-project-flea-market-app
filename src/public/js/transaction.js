@@ -119,45 +119,46 @@ document.addEventListener('DOMContentLoaded', function () {
     const ratingValue = document.getElementById('ratingValue');
     const ratingForm = document.getElementById('ratingForm');
 
-    if (completeTransactionButton && modal) {
-        console.log("モーダル要素が見つかりました。イベントをバインドします。");
-
+    // モーダルを開く処理
+    if (completeTransactionButton) {
         completeTransactionButton.addEventListener('click', function () {
             console.log("モーダル表示処理が発火しました。");
             modal.style.display = 'block';
         });
+    }
 
-        // ★ 修正: モーダルの閉じるボタンのバインド
-        if (closeModal) {
-            closeModal.addEventListener('click', function () {
-                modal.style.display = 'none';
-            });
-        }
-
-        window.addEventListener('click', function (event) {
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
+    // モーダルを閉じる処理（出品者にも対応）
+    if (closeModal) {
+        closeModal.addEventListener('click', function () {
+            modal.style.display = 'none';
         });
+    }
 
-        // ★ 修正: 星のクリック処理
+    window.addEventListener('click', function (event) {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // 星クリック処理
+    if (stars) {
         stars.forEach((star, index) => {
             star.addEventListener('click', () => {
                 ratingValue.value = index + 1;
 
                 stars.forEach((s, i) => {
                     if (i < index + 1) {
-                        s.src = `/images/modal_star_filled.png`;  // ★ パス修正
+                        s.src = `/images/modal_star_filled.png`;
                     } else {
-                        s.src = `/images/modal_star_empty.png`;  // ★ パス修正
+                        s.src = `/images/modal_star_empty.png`;
                     }
                 });
             });
         });
+    }
 
-        // =====================
-        // モーダルの送信処理
-        // =====================
+    // モーダル送信処理
+    if (ratingForm) {
         ratingForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
@@ -173,7 +174,13 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data.success) {
                     alert(data.message);
-                    window.location.replace(data.redirect);
+                    console.log("評価成功");
+                    // 出品者と購入者で遷移先を区別
+                    if (data.redirect) {
+                        window.location.replace(data.redirect);
+                    } else {
+                        window.location.replace('/');
+                    }
                 } else {
                     alert('評価の送信に失敗しました');
                 }
@@ -183,9 +190,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('評価の送信に失敗しました。ネットワークエラーかもしれません。');
             });
         });
-    } else {
-        console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
     }
+
 
     // ==================
     // 入力内容の保存処理

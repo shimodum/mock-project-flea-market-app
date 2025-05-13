@@ -148,8 +148,7 @@ class TransactionController extends Controller
         return response()->json([
             'success' => true,
             'message' => __('評価が完了しました。'),
-            'redirect' => url('/')
+            'redirect' => route('items.index')
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
-
 }
