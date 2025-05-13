@@ -297,11 +297,39 @@
     background-color: #FDFCE6;
     margin: 10% auto;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 15px;
+    border: 1px solid #ccc;
     width: 598px;
     height: 367px;
     text-align: center;
     position: relative;
+}
+
+/* タイトル */
+.modal-title {
+    text-align: left;
+    margin-left: 25px;
+    font-size: 35px;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+/* サブタイトル */
+.modal-subtitle {
+    color: #868686;
+    font-size: 20px;
+    text-align: left;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+/* 区切り線 */
+.modal-divider {
+    border: none;
+    border-top: 1px solid #000000;
+    margin: 5px 0 20px 0;
+    width: 90%;
+    margin-left: 5%;
 }
 
 .close {
@@ -313,7 +341,7 @@
 }
 
 .stars {
-    margin: 20px 0;
+    margin: 10px 0;
     display: flex;
     justify-content: center;
     gap: 10px;
@@ -336,6 +364,9 @@
     width: 127px;
     height: 49px;
     margin-top: 20px;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
 }
 
 .submit-button:hover {
