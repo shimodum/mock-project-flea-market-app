@@ -31,7 +31,10 @@ class TransactionCompleteMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('X取引が完了しました')
+        // 商品名をメールの件名に動的に設定
+        $subject = $this->transaction->item->name . 'の取引が完了しました';
+
+        return $this->subject($subject)
                     ->markdown('emails.transaction_complete')
                     ->with([
                         'transaction' => $this->transaction,
