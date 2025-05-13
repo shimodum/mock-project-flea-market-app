@@ -179,9 +179,9 @@ document.addEventListener('DOMContentLoaded', function () {
         console.error("モーダル関連の要素が見つかりません。Bladeテンプレートが正しく読み込まれているか確認してください。");
     }
 
-        // =====================
+    // ==================
     // 入力内容の保存処理
-    // =====================
+    // ==================
     const messageTextarea = document.getElementById('messageTextarea');
 
     messageTextarea.addEventListener('input', function () {
@@ -189,18 +189,18 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("メッセージが保存されました:", messageTextarea.value);
     });
 
-    // =====================
+    // ========================
     // ページ読み込み時の復元処理
-    // =====================
+    // ========================
     const savedMessage = localStorage.getItem('chat_message_' + window.location.pathname);
     if (savedMessage) {
         messageTextarea.value = savedMessage;
         console.log("メッセージが復元されました:", savedMessage);
     }
 
-    // =====================
+    // ====================================
     // メッセージ送信時に LocalStorage を削除
-    // =====================
+    // ====================================
     const messageForm = document.querySelector('form[action*="chat_messages.store"]');
     if (messageForm) {
         messageForm.addEventListener('submit', function () {
