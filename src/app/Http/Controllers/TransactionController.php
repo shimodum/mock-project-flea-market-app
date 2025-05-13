@@ -50,8 +50,11 @@ class TransactionController extends Controller
     {
         $user = Auth::user();
 
-        // 取引の詳細を取得
-        $transaction = Transaction::with(['item', 'item.user', 'chatMessages'])
+        $transaction = Transaction::with([
+                'item',
+                'item.user',
+                'chatMessages'
+            ])
             ->where('id', $id)
             ->where(function ($query) use ($user) {
                 $query->where('buyer_id', $user->id)
@@ -61,18 +64,10 @@ class TransactionController extends Controller
             })
             ->firstOrFail();
 
-        // 更新処理：未読メッセージの既読化
-        $updated = $transaction->chatMessages()
-            ->where('is_read', false)
-            ->update(['is_read' => true]);
+        // 出品者が評価済みかどうかを確認
+        $transaction->seller_rated = $transaction->seller_rated ?? false;
 
-        // データベースの最新状態を取得する
-        $transaction->refresh();
-
-        // 再度データを取得して反映
         $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
-
-        // サイドバーの取引一覧を追加
         $sidebarTransactions = Transaction::where(function ($query) use ($user) {
                 $query->where('buyer_id', $user->id)
                     ->orWhereHas('item', function ($query) use ($user) {
@@ -152,8 +147,8 @@ class TransactionController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => __('評価が完了しました。'), // Laravelのローカライズ機能を使用
-            'redirect' => route('items.index')
+            'message' => __('評価が完了しました。'),
+            'redirect' => url('/')
         ], 200, [], JSON_UNESCAPED_UNICODE);
     }
 

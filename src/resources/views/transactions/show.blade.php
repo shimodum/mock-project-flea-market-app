@@ -120,16 +120,16 @@
         {{-- モーダルの読み込み --}}
         @include('transactions.modal', ['transaction' => $transaction])
 
-        {{-- 出品者が評価していない場合、モーダルを自動表示 --}}
-        @if (Auth::id() === $transaction->item->user_id && $transaction->status === 'completed' && !$transaction->seller_rated)
-            <script>
-                window.onload = function() {
-                    console.log("出品者評価モーダルを自動表示します");
-                    document.getElementById('evaluationModal').style.display = 'block';
-                };
-            </script>
-        @endif
-
+    {{-- 出品者が評価していない場合、モーダルを自動表示 --}}
+    @if (Auth::id() === $transaction->item->user_id && !$transaction->seller_rated)
+        <script>
+            window.onload = function() {
+                console.log("出品者評価モーダルを自動表示します");
+                document.getElementById('evaluationModal').style.display = 'block';
+            };
+        </script>
+    @endif
+    
     </div>
 </div>
 @endsection

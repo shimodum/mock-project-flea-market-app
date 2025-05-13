@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const ratingValue = document.getElementById('ratingValue');
     const ratingForm = document.getElementById('ratingForm');
 
-    if (completeTransactionButton && modal && closeModal) {
+    if (completeTransactionButton && modal) {
         console.log("モーダル要素が見つかりました。イベントをバインドします。");
 
         completeTransactionButton.addEventListener('click', function () {
@@ -127,9 +127,12 @@ document.addEventListener('DOMContentLoaded', function () {
             modal.style.display = 'block';
         });
 
-        closeModal.addEventListener('click', function () {
-            modal.style.display = 'none';
-        });
+        // ★ 修正: モーダルの閉じるボタンのバインド
+        if (closeModal) {
+            closeModal.addEventListener('click', function () {
+                modal.style.display = 'none';
+            });
+        }
 
         window.addEventListener('click', function (event) {
             if (event.target === modal) {
@@ -137,12 +140,17 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
+        // ★ 修正: 星のクリック処理
         stars.forEach((star, index) => {
             star.addEventListener('click', () => {
                 ratingValue.value = index + 1;
 
                 stars.forEach((s, i) => {
-                    s.src = i < index + 1 ? "/images/modal_star_filled.png" : "/images/modal_star_empty.png";
+                    if (i < index + 1) {
+                        s.src = `/images/modal_star_filled.png`;  // ★ パス修正
+                    } else {
+                        s.src = `/images/modal_star_empty.png`;  // ★ パス修正
+                    }
                 });
             });
         });
