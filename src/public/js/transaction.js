@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 ratingValue.value = index + 1;
 
                 stars.forEach((s, i) => {
-                    s.src = i < index + 1 ? "/images/star_filled.png" : "/images/star_empty.png";
+                    s.src = i < index + 1 ? "/images/modal_star_filled.png" : "/images/modal_star_empty.png";
                 });
             });
         });
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert(data.message); // ✅ 文字化け解消済み
+                    alert(data.message);
                     window.location.replace(data.redirect);
                 } else {
                     alert('評価の送信に失敗しました');

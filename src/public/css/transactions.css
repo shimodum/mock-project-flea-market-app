@@ -279,11 +279,11 @@
 }
 
 /* ================ */
-/* モーダル */
+/* モーダルウィンドウ */
 /* ================ */
 .modal {
     display: none;
-    position: absolute;
+    position: fixed;
     z-index: 10;
     left: 0;
     top: 0;
@@ -294,11 +294,12 @@
 }
 
 .modal-content {
-    background-color: #fff;
-    margin: 15% auto;
+    background-color: #FDFCE6;
+    margin: 10% auto;
     padding: 20px;
     border-radius: 10px;
-    width: 400px;
+    width: 598px;
+    height: 367px;
     text-align: center;
     position: relative;
 }
@@ -315,26 +316,30 @@
     margin: 20px 0;
     display: flex;
     justify-content: center;
-    gap: 5px;
+    gap: 10px;
 }
 
 .star {
-    width: 40px;
+    width: 100px;
+    height: 100px;
     cursor: pointer;
 }
 
 .submit-button {
-    background-color: #e74c3c;
+    background-color: #FF8282;
     color: white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 18px;
+    width: 127px;
+    height: 49px;
+    margin-top: 20px;
 }
 
 .submit-button:hover {
-    background-color: #c0392b;
+    background-color: #e05050;
 }
 
 

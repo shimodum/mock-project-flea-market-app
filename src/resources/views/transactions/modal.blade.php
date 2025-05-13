@@ -7,11 +7,11 @@
 
         {{-- 星評価 --}}
         <div class="stars">
-            <img class="star" data-value="1" src="{{ asset('images/star_empty.png') }}">
-            <img class="star" data-value="2" src="{{ asset('images/star_empty.png') }}">
-            <img class="star" data-value="3" src="{{ asset('images/star_empty.png') }}">
-            <img class="star" data-value="4" src="{{ asset('images/star_empty.png') }}">
-            <img class="star" data-value="5" src="{{ asset('images/star_empty.png') }}">
+            <img class="star" data-value="1" src="{{ asset('images/modal_star_empty.png') }}">
+            <img class="star" data-value="2" src="{{ asset('images/modal_star_empty.png') }}">
+            <img class="star" data-value="3" src="{{ asset('images/modal_star_empty.png') }}">
+            <img class="star" data-value="4" src="{{ asset('images/modal_star_empty.png') }}">
+            <img class="star" data-value="5" src="{{ asset('images/modal_star_empty.png') }}">
         </div>
 
         <form id="ratingForm" method="POST" action="{{ route('transactions.rate', $transaction->id) }}">
