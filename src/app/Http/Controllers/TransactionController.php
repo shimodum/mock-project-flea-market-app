@@ -67,6 +67,16 @@ class TransactionController extends Controller
         // 出品者が評価済みかどうかを確認
         $transaction->seller_rated = $transaction->seller_rated ?? false;
 
+        // =====================================
+        // 未読メッセージを既読に更新する処理を追加
+        // =====================================
+        $transaction->chatMessages()
+            ->where('is_read', false) // 未読のメッセージのみ
+            ->where('user_id', '!=', Auth::id()) // 自分が送ったメッセージは除外
+            ->update(['is_read' => true]);
+        // ここで既読にすることで、マイページのバッジ表示も正しく減少する
+        // ==============================================
+
         $messages = $transaction->chatMessages()->with('user')->orderBy('created_at', 'asc')->get();
         $sidebarTransactions = Transaction::where(function ($query) use ($user) {
                 $query->where('buyer_id', $user->id)
@@ -81,54 +91,55 @@ class TransactionController extends Controller
     }
 
     /*
-     * 取引評価の保存処理
+     * 取引評価の保存処理など
      */
     public function rate(Request $request, $id)
     {
         $user = Auth::user();
         $transaction = Transaction::findOrFail($id);
-
+    
         // 購入者が評価した場合
         if ($transaction->buyer_id === $user->id) {
             $evaluatorId = $transaction->buyer_id;
             $evaluateeId = $transaction->item->user_id;
-
+    
             if ($transaction->buyer_rated) {
                 return response()->json([
                     'success' => false,
                     'message' => '購入者の評価は既に完了しています。'
                 ]);
             }
-
+    
             $transaction->buyer_rated = true;
-
+    
             // 購入者が評価した後、出品者の評価が完了している場合にステータスを更新
             if ($transaction->seller_rated) {
                 $transaction->status = 'completed';
-
+                
                 // 出品者へメール送信
-                Mail::to($transaction->item->user->email)->send(new TransactionCompleteMail($transaction));
+                \Mail::to($transaction->item->user->email)->send(new \App\Mail\TransactionCompleteMail($transaction));
             }
-
+    
+        // 出品者が評価した場合
         } else if ($transaction->item->user_id === $user->id) {
             $evaluatorId = $transaction->item->user_id;
             $evaluateeId = $transaction->buyer_id;
-
+    
             if ($transaction->seller_rated) {
                 return response()->json([
                     'success' => false,
                     'message' => '出品者の評価は既に完了しています。'
                 ]);
             }
-
+    
             $transaction->seller_rated = true;
-
+    
             // 出品者が評価した後、購入者の評価が完了している場合にステータスを更新
             if ($transaction->buyer_rated) {
                 $transaction->status = 'completed';
-
+    
                 // 購入者へメール送信
-                Mail::to($transaction->buyer->email)->send(new TransactionCompleteMail($transaction));
+                \Mail::to($transaction->buyer->email)->send(new \App\Mail\TransactionCompleteMail($transaction));
             }
         } else {
             return response()->json([
@@ -136,7 +147,7 @@ class TransactionController extends Controller
                 'message' => '権限がありません。'
             ], 403);
         }
-
+    
         Evaluation::create([
             'transaction_id' => $transaction->id,
             'evaluator_id' => $evaluatorId,
@@ -144,9 +155,9 @@ class TransactionController extends Controller
             'rating' => $request->input('rating'),
             'comment' => $request->input('comment')
         ]);
-
+    
         $transaction->save();
-
+    
         return response()->json([
             'success' => true,
             'message' => __('評価が完了しました。'),
