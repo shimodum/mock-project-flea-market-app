@@ -234,7 +234,7 @@
         margin-bottom: 8px;
     }
 
-        /* 修正部分：フル幅対応 */
+    /*フル幅対応 */
     .product-list {
         justify-content: center;
         gap: 5px;
