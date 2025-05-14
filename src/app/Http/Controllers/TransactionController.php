@@ -106,13 +106,8 @@ class TransactionController extends Controller
             if ($transaction->seller_rated) {
                 $transaction->status = 'completed';
                 
-                \Log::info('メール送信対象のメールアドレス:', ['email' => $transaction->item->user->email]);
-                \Log::info('メール送信処理を開始');
-    
                 // 出品者へメール送信
                 \Mail::to($transaction->item->user->email)->send(new \App\Mail\TransactionCompleteMail($transaction));
-    
-                \Log::info('メール送信処理を終了');
             }
     
         // 出品者が評価した場合
@@ -133,15 +128,9 @@ class TransactionController extends Controller
             if ($transaction->buyer_rated) {
                 $transaction->status = 'completed';
     
-                \Log::info('メール送信対象のメールアドレス:', ['email' => $transaction->buyer->email]);
-                \Log::info('メール送信処理を開始');
-    
                 // 購入者へメール送信
                 \Mail::to($transaction->buyer->email)->send(new \App\Mail\TransactionCompleteMail($transaction));
-    
-                \Log::info('メール送信処理を終了');
             }
-    
         } else {
             return response()->json([
                 'success' => false,
