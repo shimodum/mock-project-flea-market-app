@@ -1,3 +1,2 @@
 docker/mysql/data/
-src/storage/app/public/
 src/.env.testing.bak
