@@ -22,11 +22,13 @@ class ProfileController extends Controller
         // 購入した商品を取得（purchasesテーブルと関連付け）
         $buyItems = $user->purchases()->with('item')->get();
 
-        // 取引中の商品 (出品者 or 購入者が自分で、状態が negotiating のもの)
+        // 取引中の商品（出品者または購入者が自分で、かつ商品が売却済み、ステータスが交渉中のもの）
         $transactions = Transaction::where(function ($query) use ($user) {
                 $query->where('buyer_id', $user->id)
                     ->orWhereHas('item', function ($query) use ($user) {
-                        $query->where('user_id', $user->id);
+                        // 出品者が自分、かつ売却済みの商品のみを対象にする
+                        $query->where('user_id', $user->id)
+                        ->where('is_sold', 1);
                     });
             })
             ->where('status', 'negotiating')
